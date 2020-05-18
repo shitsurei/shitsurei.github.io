@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -45,6 +45,44 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
@@ -53,18 +91,20 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg?v=5.1.4" color="#222">
 
 
+
+  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml" />
 
 
 
@@ -85,6 +125,7 @@
 <meta property="og:url" content="https://shitsurei.online/c1.html">
 <meta property="og:site_name" content="shitsurei">
 <meta property="og:description" content="C语言诞生于20CD70s，经过演变和发展形成了C89（或C90）和C99这两个通用标准，后者由于出现较晚还未被所有编译器完全兼容。许多现代流行语言例如C++，Java，C#，Perl都是基于C语言并包含各自的特性发展起来的，学习C语言有助于我们更好地理解其他语言。">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-10-15T05:11:00.000Z">
 <meta property="article:modified_time" content="2018-10-30T16:25:30.724Z">
 <meta property="article:author" content="GuoRong Zhang">
@@ -106,7 +147,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -138,7 +179,7 @@
 
 <meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -186,7 +227,17 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            首页
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
           </a>
         </li>
       
@@ -196,7 +247,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            归档
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-top">
+          <a href="/top/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-signal"></i> <br />
+            
+            top
           </a>
         </li>
       
@@ -260,9 +331,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-15T13:11:00+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-15T13:11:00+08:00">
                 2018-10-15
               </time>
             
@@ -281,7 +352,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -346,7 +417,7 @@
 <blockquote>
 <p>GCC编译器面向Linux平台，是最流行的C语言编译器之一。最初是GUN C compiler的缩写，新版的GCC能够编译多种语言写的程序，因此变为GUN Compiler Collection的简称。其优点在于免费获取，兼容多种操作系统，广泛用于商业开发。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GCC编译器的安全检查选项</span><br><span class="line">-Wall			使编译器在检测到可能的错误时生成警告信息</span><br><span class="line">-W			除以上警告信息外，生成针对具体情况的额外警告信息</span><br><span class="line">-pedantic		根据c标准的要求生成警告信息，避免程序中使用非标准特性</span><br><span class="line">-ansi			禁用GCC的非标准C特性，并启用一些不太常用的标准特性</span><br><span class="line">-std&#x3D;c89&#x2F;C99		指明使用哪个版本的C编译器来检查程序</span><br><span class="line">以上选项通常结合使用：</span><br><span class="line">% gcc -O -Wall -W -pedantic -ansi -std&#x3D;c99 -o pun pun.c</span><br></pre></td></tr></table></figure>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GCC编译器的安全检查选项</span><br><span class="line">-<span class="ruby">Wall			使编译器在检测到可能的错误时生成警告信息</span></span><br><span class="line"><span class="ruby">-W			除以上警告信息外，生成针对具体情况的额外警告信息</span></span><br><span class="line"><span class="ruby">-pedantic		根据c标准的要求生成警告信息，避免程序中使用非标准特性</span></span><br><span class="line"><span class="ruby">-ansi			禁用GCC的非标准C特性，并启用一些不太常用的标准特性</span></span><br><span class="line"><span class="ruby">-std=c89/C99		指明使用哪个版本的C编译器来检查程序</span></span><br><span class="line"><span class="ruby">以上选项通常结合使用：</span></span><br><span class="line"><span class="ruby">% gcc -O -Wall -W -pedantic -ansi -std=c99 -o pun pun.c</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>通常我们把预处理器执行的命令叫做指令，即以字符#开头的代码，指令默认只占一行，其结尾没有其他符号标识，通常包括以下几种</p>
 <ul>
@@ -366,7 +437,7 @@
 </ul>
 <p>每一条完整的语句必须要以;作为结束标识符</p>
 <h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>即文档说明，每一个程序都应该包含识别信息，即程序名，编写日期，作者，程序的用途以及其他相关信息，以便对程序进行更好的理解和阅读</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*	单行注释内容	*&#x2F;</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line"> *	多行注释内容</span><br><span class="line"> *	....</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;C99提供的单行注释格式，注释内容会在行末自动终止</span><br><span class="line"></span><br><span class="line">注意：注释内部不能嵌套使用</span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*	单行注释内容	*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *	多行注释内容</span></span><br><span class="line"><span class="comment"> *	....</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//C99提供的单行注释格式，注释内容会在行末自动终止</span></span><br><span class="line"></span><br><span class="line">注意：注释内部不能嵌套使用</span><br></pre></td></tr></table></figure>
 
 <h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量是指C语言中的存储单元，每个变量必须有一个类型（type），用于表示所存储的数据种类，如整型、浮点型、字符型。<br>在使用变量之前必须对其进行声明，声明方式为<code>类型名 变量名;</code>，如果几个变量类型相同，则可采取合并声明，声明方式为<code>类型名 变量名1,变量名2,变量名3;</code></p>
 <blockquote>
@@ -482,10 +553,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
+            Overview
           </li>
         </ul>
       
@@ -506,7 +577,7 @@
                 <a href="/archives/%20%7C%7C%20archive">
               
                   <span class="site-state-item-count">36</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -515,10 +586,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
-                
+                  <span class="site-state-item-name">categories</span>
+                </a>
               </div>
             
 
@@ -526,10 +597,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">55</span>
-                  <span class="site-state-item-name">标签</span>
-                
+                  <span class="site-state-item-name">tags</span>
+                </a>
               </div>
             
 
@@ -580,9 +651,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
 
@@ -590,7 +661,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -598,7 +669,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 

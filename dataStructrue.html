@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -45,6 +45,44 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
@@ -53,18 +91,20 @@
 <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png?v=5.1.4">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg?v=5.1.4" color="#222">
 
 
+
+  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml" />
 
 
 
@@ -85,6 +125,7 @@
 <meta property="og:url" content="https://shitsurei.online/dataStructrue.html">
 <meta property="og:site_name" content="shitsurei">
 <meta property="og:description" content="计算机领域许多概念都是生活中实际问题的抽象表达，因为这一学科在诞生时本身就具有很强的工程倾向，其目的就是高效的解决现实中的许多问题，在数据结构这一部分尤为明显。例如我们在生活中常常面临的物品堆积问题和排队问题就分别可以抽象成栈和队列这两种数据结构，由于实际情况中这些问题非常普遍也使得这两种数据结构成为工程实践过程中最常用的两种数据结构，这也是我们在学习算法和数据结构时最先接触这两种数据结构的原因。">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-30T03:53:28.000Z">
 <meta property="article:modified_time" content="2020-02-06T07:04:51.410Z">
 <meta property="article:author" content="GuoRong Zhang">
@@ -106,7 +147,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: '博主'
+      author: 'Author'
     },
     algolia: {
       applicationID: '',
@@ -138,7 +179,7 @@
 
 <meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -186,7 +227,17 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            首页
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
           </a>
         </li>
       
@@ -196,7 +247,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            归档
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-top">
+          <a href="/top/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-signal"></i> <br />
+            
+            top
           </a>
         </li>
       
@@ -260,9 +331,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-30T11:53:28+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-30T11:53:28+08:00">
                 2020-01-30
               </time>
             
@@ -281,7 +352,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -382,7 +453,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"顺序存储结果集："</span>);</span><br><span class="line">    SeqCollection seqCollection = <span class="keyword">new</span> SeqCollection();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            seqCollection.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.print(seqCollection.pop() + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"链式存储结果集："</span>);</span><br><span class="line">    ChaCollection chaCollection = <span class="keyword">new</span> ChaCollection();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            chaCollection.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.print(chaCollection.pop() + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>验证结果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">顺序存储结果集：</span><br><span class="line">2 0 5 3 6 1 7 4 8 9 </span><br><span class="line">9 7 2 1 4 5 3 6 0 8 </span><br><span class="line">3 1 8 6 9 4 2 7 0 5 </span><br><span class="line">1 5 2 6 8 9 7 4 0 3 </span><br><span class="line">9 7 1 0 6 2 8 5 4 3 </span><br><span class="line">1 7 0 6 5 3 2 4 8 9 </span><br><span class="line">3 7 0 2 6 8 1 5 9 4 </span><br><span class="line">3 0 6 8 4 9 1 7 5 2 </span><br><span class="line">6 7 5 8 2 1 0 4 9 3 </span><br><span class="line">1 0 5 7 9 8 4 3 2 6 </span><br><span class="line">链式存储结果集：</span><br><span class="line">0 9 7 4 5 1 6 3 2 8 </span><br><span class="line">5 0 7 6 8 4 2 3 9 1 </span><br><span class="line">8 4 6 3 5 2 7 1 9 0 </span><br><span class="line">1 6 0 2 9 4 5 3 8 7 </span><br><span class="line">9 8 4 0 7 1 3 6 2 5 </span><br><span class="line">9 8 2 4 5 3 0 1 7 6 </span><br><span class="line">5 1 6 7 8 4 0 9 3 2 </span><br><span class="line">2 1 4 5 7 9 0 8 6 3 </span><br><span class="line">1 0 4 7 8 5 3 6 9 2 </span><br><span class="line">0 2 3 6 1 4 8 9 7 5</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">顺序存储结果集：</span><br><span class="line"><span class="number">2</span> <span class="number">0</span> <span class="number">5</span> <span class="number">3</span> <span class="number">6</span> <span class="number">1</span> <span class="number">7</span> <span class="number">4</span> <span class="number">8</span> <span class="number">9</span> </span><br><span class="line"><span class="number">9</span> <span class="number">7</span> <span class="number">2</span> <span class="number">1</span> <span class="number">4</span> <span class="number">5</span> <span class="number">3</span> <span class="number">6</span> <span class="number">0</span> <span class="number">8</span> </span><br><span class="line"><span class="number">3</span> <span class="number">1</span> <span class="number">8</span> <span class="number">6</span> <span class="number">9</span> <span class="number">4</span> <span class="number">2</span> <span class="number">7</span> <span class="number">0</span> <span class="number">5</span> </span><br><span class="line"><span class="number">1</span> <span class="number">5</span> <span class="number">2</span> <span class="number">6</span> <span class="number">8</span> <span class="number">9</span> <span class="number">7</span> <span class="number">4</span> <span class="number">0</span> <span class="number">3</span> </span><br><span class="line"><span class="number">9</span> <span class="number">7</span> <span class="number">1</span> <span class="number">0</span> <span class="number">6</span> <span class="number">2</span> <span class="number">8</span> <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> </span><br><span class="line"><span class="number">1</span> <span class="number">7</span> <span class="number">0</span> <span class="number">6</span> <span class="number">5</span> <span class="number">3</span> <span class="number">2</span> <span class="number">4</span> <span class="number">8</span> <span class="number">9</span> </span><br><span class="line"><span class="number">3</span> <span class="number">7</span> <span class="number">0</span> <span class="number">2</span> <span class="number">6</span> <span class="number">8</span> <span class="number">1</span> <span class="number">5</span> <span class="number">9</span> <span class="number">4</span> </span><br><span class="line"><span class="number">3</span> <span class="number">0</span> <span class="number">6</span> <span class="number">8</span> <span class="number">4</span> <span class="number">9</span> <span class="number">1</span> <span class="number">7</span> <span class="number">5</span> <span class="number">2</span> </span><br><span class="line"><span class="number">6</span> <span class="number">7</span> <span class="number">5</span> <span class="number">8</span> <span class="number">2</span> <span class="number">1</span> <span class="number">0</span> <span class="number">4</span> <span class="number">9</span> <span class="number">3</span> </span><br><span class="line"><span class="number">1</span> <span class="number">0</span> <span class="number">5</span> <span class="number">7</span> <span class="number">9</span> <span class="number">8</span> <span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">6</span> </span><br><span class="line">链式存储结果集：</span><br><span class="line"><span class="number">0</span> <span class="number">9</span> <span class="number">7</span> <span class="number">4</span> <span class="number">5</span> <span class="number">1</span> <span class="number">6</span> <span class="number">3</span> <span class="number">2</span> <span class="number">8</span> </span><br><span class="line"><span class="number">5</span> <span class="number">0</span> <span class="number">7</span> <span class="number">6</span> <span class="number">8</span> <span class="number">4</span> <span class="number">2</span> <span class="number">3</span> <span class="number">9</span> <span class="number">1</span> </span><br><span class="line"><span class="number">8</span> <span class="number">4</span> <span class="number">6</span> <span class="number">3</span> <span class="number">5</span> <span class="number">2</span> <span class="number">7</span> <span class="number">1</span> <span class="number">9</span> <span class="number">0</span> </span><br><span class="line"><span class="number">1</span> <span class="number">6</span> <span class="number">0</span> <span class="number">2</span> <span class="number">9</span> <span class="number">4</span> <span class="number">5</span> <span class="number">3</span> <span class="number">8</span> <span class="number">7</span> </span><br><span class="line"><span class="number">9</span> <span class="number">8</span> <span class="number">4</span> <span class="number">0</span> <span class="number">7</span> <span class="number">1</span> <span class="number">3</span> <span class="number">6</span> <span class="number">2</span> <span class="number">5</span> </span><br><span class="line"><span class="number">9</span> <span class="number">8</span> <span class="number">2</span> <span class="number">4</span> <span class="number">5</span> <span class="number">3</span> <span class="number">0</span> <span class="number">1</span> <span class="number">7</span> <span class="number">6</span> </span><br><span class="line"><span class="number">5</span> <span class="number">1</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">4</span> <span class="number">0</span> <span class="number">9</span> <span class="number">3</span> <span class="number">2</span> </span><br><span class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">4</span> <span class="number">5</span> <span class="number">7</span> <span class="number">9</span> <span class="number">0</span> <span class="number">8</span> <span class="number">6</span> <span class="number">3</span> </span><br><span class="line"><span class="number">1</span> <span class="number">0</span> <span class="number">4</span> <span class="number">7</span> <span class="number">8</span> <span class="number">5</span> <span class="number">3</span> <span class="number">6</span> <span class="number">9</span> <span class="number">2</span> </span><br><span class="line"><span class="number">0</span> <span class="number">2</span> <span class="number">3</span> <span class="number">6</span> <span class="number">1</span> <span class="number">4</span> <span class="number">8</span> <span class="number">9</span> <span class="number">7</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
 
 <hr />
 
@@ -483,10 +554,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
+            Overview
           </li>
         </ul>
       
@@ -507,7 +578,7 @@
                 <a href="/archives/%20%7C%7C%20archive">
               
                   <span class="site-state-item-count">36</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -516,10 +587,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">分类</span>
-                
+                  <span class="site-state-item-name">categories</span>
+                </a>
               </div>
             
 
@@ -527,10 +598,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">55</span>
-                  <span class="site-state-item-name">标签</span>
-                
+                  <span class="site-state-item-name">tags</span>
+                </a>
               </div>
             
 
@@ -581,9 +652,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
 
@@ -591,7 +662,7 @@
 </div>
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
@@ -599,7 +670,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
