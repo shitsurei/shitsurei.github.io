@@ -1,131 +1,28 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#fff">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-  <link href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-  
-
-<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg?v=5.1.4" color="#fff">
-
-
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
   <link rel="manifest" href="/images/favicon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
 
+<link rel="stylesheet" href="/css/main.css">
 
-  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml" />
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shitsurei.online","root":"/","scheme":"Muse","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-  <meta name="keywords" content="算法,数据结构,设计模式," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="实际情况，往往比理论复杂得多">
+  <meta name="description" content="实际情况，往往比理论复杂得多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次算法的方案设计">
 <meta property="og:url" content="https://shitsurei.online/droneCrossPhotograph.html">
@@ -150,39 +47,18 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph1.png">
 
+<link rel="canonical" href="https://shitsurei.online/droneCrossPhotograph.html">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
-
-
-
-  <link rel="canonical" href="https://shitsurei.online/droneCrossPhotograph.html"/>
-
-
-
-
 
   <title>记一次算法的方案设计 | shitsurei</title>
   
@@ -192,259 +68,193 @@
 
 
 
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-<meta name="generator" content="Hexo 4.2.1"></head>
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+</head>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">shitsurei</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">失礼しました</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shitsurei</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">失礼しました</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
   </div>
 </div>
 
+
+
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-tags">
-          <a href="/tags/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-top">
-          <a href="/top/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-signal"></i> <br />
-            
-            top
-          </a>
-        </li>
-      
 
-      
-    </ul>
-  
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
-  
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
 </nav>
 
 
 
- </div>
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://shitsurei.online/droneCrossPhotograph.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="GuoRong Zhang">
-      <meta itemprop="description" content="">
       <meta itemprop="image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="个人博客小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="shitsurei">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">记一次算法的方案设计</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          记一次算法的方案设计
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-24T11:49:50+08:00">
-                2020-04-24
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">算法和数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2020-04-24 11:49:50" itemprop="dateCreated datePublished" datetime="2020-04-24T11:49:50+08:00">2020-04-24</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  11.8k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-03 19:07:00" itemprop="dateModified" datetime="2020-05-03T19:07:00+08:00">2020-05-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
                 </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  42
-                </span>
-              
-            </div>
-          
+            </span>
 
           
-              <div class="post-description">
-                  实际情况，往往比理论复杂得多
-              </div>
-          
+            <div class="post-description">实际情况，往往比理论复杂得多</div>
 
         </div>
       </header>
-    
 
     
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p>随着无人机技术的快速发展，其用途也变得越来越广泛，工业农业和日常生活中处处都可以看到无人机的影子，国产无人机品牌大疆也因其国际领先的技术和工业水准广为人知。虽然用途广泛，但是总结起来也无非信息收集和物品传输两大类，因为无人机相较于传统的侦测设备或物流设备突破的点就在于不受地形的限制和视野的约束，受限于目前无人机技术的续航能力和载重能力，在物品传输方面的选择比较有限，所以大量的无人机还是运用在航拍，范围搜索，地形侦测，活动单位追踪等方面。对于收集信息的无人机，一般而言都是人为操纵无人机的飞行航线并有选择地在适当时机来记录信息的，那么我们是否有可能让无人机按照一定的路线自动导航并进行信息的收集呢，下面我们就来尝试一下。</p>
@@ -471,10 +281,10 @@
 <li>无人机在飞行的过程中会消耗电量，且支持存储的航拍信息也有上限，这里不限定为具体数值，但需要尽可能的节省飞行距离和存储空间</li>
 </ul>
 <h3 id="为什么航拍的范围是“十字”"><a href="#为什么航拍的范围是“十字”" class="headerlink" title="为什么航拍的范围是“十字”"></a>为什么航拍的范围是“十字”</h3><p>以上就是我们假定的一些限制条件，部分同学可能有疑惑，为什么每次拍摄只能记录一个“十字”范围的区域信息，这样对飞行过程中收集地图信息带来很多难度，但是如果大家对真实无人机的航拍方式有所了解，其实这是有实际意义的。大家可以回头看一眼本篇博客封面的图片，就是一个航拍的照片，为了使得一次拍摄包含更多的地图信息，我们一般会选择使用广角摄像头，这种摄像头的成像结果会以当前位置为圆心，三百六十度无死角的将四面八方的地图拍成一张圆形的图像，如下图所示：</p>
-<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph1.png" alt="广角航拍范围视图"></p>
+<p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph1.png" alt="广角航拍范围视图"></p>
 <p>我们为了方便计算，假设照片的范围正好与3×3的地图区域相切，那么此时图中左上，右上，左下，右下四个区域所能拍摄到的范围还不及当前单位面积的一半，因此不能算收集到了该区域的地图信息，单纯的观察图片可能无法得出靠谱的数据解释，我们可以通过Python的scipy库计算一下图中各个单位中所拍到的面积占单位面积的比例。</p>
 <p>首先我们建立坐标系，因为圆形区域与正方形相交的部分除了中心位置的正方形面积被全部包括外，周围的八个部分可以分成两类，其中上下左右四个位置的面积是相等的，记为面积A；四个角落的位置同样是相等的，记为面积B。我们只需要求出面积A和B的大小即可，出于数值取整的考虑，我们将上图中一个小正方形区域的边长设置为2，同时为了方便求积分操作，我们把圆心放在[3,-1]位置，此时只需要计算圆的方程在[0,2]区间和[2,4]区间的积分结果，即为B和A的面积。</p>
-<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph2.png" alt="坐标系"></p>
+<p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph2.png" alt="坐标系"></p>
 <p>以下是计算和验证面积A和面积B的代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> integrate</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="number">9</span>-(x<span class="number">-3</span>)**<span class="number">2</span>)**<span class="number">0.5</span><span class="number">-1</span></span><br><span class="line">v1, err = integrate.quad(f, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line"><span class="comment"># 2.125103815660392</span></span><br><span class="line">print(v1)</span><br><span class="line">v2, err = integrate.quad(f, <span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line"><span class="comment"># 3.886959309833288</span></span><br><span class="line">print(v2)</span><br><span class="line"><span class="comment"># 0.531275953915098</span></span><br><span class="line">print(v1/<span class="number">4</span>)</span><br><span class="line"><span class="comment"># 0.971739827458322</span></span><br><span class="line">print(v2/<span class="number">4</span>)</span><br><span class="line"><span class="comment"># 面积验证</span></span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="comment"># 28.274333882308138（通过πR^2计算的圆面积）</span></span><br><span class="line">print(<span class="number">9</span>*math.pi)</span><br><span class="line"><span class="comment"># 28.04825250197472（通过累加和大正方形相切的各个部分面积计算圆的面积）</span></span><br><span class="line">print((v1+v2)*<span class="number">4</span>+<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
 
@@ -494,7 +304,7 @@
 </ul>
 <p>在最后两个条件中规定了这个算法的功能指标和性能指标，其中第四个条件要求无人机必须对整个地图的信息收集完整，这是一个功能性的指标，如果最终我们的算法使得收集的信息有遗漏，那么这个算法就是一个无法交付的版本；而第五个条件没有明确量化要求无人机的续航限制和内存限制，因为我们可以将其理解为两个性能相关的指标，其一是无人机的续航能力是有限的，每一次位置的移动都会耗费无人机的剩余电量，换句话说无人机一次续航后的航行里程是有上限的，我们要尽可能的减少无人机的移动次数；其二是无人机的存储容量是有限的，因此我们不能每次移动都进行拍摄，这样会造成存储的较大浪费（虽然实际情况中可能需要重复的位置信息来帮助我们勘误），因此我们要尽可能减少拍摄的次数。这两条指标是用于评价算法的性能，类似于我们用于评价算法的时间复杂度和空间复杂度。</p>
 <h3 id="“十字”拼图"><a href="#“十字”拼图" class="headerlink" title="“十字”拼图"></a>“十字”拼图</h3><p>对于一个算法方案，最优先考虑的当前是实现其功能，其次再来优化性能，题目要求规划的路线和拍摄方案要收集完整个区域的地图信息，换句话说在这个M×N的地图上每一个点都要被拍到至少一次，直观的反映到地图上相当于我们拿着一个“十字”形状的印章盖在地图上，直到地图上的所有位置被盖过。由于从这一次拍摄到下一次拍摄这样一个过程是需要无人机一步步移动过去的，如果拍摄的顺序过于跳跃或者说两次拍摄为了避免重复而中间存在遗漏的区域，就会消耗额外的移动次数折返回去查漏补缺，因此考虑选择拍摄的时机尽可能在移动的距离尽可能小的情况下（这里说尽可能小而不是最小因为最小就退化为每次移动都进行拍摄，这样会出现大量的存储浪费），那么移动距离为多少比较合适呢，毫无疑问3最合适，因为一次拍摄的长和宽范围都是3，因此在当前拍摄点向任意方向不折返的移动3的步长，下一次拍摄就不会出现重复的拍摄信息，但是这三步怎么走，其实我们有很多种选择，基本可以分为下图中的三种：</p>
-<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph3.jpg" alt="无重复飞行路径"></p>
+<p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph3.jpg" alt="无重复飞行路径"></p>
 <ol>
 <li>如图所示第一种是每一次拍摄后按直线的方式向右（也可以向左，向上，向下）移动3步，作为下一次的拍摄坐标，这种方式很直观也很有效，但这种方式无法避免的一个问题是会出现信息重复，图一中两次拍摄不论方向如何选择，在这两次的拍摄范围内都会存在两个位置的信息空缺，这意味着这两个位置需要在之后的折返过程中重新拍摄填补，即使是尽可能的使拍摄信息之间不重复，也会存在一个无法弥补的区域（图中黑色阴影的坐标）需要我们不得不以重复信息的代价来填补这一空缺；</li>
 <li>相比第一种，第二种“十字”拼图的排列方式就巧妙得多，因为他并不是选择一味地向一个方向移动3的步长，而是将3步拆分成水平方向走1步和垂直方向走2步，这样的移动方式和第一种一样都是每次移动拍摄位置花费3步的距离，但是却有效避免了信息的重复，其对存储空间的利用效率就提升了不少；</li>
@@ -509,7 +319,7 @@
 <li>前面的分析也指出，拍摄区域信息的重复在实际意义中也有着勘误和验证的作用，并非纯粹浪费存储空间。</li>
 </ol>
 <p>设计这个路线最容易想到的就是<strong>以3行或3列为一个单位进行行遍历或列遍历</strong>，因为拍摄区域的长和宽都是3，所以我们在每一栋一层就拍摄3格的有效信息，同时出于无人机的移动尽可能少的考虑，采用“S”型遍历路线，即到达一侧边界后向下移动三格再以反方向遍历至另一侧，直到整个地图遍历完成。下面给出当地图大小为7×7时的路线图：</p>
-<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph4.jpg" alt="方案一路线图"></p>
+<p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph4.jpg" alt="方案一路线图"></p>
 <p>图中我们假定的无人机起飞位置在(1,0)坐标处，从S1起飞后向右不断移动，每次移动都对当前位置的拍摄范围进行拍摄，直到S7位置拍摄完成后向下移动3步到S8位置后继续向左移动并拍摄，值得注意的是如果我们最后一次遍历只剩下一行时可以对拍摄进行优化，如图所示只需要S15，S16，S17这三个位置进行拍摄即可涵盖所有地图信息，减少一定的存储压力。从这一点优化方案中我们可以发现，当地图的长宽M和N中存在某个值是3的整数倍或整数倍加1时，我们在另一条边上遍历可以减少一定的存储压力。</p>
 <p>下面我们来计算一下这种方案的移动次数和拍摄次数：</p>
 <ul>
@@ -519,14 +329,14 @@
 <p>这只是一个大概的估计值，因为实际路线会根据具体情况进行优化，类似前面提到的只剩一行时我们不需要再每次移动都拍摄，因此该算法的具体表现需要等实现后通过数据测试才能确定，在此按下不表。</p>
 <h3 id="方案二：“S”型路径优化方案"><a href="#方案二：“S”型路径优化方案" class="headerlink" title="方案二：“S”型路径优化方案"></a>方案二：“S”型路径优化方案</h3><p>方案一中虽然我们尽可能的压低移动距离，但是造成了大量的拍摄信息浪费，相比理想的拍摄次数MN/5提高到了MN/3，拍摄次数同比增幅为66.7%，也就是说比理想情况下的拍摄次数多了一半左右，我们需要想办法优化飞行路线，降低拍摄次数。这里我们想到前面的“十字拼图”中的第二种方案，其大致也是遵循先遍历某个方向，因此我们可以尝试用这种拍摄方式对第一种方案做优化，减少重复的拍摄次数。我们发现第二种拼图的方式在行或列的遍历中实际上只能保证两行或两列的有效覆盖范围，因为我们只能取其与矩形形状相交的部分，而不规则的位置同样是存在重复拍摄或信息损失的。所以我们可以先尝试用这种方式来遍历上面的地图，通过遍历的结果再来总结有哪些可以优化的方面。</p>
 <p>以下给出方案二的航行路线图：</p>
-<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph5.jpg" alt="方案二路线图"></p>
+<p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph5.jpg" alt="方案二路线图"></p>
 <p>这里先解释一下无人机的移动规则，因为存在无人机移动至地图之外的情况，可能大家会存在疑惑，这里可以理解为为了遵循航行规则的统一性而做出的设定，毕竟<strong>无人机在空中航行时并没有飞行边界的限制，当无人机的拍摄范围内的五个位置包含M×N这个地图上的任意一个坐标时我们就认为这次拍摄是有意义的</strong>，这一点对于算法的设计尤为重要。</p>
 <p>首先我们从地图的左上角起飞，以每两列为遍历单元，每次移动向着列的另一边移动行1步和列2步，而行的1步是方向交替的（口述起来比较复杂，相信大家看图可以一目了然），我们需要注意在两列遍历完成后下一次折返时逆向遍历下一个两列。由于我们不确定整个地图的长宽是多少，因此可能出现下一次的移动位置位于整个地图之外的情况，这里前面也有解释，这时只要无人机还能拍摄到地图内的区域我们就完成拍摄操作，例如图中的S8和S17位置。</p>
 <p>从上图中来看似乎我们的优化没有起到减少拍摄次数的作用，方案一最终拍摄17次，方案二也是17次，其实不然，方案一我们是进行了优化的，最后一行只拍摄了3次，而方案二中最后一列并没有优化而是遵循了既有的路线规则。其实换个角度考虑如果我们将地图范围稍作修改增加一行或一列（其实没有什么差别，都是7×8的地图范围），那么我们再来看，对于方案一来说就无法再进行优化，最后一列需要从头拍摄到尾，累计拍摄总和21次；而对于方案二呢，我们会发现增加的这一列元素已经完全被当前已有的拍摄次数所覆盖了（观察S13至S17的拍摄范围即可）。因此我们的优化方案是起到了一定减少拍摄次数的效果的，但具体的评估还是需要最终用不同量级的数据测试后观察。</p>
 <h3 id="方案三：螺旋航行拍摄方案"><a href="#方案三：螺旋航行拍摄方案" class="headerlink" title="方案三：螺旋航行拍摄方案"></a>方案三：螺旋航行拍摄方案</h3><p>现在我们先来分析一下方案二存在的问题，虽然相比方案一已经有效提升了拍摄的效率但是仍然存在信息的重复和损失，并且从初始的位置就损失了两个单位的信息，S8位置甚至一次拍摄丢失了四个单位的位置信息；而重复信息的情况例如S2和S6之间、S7和S9之间都存在两个单位的信息重复。虽然我们已经分析过拍摄过程中无法避免拍摄的信息重复和信息丢失情况，但是我们考虑能否将这种情况尽可能的延后至整个巡航过程的最后阶段，即我们优先收集最有效的信息，最后再将边界位置没有收集到的坐标信息查漏补缺的拍摄一遍。</p>
 <p>这里我们就可以利用到“十字”拼图中的第三种方案，以这种螺旋的方式逐步收集到一定范围内的元素，这种飞行路线可以从某一个点开始向四周辐射，并且在拍摄的过程中保证不会出现信息的重复拍摄，那么我们在选择起飞位置的时候，越靠近整个地图的中间位置在向周围辐射的过程中就不会出现失衡的情况，即辐射的范围和原本的地图区域是中心对称的，不会出现一边还可以每次收集五个有效坐标信息，相对的另一边已经五个位置都扩展到了整个地图之外，那么这样的移动和拍摄就没有意义了。</p>
 <p>下面我们给出方案三的航行路线图：</p>
-<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph6.jpg" alt="方案三路线图"></p>
+<p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph6.jpg" alt="方案三路线图"></p>
 <p>相较于第二种飞行路线，这种航行的路线更加复杂，下面我们来分析一下。首先无人机选择从整个地图的中心位置起飞，以3步的步长为间隔进行拍摄，但是这3步的移动规则比较复杂，在尝试旋转移动时我们说在这种航行路线的移动是在水平方向和垂直方向上交替的进行1步和2步的移动，但是如果每走一步就更换移动的方向和步长顺序就会出现“十字”拼图示例中给出的第三种结构一样，只是在四个相邻的环中循环，无法扩大其拍摄范围。因此我们需要改变一定的规则，使得在旋转的过程中还能不断扩大拍摄的范围，从图中的路线来看可以这样描述移动的规则：</p>
 <ul>
 <li>存在四种固定顺序的移动模式，依次是向当前位置的右下（参考S1-&gt;S2），左下（参考S2-&gt;S3），左上（参考S3-&gt;S4），右上（参考S5-&gt;S6）方向移动3的步长</li>
@@ -541,15 +351,15 @@
 <li>最终拍摄完成的位置距起始飞行位置近</li>
 </ol>
 <p>先来说第一点，前期飞行过程不会出现拍摄信息的重复意味着什么，还记得我们前面讨论存储空间的理想指标是多少吗？答案是Math.ceiling(M×N÷5)，虽然由于收集信息结构和地图的结构无法完美匹配导致了拍摄信息的重复和损失，但是我们一旦能够将拍摄信息重复和损失的情况延后，就能够在越早的移动范围内获取大量的地图区域信息，此时如果因为续航能力的不足或其他不可控因素导致要提前结束巡航过程，这种方案在信息的收集度上就有更大的优势。就以方案三的示例情况来看，我们仅仅截取前期的拍摄覆盖范围来看，如图所示：</p>
-<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph7.jpg" alt="方案三前期路线图"></p>
+<p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph7.jpg" alt="方案三前期路线图"></p>
 <p>当从起飞开始9次拍摄接受时对整个区域信息的掌握情况已经达到了83.7%，这样的信息收集效率如果我们对地图的信息收集要求没有百分之百这么高的话，我们只使用了方案一和方案二的一般存储空间就逼近了前两种方案的信息量，足以看出这种方案的优势。</p>
 <p>再来看第二点，优先获取地图中心区域的信息在实际情况中往往有着更强的意义，显然当我们希望对一个区域的地形情况或其他信息进行巡查时一定是更关心该区域的中心位置而非边界，除非需要对整个区域进行地毯式的搜索，那么不论我们选择从一边到另一边的遍历还是从中心到四周的遍历都是一样的，其余大部分情况下这种遍历方式都更具优势。</p>
 <p>最后一点显然也很好理解，如果我们把整个螺旋扩展的过程看做一个近似的圆，那么总终返回起飞位置的返航距离一定只是一个半径长度，反应在矩形区域中就坐落在某个边长的一半到两条边之和的一半这两者的区间内；反观方案一和方案二，基本返航距离都是该方案的两倍左右。</p>
 <h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2><p>在我们实现上述的三种航拍算法之前先来思考一下整个代码的体系结构，因为面向对象的编程思想告诉我们，适当的抽象和封装可以使我们的代码实现有效的复用，并且具备足够的可读性。尤其是在这个案例中，天然的就具有无人机这个实体，我们所要设计的一切操作都是围绕这个实体，即使上面设计了三种不同的飞行航线，其中依然用到了无人机的相同行为，例如飞行，拍摄和返航等。因此我们先对整个代码的结构做如下规划：</p>
-<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph8.jpg" alt="代码类图"></p>
+<p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph8.jpg" alt="代码类图"></p>
 <p>其中，我们遵循面向对象的编程思想，将无人机抽象为IDrone接口，在接口中定义无人机的一系列行为，包含数据的初始化，移动，拍摄，返航等，而这些功能的具体实现方式实现在Drone类中。无人机的实体通过聚合的方式与航行算法抽象类PathStrategy类进行聚合，航行算法抽象类中包含两个航行算法相关的抽象算法：地图信息收集算法和地图信息还原算法，分别对应信息的输入和输出；同样的这两个方法的具体实现在具体航行算法的实现类中，正如上文我们设计了三种方案，分别对应三个实现类，其中MinMoveStrategy对应最短移动路径方案，STypePathStrategy对应“S”型路径优化方案，SpinPathStrategy对应螺旋航行拍摄方案。这样设计，即使后期我们有了新的航行算法，也可以简单的通过类的继承实现代码的复用，具有较强的可扩展性。最后客户端和算法抽象类之间具有关联关系，当客户端调用相应的航行算法进行地图信息的输入输出时，传入地图对象初始化好的无人机对象，选择所采用的航行算法即可得到结果。</p>
 <p>下面我们来看一下整个算法最终版的代码体系结构：</p>
-<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph9.jpg" alt="代码类图"></p>
+<p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/droneCrossPhotograph9.jpg" alt="代码类图"></p>
 <p>可以看到主体的架构和我们上述分析的保持一致，同时为了功能的完整性，规范性和更进一步的可扩展性我们增加了部分代码，体现在以下几个方面：</p>
 <ol>
 <li>增加IO工具类，将算法中需要输出信息的部分功能进行抽象，主要包括输出航行日志信息和输出最终的地图信息，这样做的好处是后期便于我们希望实现多渠道的信息输出时，只需要扩展该工具类的功能，就可以将信息输出至本地文件、网络等其他渠道中；</li>
@@ -883,354 +693,206 @@
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>综上所述，我们将三种算法测试下来，可以得出并没有任何一种算法在各个层面都可以做到性能最优，每一种算法都有其合适的使用场景，方案一适用于对移动路径距离敏感的场景，例如续航能力一般但内存空间容量大的无人机；方案三正好相反，适用于对存储空间敏感的场景，但是方案三又需要地图的临边差距较小，接近于正方形；方案二则是一个在各个性能指标上比较折中的算法，适用场景比较广泛，时间和空间的性能也比较优良，是大多数场景中推荐使用的无人机航拍算法。</p>
 <hr />
 
-      
     </div>
-    
-    
-    
 
     
-      <div>
-          <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
-</div>
-      </div>
     
     
-    <div>
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
       
-        
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/droneCrossPhotograph.html">记一次算法的方案设计</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 GuoRong Zhang 的个人博客">GuoRong Zhang</a></p>
-  <p><span>发布时间:</span>2020年04月24日 - 11:04</p>
-  <p><span>最后更新:</span>2020年05月03日 - 19:05</p>
-  <p><span>原始链接:</span><a href="/droneCrossPhotograph.html" title="记一次算法的方案设计">https://shitsurei.online/droneCrossPhotograph.html</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://shitsurei.online/droneCrossPhotograph.html"  aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/wechatpay.jpg" alt="GuoRong Zhang 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/alipay.jpg" alt="GuoRong Zhang 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
 </div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-    $(".fa-clipboard").click(function(){
-      clipboard.on('success', function(){
-        swal({   
-          title: "",   
-          text: '复制成功',
-          icon: "success", 
-          showConfirmButton: true
-          });
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/drunkMan.html" rel="prev" title="《醉步男》读后感">
+      <i class="fa fa-chevron-left"></i> 《醉步男》读后感
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
     });
-    });  
+  }
 </script>
 
-      
-    </div>
-
-    
-
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Donate</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/wechatpay.jpg" alt="GuoRong Zhang WeChat Pay"/>
-        <p>WeChat Pay</p>
-      </div>
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/alipay.jpg" alt="GuoRong Zhang Alipay"/>
-        <p>Alipay</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
-          
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
-          
-            <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
-          
         </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/drunkMan.html" rel="next" title="《醉步男》读后感">
-                <i class="fa fa-chevron-left"></i> 《醉步男》读后感
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    
-      <div id="sidebar-dimmer"></div>
-    
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <a href="/">
-                <img class="site-author-image" itemprop="image"
-                  src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg"
-                  alt="GuoRong Zhang" />
-              </a>
-            
-              <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
-              <p class="site-description motion-element" itemprop="description">个人博客小站</p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/%20%7C%7C%20archive">
-              
-                  <span class="site-state-item-count">36</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
-                  <span class="site-state-item-name">categories</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
-                  <span class="site-state-item-name">tags</span>
-                </a>
-              </div>
-            
-
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/shitsurei" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="lfgewj21345@163.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="http://www.zhihu.com/people/zhang-guo-rong-44-53" target="_blank" title="知乎">
-                      
-                        <i class="fa fa-fw fa-book"></i>知乎</a>
-                  </span>
-                
-            </div>
-          
-
-          
-          
-
-          
-          
-            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-globe"></i>
-                推荐阅读
-              </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://www.alloyteam.com/nav/" title="Web前端导航" target="_blank">Web前端导航</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://www.chuangzaoshi.com/code" title="创造狮导航" target="_blank">创造狮导航</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://www.36zhen.com/t?id=3448" title="前端书籍资料" target="_blank">前端书籍资料</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://www.v2ex.com/" title="印记中文" target="_blank">印记中文</a>
-                  </li>
-                
-              </ul>
-            </div>
-          
-
-          
-
-        </div>
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题抽象"><span class="nav-number">1.</span> <span class="nav-text">问题抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建模"><span class="nav-number">1.1.</span> <span class="nav-text">建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么航拍的范围是“十字”"><span class="nav-number">1.2.</span> <span class="nav-text">为什么航拍的范围是“十字”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题剖析"><span class="nav-number">2.</span> <span class="nav-text">问题剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#“十字”拼图"><span class="nav-number">2.1.</span> <span class="nav-text">“十字”拼图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间优先VS空间优先"><span class="nav-number">2.2.</span> <span class="nav-text">时间优先VS空间优先</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案设计"><span class="nav-number">3.</span> <span class="nav-text">方案设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一：最短移动路径方案"><span class="nav-number">3.1.</span> <span class="nav-text">方案一：最短移动路径方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二：“S”型路径优化方案"><span class="nav-number">3.2.</span> <span class="nav-text">方案二：“S”型路径优化方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三：螺旋航行拍摄方案"><span class="nav-number">3.3.</span> <span class="nav-text">方案三：螺旋航行拍摄方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构设计"><span class="nav-number">4.</span> <span class="nav-text">架构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现"><span class="nav-number">4.1.</span> <span class="nav-text">算法实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法测试"><span class="nav-number">5.</span> <span class="nav-text">算法测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一"><span class="nav-number">5.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二"><span class="nav-number">5.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三"><span class="nav-number">5.3.</span> <span class="nav-text">方案三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题抽象"><span class="nav-number">1.</span> <span class="nav-text">问题抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建模"><span class="nav-number">1.1.</span> <span class="nav-text">建模</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么航拍的范围是“十字”"><span class="nav-number">1.2.</span> <span class="nav-text">为什么航拍的范围是“十字”</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题剖析"><span class="nav-number">2.</span> <span class="nav-text">问题剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#“十字”拼图"><span class="nav-number">2.1.</span> <span class="nav-text">“十字”拼图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间优先VS空间优先"><span class="nav-number">2.2.</span> <span class="nav-text">时间优先VS空间优先</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案设计"><span class="nav-number">3.</span> <span class="nav-text">方案设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一：最短移动路径方案"><span class="nav-number">3.1.</span> <span class="nav-text">方案一：最短移动路径方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二：“S”型路径优化方案"><span class="nav-number">3.2.</span> <span class="nav-text">方案二：“S”型路径优化方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三：螺旋航行拍摄方案"><span class="nav-number">3.3.</span> <span class="nav-text">方案三：螺旋航行拍摄方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构设计"><span class="nav-number">4.</span> <span class="nav-text">架构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现"><span class="nav-number">4.1.</span> <span class="nav-text">算法实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法测试"><span class="nav-number">5.</span> <span class="nav-text">算法测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方案一"><span class="nav-number">5.1.</span> <span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案二"><span class="nav-number">5.2.</span> <span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方案三"><span class="nav-number">5.3.</span> <span class="nav-text">方案三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="GuoRong Zhang"
+      src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+  <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+  <div class="site-description" itemprop="description">个人博客小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shitsurei" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shitsurei" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/lfgewj21345@163.com" title="E-Mail → lfgewj21345@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.zhihu.com/people/zhang-guo-rong-44-53" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;zhang-guo-rong-44-53" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.alloyteam.com/nav/" title="http:&#x2F;&#x2F;www.alloyteam.com&#x2F;nav&#x2F;" rel="noopener" target="_blank">Web前端导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.chuangzaoshi.com/code" title="http:&#x2F;&#x2F;www.chuangzaoshi.com&#x2F;code" rel="noopener" target="_blank">创造狮导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.36zhen.com/t?id=3448" title="http:&#x2F;&#x2F;www.36zhen.com&#x2F;t?id&#x3D;3448" rel="noopener" target="_blank">前端书籍资料</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://e.xitu.io/" title="http:&#x2F;&#x2F;e.xitu.io&#x2F;" rel="noopener" target="_blank">掘金酱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">V2EX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">印记中文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
-
-  
 </div>
 
-
-
-
-
-
-
-
-
         
 
 
@@ -1239,118 +901,26 @@
 
 
 
-        
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-          <span id="scrollpercent"><span>0</span>%</span>
-        
-      </div>
-    
-
-    
-
   </div>
 
   
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-lazyload@1.9.7/jquery.lazyload.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.js"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -1360,8 +930,9 @@
 
 
 
-
   
+<script src="/js/local-search.js"></script>
+
 
 
 
@@ -1376,27 +947,7 @@
 
   
 
-
-
-
-
   
 
-  
-
-  
-
-  
-  
-
-  
-
-  
-  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
-  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
-
-
-  
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>
