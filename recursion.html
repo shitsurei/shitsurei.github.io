@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,递归," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="递归的时间复杂度估计和主项公式的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归&amp;Master公式">
+<meta property="og:url" content="https://shitsurei.online/recursion.html">
+<meta property="og:site_name" content="shitsurei">
+<meta property="og:description" content="递归的时间复杂度估计和主项公式的使用">
+<meta property="article:published_time" content="2019-05-09T10:53:29.000Z">
+<meta property="article:modified_time" content="2020-02-03T09:20:18.465Z">
+<meta property="article:author" content="GuoRong Zhang">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="递归">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shitsurei.online/recursion.html"/>
+
+
+
+
+
+  <title>递归&Master公式 | shitsurei</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">shitsurei</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">失礼しました</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shitsurei.online/recursion.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shitsurei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">递归&Master公式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-09T10:53:29Z">
+                2019-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">算法和数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  递归的时间复杂度估计和主项公式的使用
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>评价一个算法的优劣，时间复杂度应该是最重要的指标，时间复杂度不止可以判断两个算法计算起来用时更短，甚至可以区分这个算法是否是计算机可以解决的。但是如何估计一个算法的时间复杂度有时也不是那么显而易见的，例如递归算法的时间复杂度，其中涉及到系统的压栈和弹栈时间，需要用到本文介绍主项公式来辅助求解。</p>
+<a id="more"></a>
+
+<h2 id="从算法的时间复杂度说起"><a href="#从算法的时间复杂度说起" class="headerlink" title="从算法的时间复杂度说起"></a>从算法的时间复杂度说起</h2><p>我们都知道，虽然时间复杂度这一指标以时间为名，但并不是一个时间单位，其本质是样本量的增长对计算时间的影响。任何一个算法都要有输入和输出，不管输入的数据是一组数还是对象（这不是算法所关心的），所输入的数据的数量称为样本量（n），随着样本量的增长计算时间也会相应的增长，这很好理解；但是，常数级的算法即便样本量增加，计算时间也不会发生变化（听起来似乎不可思议），而线性时间复杂度的算法计算时间的增长和样本量的增长是同等规模的，O(N<sup>2</sup>)的算法样本量增长9倍，计算时间就要增长99倍……（以此类推）</p>
+<p>时间复杂度通常主要由次数和常数项两部分构成，而其中最重要的指标还是最高项的次数，即便常数项较小，但只要最高项的次数高于其他算法，那么该算法随着样本量的增大计算时间总会超过其他算法（将时间复杂度的函数图像画出来就一目明了）。而当两个算法的最高次相同时，就可以通过比较常数项来判断谁的计算时间更长，例如位运算和加减乘除运算都是常数级的时间复杂度，但是位运算的常数项更小，因此许多算法中的<code>x/2</code>通常写作<code>x&gt;&gt;1</code>，<code>2^x</code>通常写作<code>1&lt;&lt;x</code>。</p>
+<h2 id="P问题和NP问题"><a href="#P问题和NP问题" class="headerlink" title="P问题和NP问题"></a>P问题和NP问题</h2><p>P&amp;NP问题作为千禧年七大数学难题之首，其实质就是在讨论算法的时间复杂度问题，即便是云计算已经如此普及的今天，对于计算机而言一个非多项式复杂度的算法也需要耗费大量的时间，这正是我们如此看重算法时间复杂度的原因（真的等不起）。关于多项式级复杂度，主要包括O(1),O(log(n)),O(n^a)等几种，与之相对的非多项式级复杂度有O(a^n)和O(n!)，这也是P&amp;NP问题的划分标准。</p>
+<p>时间复杂度上的差别使得我们在求解这两类问题时的思路截然不同，对于P问题，我们其实可以明确的确定一系列计算步骤来将输入数据一步步转化为输出数据，这也是我们在学习算法过程中最主要练习的部分；但是NP问题，我们不一定能够将其转化为多项式的过程将其解决的。虽然如此，但是NP问题有一个重要的特点，就是我们可以在多项式的时间内验证问题的一个解，因此就可以用递归算法来尝试求解，只要这个算法的样本量有限，就一定能在有限时间内解决这个问题。</p>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>学递归的时候老师说，任何递归算法都可以改成非递归的版本，因为递归的实质是系统帮你把分一步计算结果压栈，之后再弹栈，系统方法栈不仅可以将中间结果压栈，同时可以将每一步方法中的参数压栈，功能十分强大。但是，我们在日常学习算法和思考问题的时候总是习惯于从条件到结果的顺序依赖关系，即遇到一个问题时我们习惯于用解决P问题的方式去思考，一旦遇到NP问题就会显得有些束手无策，因此我们要通过学习递归函数的构建来训练如何用计算机的逻辑来思考问题，这也是算法能力很重要的一部分。</p>
+<p>写一个递归函数，我们首先要考虑的是递归的终止条件，也叫base case，即样本量一旦小到什么程度，我们就能够用多项式级的算法来解决该问题；确定了终止条件，接下来考虑每一步递归过程中的依赖关系，即最初始的样本量是如何依赖下一级的样本量来得到最终结果的，依赖关系也确定之后，就可以输入初始值开始求解。</p>
+<p>这里以著名的汉诺塔问题为例，样本量为n的问题从初始杆借助辅助杆移动到终止杆上。我们将问题抽象一下，我们将前n-1个圆盘看做整体，那么一次递归过程可以分为三个步骤：</p>
+<ol>
+<li>将前n-1个圆盘移动到辅助杆上</li>
+<li>将第n个圆盘移动到最终杆上</li>
+<li>将前n-1个圆盘移动到最终杆上</li>
+</ol>
+<p>通过上述三个步骤，我们可以得出，递归的终止条件是当n-1=1时，即剩余的圆盘可以通过一步操作进行移动，就没有必要再对该过程进行划分；而依赖关系则是每一次递归时，n-1这个整体逐渐减小，而三个杆又分别作为源头，目的地和辅助空间进行圆盘的移动，即第一个步骤中辅助杆作为最终n-1个圆盘要到达的“终止杆”，原本的终止杆作为了子过程的辅助杆，而第三步中n-1个圆盘所在的辅助杆成为了子过程中圆盘移动的“初始杆” ，原本父过程中的初始杆成为了“辅助杆”，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">划分次数</th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">递归树</th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">n-1=3</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">左——&gt;右</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">n-1=2</td>
+<td align="center"></td>
+<td align="center">左——&gt;中</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">中——&gt;右</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">n-1=1</td>
+<td align="center">左——&gt;右</td>
+<td align="center"></td>
+<td align="center">右——&gt;中</td>
+<td align="center"></td>
+<td align="center">中——&gt;左</td>
+<td align="center"></td>
+<td align="center">左——&gt;右</td>
+</tr>
+</tbody></table>
+<p>表中的递归树表示“源点——&gt;终点”，剩余的一个杆作为辅助杆。我们发现，n层汉诺塔问题的递归树展开实际上是一棵深度为n的满二叉树，而汉诺塔的解法则是对这棵树进行中序遍历的过程（似乎我们也可以用建立二叉树的方式来解决汉诺塔问题，将其改为非递归版本有点动态规划的思路），下面是汉诺塔问题的递归代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Hanoi</span></span>&#123;</span><br><span class="line">	<span class="comment">//三条轴</span></span><br><span class="line">	<span class="keyword">int</span>[] left;</span><br><span class="line">	<span class="keyword">int</span>[] middle;</span><br><span class="line">	<span class="keyword">int</span>[] right;</span><br><span class="line">	<span class="keyword">int</span> length;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Hanoi</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">		length = num;</span><br><span class="line">		middle = <span class="keyword">new</span> <span class="keyword">int</span>[length];</span><br><span class="line">		right = <span class="keyword">new</span> <span class="keyword">int</span>[length];</span><br><span class="line">		left = <span class="keyword">new</span> <span class="keyword">int</span>[length];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; left.length; i++) &#123;</span><br><span class="line">			left[i] = i + <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 汉诺塔的解法入口函数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">result</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		process(left, right, middle, length);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 递归求解汉诺塔的移动步骤</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> from	从哪一个轴上取</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> to	放到哪个轴的顶部</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> help	辅助轴</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> index	要移动的圆盘号</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(<span class="keyword">int</span>[] from,<span class="keyword">int</span>[] to,<span class="keyword">int</span>[] help,<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//base case</span></span><br><span class="line">		<span class="keyword">if</span>(index==<span class="number">1</span>) &#123;</span><br><span class="line">			move(from, to, index);</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">//先递归移动n-1个从初始轴到辅助轴</span></span><br><span class="line">			process(from, help, to, index - <span class="number">1</span>);</span><br><span class="line">			<span class="comment">//再移动第n个从初始轴到目的地轴</span></span><br><span class="line">			move(from, to, index);</span><br><span class="line">			<span class="comment">//最后递归移动n-1个从辅助轴到目的地轴</span></span><br><span class="line">			process(help, to, from, index - <span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 移动圆盘操作</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> from</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> to</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> index</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span>[] from,<span class="keyword">int</span>[] to,<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">		to[index-<span class="number">1</span>] = index;</span><br><span class="line">		from[index-<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">		show();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 打印当前的三根轴的状态，0表示空，大于0表示第几号圆盘在该轴上</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"------------------"</span>);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; left.length; i++) &#123;</span><br><span class="line">			System.out.print(left[i]+<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; middle.length; i++) &#123;</span><br><span class="line">			System.out.print(middle[i]+<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; right.length; i++) &#123;</span><br><span class="line">			System.out.print(right[i]+<span class="string">" "</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">		System.out.println(<span class="string">"------------------"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后我们来讨论一下汉诺塔问题的时间复杂度问题，观察我们的递归函数，可以发现每一次递归要对n-1规模的问题再递归两次，同时执行一次常数级的操作（挪动第n个圆盘），表达式为<strong>T(N)=2T(N-1)+O(1)</strong>，化简一下就会发现这是一个等比数列的展开，利用等比数列的求和公式最终<strong>T(N)=2^N-1</strong>,因此这是一个时间复杂度为O(2^N)的算法，印证了我们之前所说的汉诺塔问题是一个NP问题。其实观察表格中的递归树我们也可以计算，由于树中的每一个节点都代表一次对圆盘的移动操作，因此满二叉树的总结点的个数为2^N-1。</p>
+<h2 id="主项公式"><a href="#主项公式" class="headerlink" title="主项公式"></a>主项公式</h2><p>递归行为如何分析时间复杂度，这个问题十分复杂，也并没有通式可以全部解释和涵盖，这里介绍一种最通用的情况下该如何计算，利用主项（master）公式：</p>
+<blockquote class="blockquote-center"><p><strong>T(N)=aT(N/b)+O(N^d)</strong></p>
+</blockquote>
+
+<ol>
+<li><p>T(N)：样本量为N的情况下递归函数的时间复杂度</p>
+</li>
+<li><p>a：划分后要处理几次子样本（即是否要对划分后的子样本再次递归该函数）</p>
+</li>
+<li><p>b：总体过程在一次递归过程中被划分为了几部分</p>
+</li>
+<li><p>d：除了调用子过程之外的操作复杂度的数量级</p>
+<p> 这里的a，b直接通过“数代码”即可确定，即只关心一次递归行为，不用分析整个系统栈（树）的划分过程</p>
+</li>
+</ol>
+<p>这里有三种情况：</p>
+<ol>
+<li><strong>log(b,a)&gt;d</strong>时，<strong>T(N)=O(N^log(b,a))</strong></li>
+<li><strong>log(b,a)=d</strong>时，<strong>T(N)=O(N^d*log(N))</strong></li>
+<li><strong>log(b,a)&gt;d</strong>时，<strong>T(N)=O(N^d)</strong></li>
+</ol>
+<div class="note warning"><p>master公式仅仅适用于子样本的划分大小规模相等的情况，如上文中的汉诺塔问题就不能使用master公式估计时间复杂度。</p></div>
+<hr />
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"># 递归</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/algorithmTools.html" rel="next" title="对数器和比较器的应用">
+                <i class="fa fa-chevron-left"></i> 对数器和比较器的应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/cyff2.html" rel="prev" title="CYFF（二）：必有回响">
+                CYFF（二）：必有回响 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+              <p class="site-description motion-element" itemprop="description">个人博客小站</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从算法的时间复杂度说起"><span class="nav-number">1.</span> <span class="nav-text">从算法的时间复杂度说起</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P问题和NP问题"><span class="nav-number">2.</span> <span class="nav-text">P问题和NP问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归"><span class="nav-number">3.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主项公式"><span class="nav-number">4.</span> <span class="nav-text">主项公式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

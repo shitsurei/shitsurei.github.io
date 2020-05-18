@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="基本概念,语言特性," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C语言诞生于20CD70s，经过演变和发展形成了C89（或C90）和C99这两个通用标准，后者由于出现较晚还未被所有编译器完全兼容。许多现代流行语言例如C++，Java，C#，Perl都是基于C语言并包含各自的特性发展起来的，学习C语言有助于我们更好地理解其他语言。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言基本概念">
+<meta property="og:url" content="https://shitsurei.online/c1.html">
+<meta property="og:site_name" content="shitsurei">
+<meta property="og:description" content="C语言诞生于20CD70s，经过演变和发展形成了C89（或C90）和C99这两个通用标准，后者由于出现较晚还未被所有编译器完全兼容。许多现代流行语言例如C++，Java，C#，Perl都是基于C语言并包含各自的特性发展起来的，学习C语言有助于我们更好地理解其他语言。">
+<meta property="article:published_time" content="2018-10-15T05:11:00.000Z">
+<meta property="article:modified_time" content="2018-10-30T16:25:30.724Z">
+<meta property="article:author" content="GuoRong Zhang">
+<meta property="article:tag" content="基本概念">
+<meta property="article:tag" content="语言特性">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shitsurei.online/c1.html"/>
+
+
+
+
+
+  <title>C语言基本概念 | shitsurei</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">shitsurei</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">失礼しました</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shitsurei.online/c1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shitsurei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C语言基本概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-15T05:11:00Z">
+                2018-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>C语言诞生于20CD70s，经过演变和发展形成了C89（或C90）和C99这两个通用标准，后者由于出现较晚还未被所有编译器完全兼容。许多现代流行语言例如C++，Java，C#，Perl都是基于C语言并包含各自的特性发展起来的，学习C语言有助于我们更好地理解其他语言。</p>
+<a id="more"></a>
+
+<h2 id="C语言特性"><a href="#C语言特性" class="headerlink" title="C语言特性"></a>C语言特性</h2><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><ul>
+<li>C语言是一种底层语言，提供了机器级概念的访问，例如对字节和地址</li>
+<li>C语言是一种小型语言，只提供了一个有限的特性集合，这是因为其在很大程度上依赖一个标准函数的库</li>
+<li>C语言的优点在于高效，可移植，功能强大，灵活，标准库，与Unix系统的集成</li>
+<li>C语言的缺点在于不容易及时发现错误，可能会难以理解和修改（这一点是面向过程开发语言的弊端）</li>
+</ul>
+<h3 id="使用原则"><a href="#使用原则" class="headerlink" title="使用原则"></a>使用原则</h3><ul>
+<li>借助于<acronym title="Integrated Development Environment">IDE</acronym>（集成开发环境）进行编译和调试，可有效显示错误信息</li>
+<li>复用现有的代码库，提高开发效率，节省试错成本</li>
+<li>采用一套切合实际的编码规范，避免“投机取巧”和极度复杂的代码</li>
+<li>紧贴标准，若非必要，避免使用不属于C89和C99标准的特性和库函数</li>
+</ul>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="C程序的执行过程"><a href="#C程序的执行过程" class="headerlink" title="C程序的执行过程"></a>C程序的执行过程</h3><p>对于任何一个.c文件，要想转化成机器可以执行的形式，需要经过以下三个步骤：</p>
+<ol>
+<li><strong>预处理</strong> 预处理器（preprocessor）执行以#开头的指令，其功能类似于编辑器，为程序添加内容或修改内容</li>
+<li><strong>编译</strong> 编译器（compiler）把修改后的程序翻译成机器指令，即目标代码</li>
+<li><strong>链接</strong> 链接器（linker）把目标代码和其他所需的附加代码（包括程序中用到的库函数）进行整合，最终形成可执行程序</li>
+</ol>
+<blockquote>
+<p>GCC编译器面向Linux平台，是最流行的C语言编译器之一。最初是GUN C compiler的缩写，新版的GCC能够编译多种语言写的程序，因此变为GUN Compiler Collection的简称。其优点在于免费获取，兼容多种操作系统，广泛用于商业开发。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GCC编译器的安全检查选项</span><br><span class="line">-Wall			使编译器在检测到可能的错误时生成警告信息</span><br><span class="line">-W			除以上警告信息外，生成针对具体情况的额外警告信息</span><br><span class="line">-pedantic		根据c标准的要求生成警告信息，避免程序中使用非标准特性</span><br><span class="line">-ansi			禁用GCC的非标准C特性，并启用一些不太常用的标准特性</span><br><span class="line">-std&#x3D;c89&#x2F;C99		指明使用哪个版本的C编译器来检查程序</span><br><span class="line">以上选项通常结合使用：</span><br><span class="line">% gcc -O -Wall -W -pedantic -ansi -std&#x3D;c99 -o pun pun.c</span><br></pre></td></tr></table></figure>
+
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>通常我们把预处理器执行的命令叫做指令，即以字符#开头的代码，指令默认只占一行，其结尾没有其他符号标识，通常包括以下几种</p>
+<ul>
+<li><strong>宏定义</strong>（macro definition） <code>#define</code> 用于定义函数中所用到的常量</li>
+<li><strong>包含程序</strong> <code>#include</code> 用于引入C程序所需的头文件（.h文件）</li>
+</ul>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>事实上C语言就是函数的集合，函数类似于其他编程语言中的例行程序（routine）和子例程（subroutine），是用来构建程序的构建块，分为以下两种：</p>
+<ul>
+<li>程序员编写的函数</li>
+<li>C语言实现的一部分提供的函数，称为<strong>库函数</strong></li>
+</ul>
+<p>一个C程序可以包含多个函数，但是<code>main</code>函数是不可或缺的，且只能有几个，作为程序的入口，执行时系统会自动调用<code>main</code>函数</p>
+<h3 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h3><p>语句是程序运行时执行的命令，包括以下几种</p>
+<ul>
+<li>返回语句，例如<code>return 0;</code></li>
+<li>函数调用语句（function call），例如<code>printf(&quot;hello world\n&quot;);</code></li>
+</ul>
+<p>每一条完整的语句必须要以;作为结束标识符</p>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>即文档说明，每一个程序都应该包含识别信息，即程序名，编写日期，作者，程序的用途以及其他相关信息，以便对程序进行更好的理解和阅读</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*	单行注释内容	*&#x2F;</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line"> *	多行注释内容</span><br><span class="line"> *	....</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;C99提供的单行注释格式，注释内容会在行末自动终止</span><br><span class="line"></span><br><span class="line">注意：注释内部不能嵌套使用</span><br></pre></td></tr></table></figure>
+
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>变量是指C语言中的存储单元，每个变量必须有一个类型（type），用于表示所存储的数据种类，如整型、浮点型、字符型。<br>在使用变量之前必须对其进行声明，声明方式为<code>类型名 变量名;</code>，如果几个变量类型相同，则可采取合并声明，声明方式为<code>类型名 变量名1,变量名2,变量名3;</code></p>
+<blockquote>
+<p>C语言的编码规范为先将函数中所需要使用的变量在函数开始统一声明，再在之后的语句中使用，而在C99和其他语言规范中多采用使用时才声明的方式。</p>
+</blockquote>
+<p>声明过后通过要给变量赋值，也称为变量的初始化，赋值方式为<code>变量名 = 常量;</code>，通常情况下我们要保证所赋值的类型和变量的类型要保持统一，混合类型赋值可能会不安全，其中在对float类型的变量进行赋值的时候需要在常量后添加小写字母f</p>
+<h3 id="标识符（indentifier）"><a href="#标识符（indentifier）" class="headerlink" title="标识符（indentifier）"></a>标识符（indentifier）</h3><p>用于对变量、函数、宏和其他实体进行命名，命名规则如下：</p>
+<ul>
+<li>标识符只能含有字母、数字和<code>_</code>（下划线）</li>
+<li>必须以字母或<code>_</code>（下划线）作为开头</li>
+</ul>
+<p>注意C语言是区分大小写的，在命名时尽可能的保持标识符的可分辨性</p>
+<h3 id="关键字（keyword）"><a href="#关键字（keyword）" class="headerlink" title="关键字（keyword）"></a>关键字（keyword）</h3><p>对C编译器而言具有特殊意义，不能用来作为标识符</p>
+<p>|  |  |  |  |<br>| :—: | :—: | :—: | :—: | :—: |<br>| auto | enum | restrict<sup>1</sup> | unsigned |<br>| break | extern | return | void |<br>| case | float | short | volatile |<br>| const | goto | sizeof | _Bool<sup>1</sup> |<br>| continue | if | static | _Complex<sup>1</sup> |<br>| default | inline<sup>1</sup> | struct | _Imaginary<sup>1</sup> |<br>| do | int | switch |  |<br>| double | long | typedef |  |<br>| else | register | union |  |</p>
+<blockquote>
+<p>有角标<sup>1</sup>的关键字是C99新增的</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" rel="tag"># 基本概念</a>
+          
+            <a href="/tags/%E8%AF%AD%E8%A8%80%E7%89%B9%E6%80%A7/" rel="tag"># 语言特性</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/markdown-learning.html" rel="next" title="markdown学习笔记">
+                <i class="fa fa-chevron-left"></i> markdown学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/php1.html" rel="prev" title="PHP学习笔记1">
+                PHP学习笔记1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+              <p class="site-description motion-element" itemprop="description">个人博客小站</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C语言特性"><span class="nav-number">1.</span> <span class="nav-text">C语言特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">1.1.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用原则"><span class="nav-number">1.2.</span> <span class="nav-text">使用原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C程序的执行过程"><span class="nav-number">2.1.</span> <span class="nav-text">C程序的执行过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">2.2.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">2.3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语句"><span class="nav-number">2.4.</span> <span class="nav-text">语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">2.5.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">2.6.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标识符（indentifier）"><span class="nav-number">2.7.</span> <span class="nav-text">标识符（indentifier）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字（keyword）"><span class="nav-number">2.8.</span> <span class="nav-text">关键字（keyword）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

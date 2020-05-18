@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库连接,mysql扩展库," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据库软件是位于操作系统之上对数据提供持久化支持的主要程序，在软件编程中有着广泛的应用，主要分为三层结构，分别是客户端（面向应用软件所提供的接口），数据库管理系统DBMS（mysql，Oracle，SQL server等）和数据对象（表，存储过程，函数等）。由于历史的原因，PHP在初期并没有对面向对象编程风格太多支持，而在后期转向面向对象的过程中为了向下兼容，PHP在数据库的连接方面保留了不同的扩">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP数据库编程学习笔记1">
+<meta property="og:url" content="https://shitsurei.online/php7.html">
+<meta property="og:site_name" content="shitsurei">
+<meta property="og:description" content="数据库软件是位于操作系统之上对数据提供持久化支持的主要程序，在软件编程中有着广泛的应用，主要分为三层结构，分别是客户端（面向应用软件所提供的接口），数据库管理系统DBMS（mysql，Oracle，SQL server等）和数据对象（表，存储过程，函数等）。由于历史的原因，PHP在初期并没有对面向对象编程风格太多支持，而在后期转向面向对象的过程中为了向下兼容，PHP在数据库的连接方面保留了不同的扩">
+<meta property="article:published_time" content="2018-11-11T13:51:07.000Z">
+<meta property="article:modified_time" content="2018-11-17T14:41:29.377Z">
+<meta property="article:author" content="GuoRong Zhang">
+<meta property="article:tag" content="数据库连接">
+<meta property="article:tag" content="mysql扩展库">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shitsurei.online/php7.html"/>
+
+
+
+
+
+  <title>PHP数据库编程学习笔记1 | shitsurei</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">shitsurei</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">失礼しました</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shitsurei.online/php7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shitsurei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP数据库编程学习笔记1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-11T13:51:07Z">
+                2018-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数据库软件是位于操作系统之上对数据提供持久化支持的主要程序，在软件编程中有着广泛的应用，主要分为三层结构，分别是客户端（面向应用软件所提供的接口），数据库管理系统DBMS（mysql，Oracle，SQL server等）和数据对象（表，存储过程，函数等）。<br>由于历史的原因，PHP在初期并没有对面向对象编程风格太多支持，而在后期转向面向对象的过程中为了向下兼容，PHP在数据库的连接方面保留了不同的扩展库。以mysql数据库的连接为例，PHP提供了三种扩展库，用来支持不同的编程风格，PHP通过扩展库中的函数操作数据库。其中mysql扩展库最早，主要支持面向过程的编程风格，最新的PHP7中以及不再支持该扩展库，取而代之的是mysqli扩展库。</p>
+<a id="more"></a>
+
+<h2 id="mysql扩展库调用过程"><a href="#mysql扩展库调用过程" class="headerlink" title="mysql扩展库调用过程"></a>mysql扩展库调用过程</h2><div class="note info"><p>请将本标题下的所有代码段链接起来学习理解。</p></div>
+
+<h3 id="获取连接"><a href="#获取连接" class="headerlink" title="获取连接"></a>获取连接</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接参数：IP+端口（默认3306），用户名，密码</span></span><br><span class="line">$conn=mysql_connect(<span class="string">"127.0.0.1"</span>,<span class="string">"root"</span>,<span class="string">"mysql"</span>);</span><br><span class="line"><span class="keyword">if</span> ($conn) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"># 返回错误信息</span></span><br><span class="line">	<span class="keyword">die</span>(<span class="string">"failure"</span>.mysql_error());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="选择数据库"><a href="#选择数据库" class="headerlink" title="选择数据库"></a>选择数据库</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_select_db(<span class="string">"dbname"</span>) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置操作编码"><a href="#设置操作编码" class="headerlink" title="设置操作编码"></a>设置操作编码</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#保证PHP程序按照utf8操作</span></span><br><span class="line">mysql_query(<span class="string">"set names utf8"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送sql指令"><a href="#发送sql指令" class="headerlink" title="发送sql指令"></a>发送sql指令</h3><p>SQL指令分为四类：其中ddl（数据定义语句）一般在数据库建库时使用，很少通过应用软件连接数据库发送指令更改数据库、表和字段的属性；而dtl数据事务语句在mysql扩展库中并没有函数支持，而是通过发送SQL指令实现，进而在mysqli扩展库中增加了事务处理的相关函数。</p>
+<ul>
+<li>dml</li>
+</ul>
+<p>数据操作语句，包括 update insert delete</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$sql=<span class="string">"insert into tablename(key1,key2,key3,key4) values('value1','value2','value3','value4') "</span></span><br><span class="line"><span class="comment">### 注意在插入密码时，最好使用md5()进行加密，格式为md5('password')</span></span><br><span class="line">$res=mysql_query($sql,$conn);</span><br><span class="line"><span class="keyword">if</span> ($res) &#123;</span><br><span class="line">	<span class="comment"># mysql_affected_rows用于返回受影响的行数</span></span><br><span class="line">	<span class="keyword">if</span> (mysql_affected_rows($conn)&gt;<span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"operate success"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment"># 删除操作有可能无删除数据</span></span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"没有受影响的行数"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"># 操作失败，输出失败原因</span></span><br><span class="line">	<span class="keyword">die</span>(<span class="string">"operate failure"</span>.mysql_error());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>dql</li>
+</ul>
+<p>数据查询语句 select</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$sql=<span class="string">"select * from tablename"</span>;</span><br><span class="line"><span class="comment">#第一个参数是语句，第二个参数是连接符，用于确认是哪个连接（缺省时使用上一个打开的连接）</span></span><br><span class="line">$res=mysql_query($sql,$conn);</span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p>
+1. res在从数据库结果集中取完数据后指向内存中的数据，因此在这句后关闭conn连接也不影响后续数据的使用，但是这句后释放结果集资源后则无法再操作数据
+2. 返回的res是一个资源类型 mysql_result
+3. 如果执行dml语句 返回类型是 bool
+</p></div>
+
+<h3 id="接受返回结果并处理"><a href="#接受返回结果并处理" class="headerlink" title="接受返回结果并处理"></a>接受返回结果并处理</h3><p>返回的数据集属于一个资源类型，PHP提供了多种封装形式，故可以采用多种取法处理返回结果。</p>
+<ul>
+<li>取法1 mysql_fetch_row 会返回一个索引数组，并依次取下一行</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ($row=mysql_fetch_row($res)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;br&gt;$row[0]--$row[1]--$row[2]--$row[3]"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取法2 mysql_fetch_assoc 会返回一个关联数组（键值对），并依次取下一行</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ($row=mysql_fetch_assoc($res)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;br&gt;$row['key1']--$row['key2']--$row['key3']--$row['key4']"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>取法3 mysql_fetch_array 会返回索引数组和关联数组（两套），并依次取下一行</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ($row=mysql_fetch_array($res)) &#123;</span><br><span class="line">	<span class="comment">#两种方式都可以取到</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;br&gt;$row[0]--$row[1]--$row[2]--$row[3]"</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;br&gt;$row['key1']--$row['key2']--$row['key3']--$row['key4']"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>取法4 mysql_fetch_object 会把一行数据当做一个对象返回，并依次取下一行</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ($row=mysql_fetch_object($res)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> $row-&gt;key1.<span class="string">"---"</span>.$row-&gt;key2.<span class="string">"---"</span>.$row-&gt;key3.<span class="string">"---"</span>.$row-&gt;key4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>取法5 mysql_fetch_field 会把表的表头属性名当做一个数组返回</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ($field_info=mysql_fetch_field($res)) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>.$field_info-&gt;name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>取法6 mysql_affected_rows和mysql_num_fields 返回所取数据的行数和列数</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$rows=mysql_affected_rows($conn);<span class="comment">//行数</span></span><br><span class="line">$colums=mysql_num_fields($res);<span class="comment">//列数</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="释放资源"><a href="#释放资源" class="headerlink" title="释放资源"></a>释放资源</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 释放结果集中的资源，回收内存</span></span><br><span class="line">mysql_free_result($res);</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭连接"><a href="#关闭连接" class="headerlink" title="关闭连接"></a>关闭连接</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可以不写，脚本执行结束后会自动关闭，执行语句后也不会立刻关闭</span></span><br><span class="line">mysql_close($conn);</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysql封装类"><a href="#mysql封装类" class="headerlink" title="mysql封装类"></a>mysql封装类</h2><p>以上代码的可维护性和复用性不高，在面向对象编程中，我们通常将其封装成一个工具类SqlTool.class.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 数据库操作工具类</span></span><br><span class="line"><span class="comment"> * 适用于mysql扩展库</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SqlTool</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $connection;</span><br><span class="line">	<span class="keyword">private</span> $host;</span><br><span class="line">	<span class="keyword">private</span> $username;</span><br><span class="line">	<span class="keyword">private</span> $password;</span><br><span class="line">	<span class="keyword">private</span> $dbname;</span><br><span class="line">	<span class="comment"># 构造函数，创建连接</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($host,$username,$password,$dbname)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;connection=mysql_connect($host,$username,$password);</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;connection) &#123;</span><br><span class="line">			<span class="keyword">$this</span>-&gt;dbname=$dbname;</span><br><span class="line">			mysql_select_db($dbname,<span class="keyword">$this</span>-&gt;connection);</span><br><span class="line">			mysql_query(<span class="string">"set names utf8"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">die</span>(<span class="string">"connection failure:"</span>.mysql_error());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"># 析构函数，关闭连接</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		mysql_close(<span class="keyword">$this</span>-&gt;connection);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"># 将查询的数据作为对象索引数组返回</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">execute_dql</span><span class="params">($sql)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$res=mysql_query($sql,<span class="keyword">$this</span>-&gt;connection) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());</span><br><span class="line">		$res_set=<span class="keyword">array</span>();</span><br><span class="line">		<span class="keyword">while</span> ($row=mysql_fetch_object($res)) &#123;</span><br><span class="line">			array_push($res_set, $row);</span><br><span class="line">		&#125;</span><br><span class="line">		mysql_free_result($res);</span><br><span class="line">		<span class="keyword">return</span> $res_set;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">execute_dml</span><span class="params">($sql)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$res=mysql_query($sql,<span class="keyword">$this</span>-&gt;connection);</span><br><span class="line">		<span class="keyword">if</span> ($res) &#123;</span><br><span class="line">			<span class="keyword">return</span> mysql_affected_rows(<span class="keyword">$this</span>-&gt;connection);<span class="comment">//返回受影响的行数</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;<span class="comment">//语句执行失败</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment"># 将查询的表头信息作为索引数组返回</span></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">query_field</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$res=mysql_query(<span class="string">"select * from"</span>.$tablename,<span class="keyword">$this</span>-&gt;connection) <span class="keyword">or</span> <span class="keyword">die</span>(mysql_error());</span><br><span class="line">		$filed=<span class="keyword">array</span>();</span><br><span class="line">		<span class="keyword">while</span> ($field_info=mysql_fetch_field(result)) &#123;</span><br><span class="line">			array_push($filed, $field_info-&gt;name);</span><br><span class="line">		&#125;</span><br><span class="line">		mysql_free_result($res);</span><br><span class="line">		<span class="keyword">return</span> $filed;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr />
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" rel="tag"># 数据库连接</a>
+          
+            <a href="/tags/mysql%E6%89%A9%E5%B1%95%E5%BA%93/" rel="tag"># mysql扩展库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/first.html" rel="next" title="从FIRST开始的蜕变">
+                <i class="fa fa-chevron-left"></i> 从FIRST开始的蜕变
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/design1.html" rel="prev" title="简单工厂模式">
+                简单工厂模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+              <p class="site-description motion-element" itemprop="description">个人博客小站</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql扩展库调用过程"><span class="nav-number">1.</span> <span class="nav-text">mysql扩展库调用过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取连接"><span class="nav-number">1.1.</span> <span class="nav-text">获取连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择数据库"><span class="nav-number">1.2.</span> <span class="nav-text">选择数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置操作编码"><span class="nav-number">1.3.</span> <span class="nav-text">设置操作编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送sql指令"><span class="nav-number">1.4.</span> <span class="nav-text">发送sql指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接受返回结果并处理"><span class="nav-number">1.5.</span> <span class="nav-text">接受返回结果并处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#释放资源"><span class="nav-number">1.6.</span> <span class="nav-text">释放资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭连接"><span class="nav-number">1.7.</span> <span class="nav-text">关闭连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql封装类"><span class="nav-number">2.</span> <span class="nav-text">mysql封装类</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

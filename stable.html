@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,稳定性," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习排序算法，稳定性是一个绕不开的话题；稳定的算法不仅能够节省排序的成本，在工程实践中也有着重要的意义，那么究竟如何判断一个算法是不是稳定的呢，本文通过研究和分析一些常用算法的稳定性，对稳定性的实质做一定探讨。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法的稳定性分析">
+<meta property="og:url" content="https://shitsurei.online/stable.html">
+<meta property="og:site_name" content="shitsurei">
+<meta property="og:description" content="学习排序算法，稳定性是一个绕不开的话题；稳定的算法不仅能够节省排序的成本，在工程实践中也有着重要的意义，那么究竟如何判断一个算法是不是稳定的呢，本文通过研究和分析一些常用算法的稳定性，对稳定性的实质做一定探讨。">
+<meta property="article:published_time" content="2019-05-12T05:41:06.000Z">
+<meta property="article:modified_time" content="2019-05-13T09:38:58.856Z">
+<meta property="article:author" content="GuoRong Zhang">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="稳定性">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shitsurei.online/stable.html"/>
+
+
+
+
+
+  <title>排序算法的稳定性分析 | shitsurei</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">shitsurei</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">失礼しました</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shitsurei.online/stable.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shitsurei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">排序算法的稳定性分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T05:41:06Z">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">算法和数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习排序算法，稳定性是一个绕不开的话题；稳定的算法不仅能够节省排序的成本，在工程实践中也有着重要的意义，那么究竟如何判断一个算法是不是稳定的呢，本文通过研究和分析一些常用算法的稳定性，对稳定性的实质做一定探讨。</p>
+<a id="more"></a>
+
+<h2 id="稳定性的定义"><a href="#稳定性的定义" class="headerlink" title="稳定性的定义"></a>稳定性的定义</h2><p>排序算法的稳定性指依据当前比较原则进行排序前和排序后，相等元素的相对次序保持不变。这句话的意思显而易见，即如果对【5,3<sup>1</sup>,7,3<sup>2</sup>,4】进行排序，结果必须是【3<sup>1</sup>,3<sup>2</sup>,4,5,7】,才能说该算法是稳定的，反之出现【3<sup>2</sup>,3<sup>1</sup>,4,5,7】则说该算法是不稳定的。</p>
+<p>那么，要求算法有这样的特性有什么意义呢。我们设想一下这样的场景：在一张大表内包含了整个年级所有的班的同学的考试成绩，当然为了区别每个同学是来自哪个班的，相应的也有班级这个字段来标识。现在，我们依据总成绩这个字段来将全年级的同学进行一个排名，排序的结果当然是各个班级的学生穿插在一起，大致如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="left">姓名</th>
+<th align="left">班级</th>
+<th align="left">成绩</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">张三</td>
+<td align="left">2</td>
+<td align="left">95</td>
+</tr>
+<tr>
+<td align="left">李四</td>
+<td align="left">1</td>
+<td align="left">93</td>
+</tr>
+<tr>
+<td align="left">王五</td>
+<td align="left">2</td>
+<td align="left">90</td>
+</tr>
+<tr>
+<td align="left">赵六</td>
+<td align="left">3</td>
+<td align="left">80</td>
+</tr>
+<tr>
+<td align="left">丁七</td>
+<td align="left">3</td>
+<td align="left">70</td>
+</tr>
+<tr>
+<td align="left">……</td>
+<td align="left">……</td>
+<td align="left">……</td>
+</tr>
+</tbody></table>
+<p>在得到这样的排序结果之后，我们可以大致了解到每个同学在全年级中的名次，那么如果想要得到每个同学在班级中的名次呢，我们能否在现有排序的基础上，以班级这个字段为依据进行排序呢？如果，我们所采用的排序算法不稳定，那么很可能我们在对班级字段进行排序后得到下面这个结果：</p>
+<table>
+<thead>
+<tr>
+<th align="left">姓名</th>
+<th align="left">班级</th>
+<th align="left">成绩</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">李四</td>
+<td align="left">1</td>
+<td align="left">93</td>
+</tr>
+<tr>
+<td align="left">王五</td>
+<td align="left">2</td>
+<td align="left">90</td>
+</tr>
+<tr>
+<td align="left">张三</td>
+<td align="left">2</td>
+<td align="left">95</td>
+</tr>
+<tr>
+<td align="left">赵六</td>
+<td align="left">3</td>
+<td align="left">80</td>
+</tr>
+<tr>
+<td align="left">丁七</td>
+<td align="left">3</td>
+<td align="left">70</td>
+</tr>
+<tr>
+<td align="left">……</td>
+<td align="left">……</td>
+<td align="left">……</td>
+</tr>
+</tbody></table>
+<p>我们发现，在班级这个字段进行重排的过程中，张三这条字段虽然调整到李四之后，但是他和王五的相对次序与原表中发生了改变，这样第一次排序中产生的成绩降序这个实际意义在班级这个小的序列中就无法作为参考依据，那么如果我们希望查询学生在班级中的名次，在原大表中不论怎么重排都是无法做到的，任何一个字段的排序就会使得之前排好的其他字段的排序关系失效，我们不得不开辟新的空间来存储各个班的学生数据，花费额外的时间成本和空间成本，这样无疑是非常浪费的。</p>
+<p>通过这个案例我们可以看出稳定的排序算法能够对多次排序的结果有记忆功能，帮助我们节省大量的时间和空间成本，从上述案例我们似乎可以发现，稳定与否的关键在于一次排序过程中，数据的位置交换有没有跨越值相等的元素，如果没有跨越，那么结果一定是稳定的，否则是不稳定的。那么到底是不是这样的，我们来通过一些具体的算法来分析一下。</p>
+<h2 id="常用算法的稳定性分析"><a href="#常用算法的稳定性分析" class="headerlink" title="常用算法的稳定性分析"></a>常用算法的稳定性分析</h2><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>冒牌排序可以按照递增、递减以及大数冒泡和小数冒泡交叉分为四种情况，这里我们以递增顺序，大数向后冒泡为例，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 冒泡排序：大数向后冒泡</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">bubble</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = arr.length; i &gt; <span class="number">0</span> ; i--) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;  j &lt; i-<span class="number">1</span> ; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])</span><br><span class="line">				swap(arr, j, j+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设原序列为【1,5,3<sup>1</sup>,2,7,4,6,3<sup>2</sup>】，那么每一次冒泡的结果如下：</p>
+<ol>
+<li>【1,3<sup>1</sup>,2,5,4,6,3<sup>2</sup>,7】</li>
+<li>【1,2,3<sup>1</sup>,4,5,3<sup>2</sup>,6,7】</li>
+<li>【1,2,3<sup>1</sup>,4,3<sup>2</sup>,5,6,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>2</sup>,4,5,6,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>2</sup>,4,5,6,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>2</sup>,4,5,6,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>2</sup>,4,5,6,7】</li>
+</ol>
+<p>我们看到，排序结果中两个3的相对次序没有发生变化，说明这个算法是稳定的，分析一下代码可以发现，当两个元素比较是否应该改变相对次序时的代码为<code>if(arr[j]&gt;arr[j+1])</code>，因为用的是大于号，而不是大于等于号，所以结果是稳定的，但是如果将其改成大于等于号的话，也不会影响冒泡排序的结果，但是原本相等元素的相对次序就会被打乱，因此可以说冒泡排序可以被设计成稳定的。</p>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>选择排序也可以根据递增、递减以及选择大数和选择小数分为四种情况，这里以递增顺序，选择小数为例，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 选择排序：选小数往前放</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; arr.length ; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> min_index = i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span> ; j &lt; arr.length ; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[j]&lt;arr[min_index])</span><br><span class="line">				min_index = j;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(min_index!=i)</span><br><span class="line">			swap(arr, i, min_index);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设原序列为【3<sup>1</sup>,1,7,4,6,3<sup>2</sup>,5,2】，那么每一次选择的结果如下：</p>
+<ol>
+<li>【1,3<sup>1</sup>,7,4,6,3<sup>2</sup>,5,2】</li>
+<li>【1,2,7,4,6,3<sup>2</sup>,5,3<sup>1</sup>】</li>
+<li>【1,2,3<sup>2</sup>,4,6,7,5,3<sup>1</sup>】</li>
+<li>【1,2,3<sup>2</sup>,3<sup>1</sup>,6,7,5,4】</li>
+<li>【1,2,3<sup>2</sup>,3<sup>1</sup>,4,7,5,6】</li>
+<li>【1,2,3<sup>2</sup>,3<sup>1</sup>,4,5,7,6】</li>
+<li>【1,2,3<sup>2</sup>,3<sup>1</sup>,4,5,6,7】</li>
+</ol>
+<p>可以看到排序结果中两个3的相对次序发生了变化，并且在第二次选择的过程中就已经出现了相对次序的混乱，原因是，第二次选择时最小的数位于原本相对次序靠后的3之后，交换时第一个3直接跨过了第二个3和2进行了交换，而在之后的过程中，<code>if(arr[j]&lt;arr[min_index])</code>这行代码使得最小值元素的下标在遇到相同元素时不会发生变化，所以第一个3再也没有机会换到第二个3之前。</p>
+<p>那么我们尝试修改代码的细节，看是否能改变算法的不稳定性，首先我们需要明确的是，待排序的数据状况是随机的，我们不能要求小数一定位于相等的大数的前面，因此一定会出现上述案例中小数跨越中间的大数和前面的大数交换的情况。因此我们只能考虑是否能在之后的交换过程中调整回原本的顺序，将这一句代码<code>if(arr[j]&lt;arr[min_index])</code>中的小于号改为小于等于号，这样原本序列的选择排序结果就如下：</p>
+<ol>
+<li>【1,3<sup>1</sup>,7,4,6,3<sup>2</sup>,5,2】</li>
+<li>【1,2,7,4,6,3<sup>2</sup>,5,3<sup>1</sup>】</li>
+<li>【1,2,3<sup>1</sup>,4,6,3<sup>2</sup>,5,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>2</sup>,6,7,5,4】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>2</sup>,4,7,5,6】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>2</sup>,4,5,7,6】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>2</sup>,4,5,6,7】</li>
+</ol>
+<p>结果看起来似乎是成功了，我们来看问题出在哪，第三步选择时，上一个代码选择了从前往后遇到的第一个3进行交换，而这个代码选择了最后一个3进行交换，这样就将第二步选择时造成的乱序修正了，但是这样的修改是普遍适用的吗，我们再来看一个例子：</p>
+<ol>
+<li>【1,3<sup>1</sup>,7,4,3<sup>2</sup>,6,3<sup>3</sup>,5,2】</li>
+<li>【1,2,7,4,3<sup>2</sup>,6,3<sup>3</sup>,5,3<sup>1</sup>】</li>
+<li>【1,2,3<sup>1</sup>,4,3<sup>2</sup>,6,3<sup>3</sup>,5,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>3</sup>,3<sup>2</sup>,6,4,5,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>3</sup>,3<sup>2</sup>,6,4,5,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>3</sup>,3<sup>2</sup>,4,6,5,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>3</sup>,3<sup>2</sup>,4,5,6,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>3</sup>,3<sup>2</sup>,4,5,6,7】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>3</sup>,3<sup>2</sup>,4,5,6,7】</li>
+</ol>
+<p>奇怪的是这次选择排序的结果虽然我们依据了修改后的代码逻辑，但是依然出现结果的不稳定性，这是为什么？仔细分析一下代码，我们可以发现之所以在上一个案例中选择排序的结果能够保证稳定性，其实是对排序过程中的数据状况也有隐含的要求，即被打乱的相等数据在开始确定最终站位之前，必须要保持原相对次序的逆序。因为相同的数字在确定最终站位时必然是依次确定的，那么你希望排序结果的相对次序是正序，那么排序之前的相对次序一定是逆序，这是很容易理解的。这个案例中，第三步开始，第一个3的位置已经确定，而在这一步之前三个3的相对次序还不是逆序，因此确定的结果必然也是乱序的。</p>
+<p>通过上述分析，我们发现不论对原程序的逻辑做何种意义上的修改，都是要求其数据状况遵循一定的规律，在此代码逻辑的基础上这显然是不可能的。如果我们强行要保证这一算法的稳定性，似乎只能在每次交换元素之前，遍历跨度区间，找出与被交换元素相等的元素，进行依次的后移操作，以保证被交换的元素是相等元素中相对次序最靠前的元素。但是这无疑增加了算法的时间成本，选择排序本来作为一个O(N<sup>2</sup>)的算法，这样再套一层遍历，直接变成一个O(N<sup>3</sup>)的算法，为了保证稳定性而如此增加时间复杂度，无疑是得不偿失的。</p>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>插入排序同样可以根据递增、递减以及向前插入和向后插入分为四种情况，这里以递增顺序，向前插入为例，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入排序：从前往后选数字顺序插入</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; arr.length ; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> index = i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; i ; j++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[i]&lt;arr[j]) &#123;</span><br><span class="line">				index = j;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(index!=i) &#123;</span><br><span class="line">			<span class="keyword">int</span> temp = arr[i];</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j = i ; j &gt; index ; j--)</span><br><span class="line">				swap(arr, j-<span class="number">1</span>, j);</span><br><span class="line">			arr[index] = temp;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//show(arr,true);</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设原序列为【3<sup>1</sup>,1,7,4,6,3<sup>2</sup>,5,2】，那么每一次插入的结果如下：</p>
+<ol>
+<li>【1,3<sup>1</sup>,7,4,6,3<sup>2</sup>,5,2】</li>
+<li>【1,3<sup>1</sup>,7,4,6,3<sup>2</sup>,5,2】</li>
+<li>【1,3<sup>1</sup>,7,4,6,3<sup>2</sup>,5,2】</li>
+<li>【1,3<sup>1</sup>,4,7,6,3<sup>2</sup>,5,2】</li>
+<li>【1,3<sup>1</sup>,4,6,7,3<sup>2</sup>,5,2】</li>
+<li>【1,3<sup>1</sup>,3<sup>2</sup>,4,6,7,5,2】</li>
+<li>【1,3<sup>1</sup>,3<sup>2</sup>,4,5,6,7,2】</li>
+<li>【1,2,3<sup>1</sup>,3<sup>2</sup>,4,5,6,7】</li>
+</ol>
+<p>我们看到，排序结果中两个3的相对次序没有发生变化，说明这个算法是稳定的，分析一下代码可以发现，当查找下一个未排序的元素该插入到哪个元素之前时的代码为<code>if(arr[j]&lt;arr[j+1])</code>，因为用的是小于号，而不是小于等于号，所以结果是稳定的，但是如果将其改成小于等于号的话，也不会影响插入排序的结果，但是原本相等元素的相对次序就会被打乱，因此可以说插入排序可以被设计成稳定的。</p>
+<h2 id="稳定性实质"><a href="#稳定性实质" class="headerlink" title="稳定性实质"></a>稳定性实质</h2><p>通过分析这些常见的稳定和不稳定的排序算法，我们发现，排序的过程无非可以分成两个步骤（这里指的是只借助O(1)辅助空间的算法），比较和交换。比较是排序的依据，交换是排序的过程，稳定的算法往往在交换元素时不会跨越元素，只是两两之间交换，这样当遇到相等的元素时，我们就可以很容易通过代码逻辑避免这种交换的出现，从而保证算法的稳定性。其实回想一下我们学过的算法，凡是涉及到跨元素进行交换的排序算法，例如快排和堆排，都是不稳定的排序算法。</p>
+<p>综上我们在判断一个算法的稳定性时，只要多关注元素在交换的过程中是否有跨元素，便能够很好的进行判断。</p>
+<hr />
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E7%A8%B3%E5%AE%9A%E6%80%A7/" rel="tag"># 稳定性</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/cyff2.html" rel="next" title="CYFF（二）：必有回响">
+                <i class="fa fa-chevron-left"></i> CYFF（二）：必有回响
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/mergeSort.html" rel="prev" title="归并排序及其应用">
+                归并排序及其应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+              <p class="site-description motion-element" itemprop="description">个人博客小站</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#稳定性的定义"><span class="nav-number">1.</span> <span class="nav-text">稳定性的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用算法的稳定性分析"><span class="nav-number">2.</span> <span class="nav-text">常用算法的稳定性分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">2.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">2.2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">2.3.</span> <span class="nav-text">插入排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#稳定性实质"><span class="nav-number">3.</span> <span class="nav-text">稳定性实质</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

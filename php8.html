@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库连接,mysqli扩展库," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在新版的PHP7中，PHP越来越向面向对象风格靠拢，原有的mysql已经不再支持，因此PHP更加推荐用户使用mysqli扩展库，相比mysql扩展库，mysqli扩展库具有以下优势：  稳定性，安全性，效率有所提升 支持面向对象编程风格，同时也向后兼容，支持面向过程编程风格（具备两套函数库）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP数据库编程学习笔记2">
+<meta property="og:url" content="https://shitsurei.online/php8.html">
+<meta property="og:site_name" content="shitsurei">
+<meta property="og:description" content="在新版的PHP7中，PHP越来越向面向对象风格靠拢，原有的mysql已经不再支持，因此PHP更加推荐用户使用mysqli扩展库，相比mysql扩展库，mysqli扩展库具有以下优势：  稳定性，安全性，效率有所提升 支持面向对象编程风格，同时也向后兼容，支持面向过程编程风格（具备两套函数库）">
+<meta property="article:published_time" content="2018-11-16T14:34:00.000Z">
+<meta property="article:modified_time" content="2018-11-17T15:07:16.037Z">
+<meta property="article:author" content="GuoRong Zhang">
+<meta property="article:tag" content="数据库连接">
+<meta property="article:tag" content="mysqli扩展库">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://shitsurei.online/php8.html"/>
+
+
+
+
+
+  <title>PHP数据库编程学习笔记2 | shitsurei</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">shitsurei</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">失礼しました</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://shitsurei.online/php8.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shitsurei">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP数据库编程学习笔记2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-16T14:34:00Z">
+                2018-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在新版的PHP7中，PHP越来越向面向对象风格靠拢，原有的mysql已经不再支持，因此PHP更加推荐用户使用mysqli扩展库，相比mysql扩展库，mysqli扩展库具有以下优势：</p>
+<ul>
+<li>稳定性，安全性，效率有所提升</li>
+<li>支持面向对象编程风格，同时也向后兼容，支持面向过程编程风格（具备两套函数库）</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="mysqli扩展库调用过程（面向对象风格）"><a href="#mysqli扩展库调用过程（面向对象风格）" class="headerlink" title="mysqli扩展库调用过程（面向对象风格）"></a>mysqli扩展库调用过程（面向对象风格）</h2><div class="note info"><p>请将本标题下的所有代码段链接起来学习理解。</p></div>
+
+<h3 id="获取连接"><a href="#获取连接" class="headerlink" title="获取连接"></a>获取连接</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建mysqli对象</span></span><br><span class="line">$mysqli=<span class="keyword">new</span> MySQLi(<span class="string">"localhost"</span>,<span class="string">"root"</span>,<span class="string">"mysql"</span>,<span class="string">"test"</span>);</span><br><span class="line"><span class="comment">## 验证是否连接成功</span></span><br><span class="line"><span class="keyword">if</span> ($mysqli-&gt;connect_error) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">"connect failed"</span>.$mysqli-&gt;connect_error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="发送sql指令"><a href="#发送sql指令" class="headerlink" title="发送sql指令"></a>发送sql指令</h3><p>mysqli扩展库支持批量执行SQL语句。</p>
+<ul>
+<li>dml语句</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sql=<span class="string">"insert into user(name,age,password) values('a',30,md5('qcz'))"</span>;</span><br><span class="line">$res=$mysqli-&gt;query($sql);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>批量执行dml语句</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$sqls=<span class="string">"insert into user(name,age,password) values('b',23,md5('zxq'));"</span>;</span><br><span class="line">$sqls.=<span class="string">"insert into user(name,age,password) values('c',23,md5('xam'));"</span>;</span><br><span class="line">$sqls.=<span class="string">"insert into user(name,age,password) values('d',24,md5('mt'));"</span>;</span><br><span class="line">$sqls.=<span class="string">"update user set age=20 where id=1;"</span>;</span><br><span class="line">$sqls.=<span class="string">"delete from user where id=2;"</span>;</span><br><span class="line">$res=$mysqli-&gt;multi_query($sqls);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>dql语句</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sql=<span class="string">"select * from user"</span>;</span><br><span class="line">$res=$mysqli-&gt;query($sql);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>批量执行dql语句</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$sqls=<span class="string">"select * from user where age&gt;23;"</span>;</span><br><span class="line">$sqls.=<span class="string">"select * from user where age&lt;=23;"</span>;</span><br><span class="line">$res=$mysqli-&gt;multi_query($sqls);</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理结果"><a href="#处理结果" class="headerlink" title="处理结果"></a>处理结果</h3><ul>
+<li>dml语句</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ($res) &#123;</span><br><span class="line">	<span class="comment"># 操作影响行数</span></span><br><span class="line">	<span class="keyword">if</span> ($mysqli-&gt;affected_rows&gt;<span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"success"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"no effects"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"operate failed"</span>.$mysqli-&gt;error;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>dql语句</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ($row=$res-&gt;fetch_row()) &#123;</span><br><span class="line">	<span class="keyword">foreach</span> ($row <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;br&gt;--$value"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>批量执行dql语句（执行成功返回批量结果集，失败返回false）</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 必须使用do while循环取值</span></span><br><span class="line"><span class="keyword">if</span> ($res) &#123;</span><br><span class="line">	<span class="comment"># 如果执行成功说明至少有一个结果集</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="comment"># store_result从mysqli中取出第一个结果集，即mysqli_result对象</span></span><br><span class="line">		$result=$mysqli-&gt;store_result();</span><br><span class="line">		<span class="keyword">while</span> ($row=$result-&gt;fetch_row()) &#123;</span><br><span class="line">			<span class="keyword">foreach</span> ($row <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">				<span class="keyword">echo</span> <span class="string">"&lt;br&gt;--$value"</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment"># 关闭当前结果集</span></span><br><span class="line">		$result-&gt;free();</span><br><span class="line">		<span class="comment"># more_results 判断是否还有剩余未取出的结果集</span></span><br><span class="line">		<span class="keyword">if</span> ($mysqli-&gt;more_results()) &#123;</span><br><span class="line">			<span class="keyword">echo</span> <span class="string">"&lt;br&gt;new result"</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="comment"># next_result 不加判断的取下一个结果集</span></span><br><span class="line">	&#125; <span class="keyword">while</span> ($mysqli-&gt;next_result());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭资源"><a href="#关闭资源" class="headerlink" title="关闭资源"></a>关闭资源</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 释放内存（执行dml语句不需要释放资源）</span></span><br><span class="line">$res-&gt;free();</span><br><span class="line"><span class="comment"># 关闭连接</span></span><br><span class="line">$mysqli-&gt;close();</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysqli扩展库调用过程（面向过程风格）"><a href="#mysqli扩展库调用过程（面向过程风格）" class="headerlink" title="mysqli扩展库调用过程（面向过程风格）"></a>mysqli扩展库调用过程（面向过程风格）</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1 获取mysqli连接</span></span><br><span class="line">$mysqli=mysqli_connect(<span class="string">"localhost"</span>,<span class="string">"root"</span>,<span class="string">"mysql"</span>,<span class="string">"test"</span>);</span><br><span class="line"><span class="comment">## 验证是否连接成功</span></span><br><span class="line"><span class="keyword">if</span> (!$mysqli) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">"connect failed"</span>.mysqli_connect_error($mysqli));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 2 向数据库发送sql语句（ddl dml dql……）</span></span><br><span class="line">$sql=<span class="string">"select * from user"</span>;</span><br><span class="line">$res=mysqli_query($mysqli,$sql);</span><br><span class="line"><span class="comment"># 3 处理得到的结果</span></span><br><span class="line"><span class="keyword">while</span> ($row=mysqli_fetch_row($res)) &#123;</span><br><span class="line">	<span class="keyword">foreach</span> ($row <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;br&gt;--$value"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 4 关闭资源</span></span><br><span class="line"><span class="comment">## 释放内存</span></span><br><span class="line">mysqli_free_result($res);</span><br><span class="line"><span class="comment">## 关闭连接（遵循 晚创建早释放 的原则）</span></span><br><span class="line">mysqli_close($mysqli);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>操作mysqli扩展库时与mysql扩展库相似：</p>
+<ul>
+<li>如果执行的是dml语句，则返回bool类型；如果执行dql语句，则返回查询结果mysqli_result结果集对象</li>
+<li>取res结果集的方式仍然有四种与mysql扩展库中的方法一一对应：<ul>
+<li>$res-&gt;fetch_assoc()</li>
+<li>$res-&gt;fetch_row()</li>
+<li>$res-&gt;fetch_array()</li>
+<li>$res-&gt;fetch_object()</li>
+</ul>
+</li>
+<li>释放资源有三种方式：<ul>
+<li>$mysqli-&gt;free()</li>
+<li>$mysqli-&gt;close()</li>
+<li>$mysqli-&gt;free_result()</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="mysqli封装类"><a href="#mysqli封装类" class="headerlink" title="mysqli封装类"></a>mysqli封装类</h2><p>以上代码的可维护性和复用性不高，在面向对象编程中，我们通常将其封装成一个工具类SqlTool.class.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 数据库操作工具类</span></span><br><span class="line"><span class="comment"> * 适用于mysqli扩展库</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SqlTool</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> $mysqli;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($host,$username,$password,$dbname)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;mysqli=<span class="keyword">new</span> MySQLi($host,$username,$password,$dbname);</span><br><span class="line">		<span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;mysqli-&gt;connect_error) &#123;</span><br><span class="line">			<span class="keyword">die</span>(<span class="string">"connect failed"</span>.$mysqli-&gt;connect_error);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;mysqli-&gt;query(<span class="string">"set names utf8"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;mysqli-&gt;close();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">execute_dql</span><span class="params">($sql)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$res=<span class="keyword">$this</span>-&gt;mysqli-&gt;query($sql) <span class="keyword">or</span> <span class="keyword">die</span>($sql.<span class="string">"--failed--"</span>.<span class="keyword">$this</span>-&gt;mysqli-&gt;error);</span><br><span class="line">		$res_set=<span class="keyword">array</span>();</span><br><span class="line">		<span class="keyword">while</span> ($row=$res-&gt;fetch_object()) &#123;</span><br><span class="line">			array_push($res_set, $row);</span><br><span class="line">		&#125;</span><br><span class="line">		$res-&gt;free();</span><br><span class="line">		<span class="keyword">return</span> $res_set;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">execute_dqls</span><span class="params">($sqls)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		$res=<span class="keyword">$this</span>-&gt;mysqli-&gt;multi_query($sqls) <span class="keyword">or</span> <span class="keyword">die</span>(<span class="string">"sqls failed--"</span>.<span class="keyword">$this</span>-&gt;mysqli-&gt;error);</span><br><span class="line">		$res_set=<span class="keyword">array</span>();</span><br><span class="line">		<span class="keyword">if</span> ($res) &#123;</span><br><span class="line">			<span class="keyword">do</span> &#123;</span><br><span class="line">				$result=<span class="keyword">$this</span>-&gt;mysqli-&gt;store_result();</span><br><span class="line">				$res_set_obj=<span class="keyword">array</span>();</span><br><span class="line">				<span class="keyword">while</span> ($row=$result-&gt;fetch_object()) &#123;</span><br><span class="line">					array_push($res_set_obj, $row);</span><br><span class="line">				&#125;</span><br><span class="line">				array_push($res_set, $res_set_obj);</span><br><span class="line">				$result-&gt;free();</span><br><span class="line">				<span class="keyword">if</span> (!<span class="keyword">$this</span>-&gt;mysqli-&gt;more_results()) &#123;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">while</span> (<span class="keyword">$this</span>-&gt;mysqli-&gt;next_result());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> $res_set;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">execute_dml</span><span class="params">($sql,$is_multi)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> ($is_multi) &#123;</span><br><span class="line">			$res=<span class="keyword">$this</span>-&gt;mysqli-&gt;multi_query($sql) <span class="keyword">or</span> <span class="keyword">die</span>($sql.<span class="string">"--failed--"</span>.<span class="keyword">$this</span>-&gt;mysqli-&gt;errno.<span class="keyword">$this</span>-&gt;mysqli-&gt;error);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			$res=<span class="keyword">$this</span>-&gt;mysqli-&gt;query($sql) <span class="keyword">or</span> <span class="keyword">die</span>($sql.<span class="string">"--failed--"</span>.<span class="keyword">$this</span>-&gt;mysqli-&gt;errno.<span class="keyword">$this</span>-&gt;mysqli-&gt;error);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> ($res) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;mysqli-&gt;affected_rows;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>封装类的使用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">$sqltool=<span class="keyword">new</span> SqlTool(<span class="string">"localhost"</span>,<span class="string">"root"</span>,<span class="string">"mysql"</span>,<span class="string">"test"</span>);</span><br><span class="line"><span class="comment"># 查</span></span><br><span class="line">$sql=<span class="string">"select * from user"</span>;</span><br><span class="line">$res=$sqltool-&gt;execute_dql($sql);</span><br><span class="line"><span class="comment"># 处理</span></span><br><span class="line"><span class="keyword">foreach</span> ($res <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;br&gt;--"</span>.$value-&gt;name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量查</span></span><br><span class="line">$sqls=<span class="string">"select * from user where age&gt;23;"</span>;</span><br><span class="line">$sqls.=<span class="string">"select * from user where age&lt;=23;"</span>;</span><br><span class="line">$res=$sqltool-&gt;execute_dqls($sqls);</span><br><span class="line"><span class="comment"># 处理</span></span><br><span class="line"><span class="keyword">foreach</span> ($res <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;br&gt;new result"</span>;</span><br><span class="line">	<span class="keyword">foreach</span> ($value <span class="keyword">as</span> $key1 =&gt; $value1) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;br&gt;--"</span>.$value1-&gt;id.$value1-&gt;name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增</span></span><br><span class="line">$sql=<span class="string">"insert into user(name,age,password) values('a',25,md5('xyj'))"</span>;</span><br><span class="line"><span class="comment"># 删</span></span><br><span class="line">$sql=<span class="string">"delete from user1 where id=4"</span>;</span><br><span class="line">$res=$sqltool-&gt;execute_dml($sql);</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量</span></span><br><span class="line">$sqls=<span class="string">"insert into user(name,age,password) values('b',23,md5('zxq'));"</span>;</span><br><span class="line">$sqls.=<span class="string">"insert into user(name,age,password) values('c',23,md5('xam'));"</span>;</span><br><span class="line">$sqls.=<span class="string">"insert into user(name,age,password) values('d',24,md5('mt'));"</span>;</span><br><span class="line">$sqls.=<span class="string">"update user set age=20 where id=1;"</span>;</span><br><span class="line">$sqls.=<span class="string">"delete from user where id=5;"</span>;</span><br><span class="line">$sqls.=<span class="string">"delete from user where id=6;"</span>;</span><br><span class="line">$sqls.=<span class="string">"delete from user where id=7;"</span>;</span><br><span class="line">$res=$sqltool-&gt;execute_dml($sqls,<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理</span></span><br><span class="line"><span class="keyword">switch</span> ($res) &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"no effects"</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">-1</span>:</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"failed"</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"success"</span>;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr />
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" rel="tag"># 数据库连接</a>
+          
+            <a href="/tags/mysqli%E6%89%A9%E5%B1%95%E5%BA%93/" rel="tag"># mysqli扩展库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/design1.html" rel="next" title="简单工厂模式">
+                <i class="fa fa-chevron-left"></i> 简单工厂模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/design2.html" rel="prev" title="策略模式">
+                策略模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+              <p class="site-description motion-element" itemprop="description">个人博客小站</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysqli扩展库调用过程（面向对象风格）"><span class="nav-number">1.</span> <span class="nav-text">mysqli扩展库调用过程（面向对象风格）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取连接"><span class="nav-number">1.1.</span> <span class="nav-text">获取连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送sql指令"><span class="nav-number">1.2.</span> <span class="nav-text">发送sql指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理结果"><span class="nav-number">1.3.</span> <span class="nav-text">处理结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭资源"><span class="nav-number">1.4.</span> <span class="nav-text">关闭资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysqli扩展库调用过程（面向过程风格）"><span class="nav-number">2.</span> <span class="nav-text">mysqli扩展库调用过程（面向过程风格）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysqli封装类"><span class="nav-number">3.</span> <span class="nav-text">mysqli封装类</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
