@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="get,post," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="所谓预定义超全局变量，指的是全部作用域中始终可用的内置变量，函数中无需通过global关键字访问。PHP提供了9中超全局变量，有助于方便快捷的写代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP预定义超全局变量学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/11/29/php10/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="所谓预定义超全局变量，指的是全部作用域中始终可用的内置变量，函数中无需通过global关键字访问。PHP提供了9中超全局变量，有助于方便快捷的写代码">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-29T15:24:54.000Z">
+<meta property="article:modified_time" content="2018-11-29T16:17:59.504Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="get">
+<meta property="article:tag" content="post">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/29/php10/"/>
+
+
+
+
+
+  <title>PHP预定义超全局变量学习笔记 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/29/php10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHP预定义超全局变量学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-29T23:24:54+08:00">
+                2018-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>所谓预定义超全局变量，指的是全部作用域中始终可用的内置变量，函数中无需通过global关键字访问。PHP提供了9中超全局变量，有助于方便快捷的写代码</p>
+<a id="more"></a>
+
+<p>我们之前学习过PHP的基本语法中有一种全局变量，在整个作用域（当前PHP脚本文件）中可见，而预定义的超全局变量，除了有全局变量的特点之外，可以无需声明直接引用。</p>
+<h2 id="GET"><a href="#GET" class="headerlink" title="$_GET"></a>$_GET</h2><p>使用场景：浏览器通过超链接传送信息给服务器</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;a href='get.php?param1=你好啊'&gt;传输数据&lt;/a&gt;"</span>;<span class="comment">//点击跳转到get.php页面</span></span><br><span class="line"><span class="comment">## 处理低版本IE浏览器（5/6）的中文乱码问题</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">$str=urlencode("中文字符");</span></span><br><span class="line"><span class="comment">echo "&lt;a href='get.php?param1='".$str."&gt;传输数据&lt;/a&gt;";</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>通过URL参数传递给当前脚本的变量的数组，原理如下：</p>
+<ol>
+<li>浏览器点击超链接，遵循http协议发送请求</li>
+<li>Apache服务器接受到请求后调用PHP模块</li>
+<li>PHP模块处理请求，创建进程并封装相关参数到超全局数组$_GET中</li>
+<li>PHP脚本处理超全局数组中的参数，处理完成后返回给服务器</li>
+<li>服务器遵循http协议返回响应给浏览器</li>
+<li>浏览器解析响应数据，展示界面</li>
+</ol>
+<ul>
+<li>不同的进程对应不同的浏览器请求，封装不同的超全局数组，请求较多时要考虑服务器的并发承受能力</li>
+<li>禁止在php.ini中启用register_globals（默认取全局数组中的变量），防止sql注入</li>
+</ul>
+<h2 id="POST"><a href="#POST" class="headerlink" title="$_POST"></a>$_POST</h2><p>使用场景：</p>
+<ol>
+<li>浏览前通过表单传输信息给服务器（注意多选框的name值应该以数组方式填写）</li>
+<li>流数据的传输，文件、图片等</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"</span></span><br><span class="line"><span class="string">&lt;h1&gt;用户注册&lt;/h1&gt;</span></span><br><span class="line"><span class="string">&lt;form action='post.php' method='post'&gt;</span></span><br><span class="line"><span class="string">用户名：&lt;input type='text' name='username'/&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">密码：&lt;input type='password' name='password'/&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">性别：男&lt;input type='radio' name='sex' value='1'/&gt;女&lt;input type='radio' name='sex' value='0'/&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">爱好：唱歌&lt;input name='hobby[]' type='checkbox' value='1'/&gt;读书&lt;input name='hobby[]' type='checkbox' value='2'/&gt;跳舞&lt;input name='hobby[]' type='checkbox' value='3'/&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">年级：&lt;select name='class'&gt;</span></span><br><span class="line"><span class="string">&lt;option value='1'&gt;一年级&lt;/option&gt;</span></span><br><span class="line"><span class="string">&lt;option value='2'&gt;二年级&lt;/option&gt;</span></span><br><span class="line"><span class="string">&lt;option value='3'&gt;三年级&lt;/option&gt;</span></span><br><span class="line"><span class="string">&lt;/select&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">&lt;textarea rows='10' cols='50' name='introduce'&gt;&lt;/textarea&gt;&lt;br/&gt;</span></span><br><span class="line"><span class="string">&lt;input type='submit' value='提交'&gt;</span></span><br><span class="line"><span class="string">&lt;/form&gt;</span></span><br><span class="line"><span class="string">"</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">提交跳转到post.php页面</span></span><br><span class="line"><span class="comment">echo "&lt;pre&gt;";</span></span><br><span class="line"><span class="comment">print_r($_POST);</span></span><br><span class="line"><span class="comment">Array</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">    [username] =&gt; aaa</span></span><br><span class="line"><span class="comment">    [password] =&gt; 222</span></span><br><span class="line"><span class="comment">    [sex] =&gt; 1</span></span><br><span class="line"><span class="comment">    [hobby] =&gt; Array</span></span><br><span class="line"><span class="comment">        (</span></span><br><span class="line"><span class="comment">            [0] =&gt; 1</span></span><br><span class="line"><span class="comment">            [1] =&gt; 3</span></span><br><span class="line"><span class="comment">        )</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    [class] =&gt; 1</span></span><br><span class="line"><span class="comment">)</span></span><br><span class="line"><span class="comment">echo "&lt;/pre&gt;";</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="REQUEST"><a href="#REQUEST" class="headerlink" title="$_REQUEST"></a>$_REQUEST</h2><p>其中包含$_GET/$_POST/$_COOKIE三个超全局数组的信息，更完整。如果不知道提交方式，可以通过$_SERVER中的参数判断，官方不建议使用这个变量。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ($_SERVER[<span class="string">'REQUEST_METHOD'</span>]==<span class="string">"post"</span>) &#123;</span><br><span class="line">	$echo $_POST[<span class="string">'xxx'</span>];</span><br><span class="line">&#125;<span class="keyword">elseif</span> ($_SERVER[<span class="string">'REQUEST_METHOD'</span>]==<span class="string">"get"</span>) &#123;</span><br><span class="line">	$echo $_GET[<span class="string">'xxx'</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="SERVER"><a href="#SERVER" class="headerlink" title="$_SERVER"></a>$_SERVER</h2><p>主要包含了http请求行和请求头的信息，以及客户端和服务器的一些信息，例如服务器文档根目录</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;pre&gt;"</span>;</span><br><span class="line">print_r($_SERVER);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;/pre&gt;"</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>获取请求该页面的客户机的IP地址 <strong>$_SERVER[‘REMOTE_ADDR’]</strong></li>
+<li>获取服务器端的软件版本 <strong>$_SERVER[‘SERVER_SOFTWARE’]</strong></li>
+</ul>
+<h2 id="ENV"><a href="#ENV" class="headerlink" title="$_ENV"></a>$_ENV</h2><p>该全局数组可以获取全局变量，出于安全性的考虑默认禁用，在开发和生产环境中不要启用。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;pre&gt;"</span>;</span><br><span class="line">print_r($_ENV);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;/pre&gt;"</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="GLOBALS"><a href="#GLOBALS" class="headerlink" title="$GLOBALS"></a>$GLOBALS</h2><p>包含全部变量的全局组合数组，变量的名字就是数组的键，一个自定义的全局变量也会被该数组管理。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$a=<span class="number">22</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;pre&gt;"</span>;</span><br><span class="line">print_r($GLOBALS);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;/pre&gt;"</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Array</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">    [_GET] =&gt; Array</span></span><br><span class="line"><span class="comment">        (</span></span><br><span class="line"><span class="comment">        )</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    [_POST] =&gt; Array</span></span><br><span class="line"><span class="comment">        (</span></span><br><span class="line"><span class="comment">        )</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    [_COOKIE] =&gt; Array</span></span><br><span class="line"><span class="comment">        (</span></span><br><span class="line"><span class="comment">            [Hm_lvt_94d8610c17caaa5b58069613ba4c67cf] =&gt; 1541080289,1541147321,1541260617</span></span><br><span class="line"><span class="comment">            [__atuvc] =&gt; 8|44</span></span><br><span class="line"><span class="comment">            [scroll-cookie] =&gt; 0|/</span></span><br><span class="line"><span class="comment">        )</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    [_FILES] =&gt; Array</span></span><br><span class="line"><span class="comment">        (</span></span><br><span class="line"><span class="comment">        )</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    [GLOBALS] =&gt; Array</span></span><br><span class="line"><span class="comment"> *RECURSION*</span></span><br><span class="line"><span class="comment">    [a] =&gt; 22</span></span><br><span class="line"><span class="comment">)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<hr />
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/get/" rel="tag"># get</a>
+          
+            <a href="/tags/post/" rel="tag"># post</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/22/design4/" rel="next" title="装饰者模式">
+                <i class="fa fa-chevron-left"></i> 装饰者模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/10/cyff1/" rel="prev" title="CYFF（一）：念念不忘">
+                CYFF（一）：念念不忘 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GET"><span class="nav-number">1.</span> <span class="nav-text">$_GET</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST"><span class="nav-number">2.</span> <span class="nav-text">$_POST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#REQUEST"><span class="nav-number">3.</span> <span class="nav-text">$_REQUEST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SERVER"><span class="nav-number">4.</span> <span class="nav-text">$_SERVER</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ENV"><span class="nav-number">5.</span> <span class="nav-text">$_ENV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GLOBALS"><span class="nav-number">6.</span> <span class="nav-text">$GLOBALS</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

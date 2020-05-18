@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="面向过程风格,简单工厂模式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="设计模式学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="策略模式">
+<meta property="og:url" content="http://yoursite.com/2018/11/17/design2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="设计模式学习笔记">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/design21.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/design22.jpg">
+<meta property="article:published_time" content="2018-11-17T07:15:37.000Z">
+<meta property="article:modified_time" content="2019-03-10T06:34:06.769Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="面向过程风格">
+<meta property="article:tag" content="简单工厂模式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/design21.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/17/design2/"/>
+
+
+
+
+
+  <title>策略模式 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/17/design2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">策略模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-17T15:15:37+08:00">
+                2018-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  设计模式学习笔记
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>日常设计过程中我们常常会遇到这样的需求，在得到一个数据结果的过程中，有时会选择这样或那样不同的处理过程，也就是说目的相同，算法却不同，并且这些算法之间还要频繁的替换，如果是在小型的程序中，还可以使用方法重载的技术实现这种需求，但是面对大型系统，这样基于函数级别的封装就显得不便于维护，每次增加新的算法就要使得原来已有的算法重新编译一边，代价较高，因此策略模型的引入就显得非常重要。</p>
+<a id="more"></a>
+
+<div class="note info"><p>以下学习笔记内容由java语言编写。</p></div>
+
+<p>商场开业，需要在每台收银机上安装一个收银系统，要求每次录入商品的名称，单价和购买数量，点击确定按钮后就可以将当前商品的收费信息显示在收银界面，再次录入下一条商品信息点击确定后，将收费信息追加在收银界面，总价递增；商品录入结束后点击清零按钮刷新界面，清空录入列表和总价。</p>
+<h2 id="面向过程风格"><a href="#面向过程风格" class="headerlink" title="面向过程风格"></a>面向过程风格</h2><div class="note danger"><p>以下代码中包含java图形化编程相关接口调用，要读懂部分函数参数和功能需要一定图形化编程经验。</p></div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.Font;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionListener;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JButton;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JFrame;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JLabel;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JOptionPane;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JPanel;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JScrollPane;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JTextArea;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JTextField;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CashView</span> <span class="keyword">extends</span> <span class="title">JFrame</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">	<span class="comment">//总价</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">double</span> sum_price = <span class="number">0.00</span>;</span><br><span class="line">	<span class="comment">//构造方法即程序入口</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CashView</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.setTitle(<span class="string">"商场收银系统"</span>);</span><br><span class="line">		<span class="keyword">this</span>.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br><span class="line">		<span class="comment">//设置框架的宽高</span></span><br><span class="line">		<span class="keyword">this</span>.setSize(<span class="number">400</span>, <span class="number">450</span>);</span><br><span class="line">		<span class="comment">//将中间容器放入框架</span></span><br><span class="line">		<span class="keyword">this</span>.add(getPanel());</span><br><span class="line">		<span class="comment">//设置框架不可缩放</span></span><br><span class="line">		<span class="keyword">this</span>.setResizable(<span class="keyword">false</span>);</span><br><span class="line">		<span class="comment">//设置框架可见</span></span><br><span class="line">		<span class="keyword">this</span>.setVisible(<span class="keyword">true</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> JPanel <span class="title">getPanel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		JPanel panel = <span class="keyword">new</span> JPanel();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置布局为 null，绝对布局</span></span><br><span class="line">        panel.setLayout(<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 这个方法定义了组件的位置。</span></span><br><span class="line"><span class="comment">         * setBounds(x, y, width, height)</span></span><br><span class="line"><span class="comment">         * x 和 y 指定左上角的新位置，由 width 和 height 指定新的大小。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="comment">// 创建商品名标签</span></span><br><span class="line">        JLabel goodsLabel = <span class="keyword">new</span> JLabel(<span class="string">"商品:"</span>);</span><br><span class="line">        goodsLabel.setBounds(<span class="number">20</span>,<span class="number">20</span>,<span class="number">50</span>,<span class="number">30</span>);</span><br><span class="line">        goodsLabel.setFont(getCashFont(<span class="keyword">false</span>));</span><br><span class="line">        panel.add(goodsLabel);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建商品名文本域</span></span><br><span class="line">        JTextField goodsText = <span class="keyword">new</span> JTextField(<span class="number">20</span>);</span><br><span class="line">        goodsText.setBounds(<span class="number">90</span>,<span class="number">20</span>,<span class="number">165</span>,<span class="number">30</span>);</span><br><span class="line">        panel.add(goodsText);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 创建单价标签</span></span><br><span class="line">        JLabel priceLabel = <span class="keyword">new</span> JLabel(<span class="string">"单价:"</span>);</span><br><span class="line">        priceLabel.setBounds(<span class="number">20</span>,<span class="number">60</span>,<span class="number">50</span>,<span class="number">30</span>);</span><br><span class="line">        priceLabel.setFont(getCashFont(<span class="keyword">false</span>));</span><br><span class="line">        panel.add(priceLabel);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建单价文本域</span></span><br><span class="line">        JTextField priceText = <span class="keyword">new</span> JTextField(<span class="number">20</span>);</span><br><span class="line">        priceText.setBounds(<span class="number">90</span>,<span class="number">60</span>,<span class="number">165</span>,<span class="number">30</span>);</span><br><span class="line">        panel.add(priceText);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 创建确定按钮</span></span><br><span class="line">        JButton addButton = <span class="keyword">new</span> JButton(<span class="string">"确定"</span>);</span><br><span class="line">        addButton.setBounds(<span class="number">280</span>, <span class="number">60</span>, <span class="number">80</span>, <span class="number">30</span>);</span><br><span class="line">        addButton.setFont(getCashFont(<span class="keyword">false</span>));</span><br><span class="line">        panel.add(addButton);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 创建数量标签</span></span><br><span class="line">        JLabel numberLabel = <span class="keyword">new</span> JLabel(<span class="string">"数量:"</span>);</span><br><span class="line">        numberLabel.setBounds(<span class="number">20</span>,<span class="number">100</span>,<span class="number">50</span>,<span class="number">30</span>);</span><br><span class="line">        numberLabel.setFont(getCashFont(<span class="keyword">false</span>));</span><br><span class="line">        panel.add(numberLabel);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建数量文本域</span></span><br><span class="line">        JTextField numberText = <span class="keyword">new</span> JTextField(<span class="number">20</span>);</span><br><span class="line">        numberText.setBounds(<span class="number">90</span>,<span class="number">100</span>,<span class="number">165</span>,<span class="number">30</span>);</span><br><span class="line">        panel.add(numberText);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 创建清零按钮</span></span><br><span class="line">        JButton resetButton = <span class="keyword">new</span> JButton(<span class="string">"清零"</span>);</span><br><span class="line">        resetButton.setBounds(<span class="number">280</span>, <span class="number">100</span>, <span class="number">80</span>, <span class="number">30</span>);</span><br><span class="line">        resetButton.setFont(getCashFont(<span class="keyword">false</span>));</span><br><span class="line">        panel.add(resetButton);</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建文本域显示商品清单</span></span><br><span class="line">        JTextArea jta= <span class="keyword">new</span> JTextArea();</span><br><span class="line">        <span class="comment">//设置文本框不可编辑</span></span><br><span class="line">        jta.setEditable(<span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">//在文本框上添加滚动条</span></span><br><span class="line">        JScrollPane jsp = <span class="keyword">new</span> JScrollPane(jta);</span><br><span class="line">        <span class="comment">//设置矩形大小.参数依次为(矩形左上角横坐标x,矩形左上角纵坐标y，矩形长度，矩形宽度)</span></span><br><span class="line">        jsp.setBounds(<span class="number">20</span>, <span class="number">140</span>, <span class="number">340</span>, <span class="number">150</span>);</span><br><span class="line">        <span class="comment">//默认的设置是超过文本框才会显示滚动条，以下设置让滚动条一直显示</span></span><br><span class="line">        jsp.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);        </span><br><span class="line">        <span class="comment">//把滚动条添加到容器里面</span></span><br><span class="line">        panel.add(jsp);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 创建总价标签</span></span><br><span class="line">        JLabel sumLabel = <span class="keyword">new</span> JLabel(<span class="string">"总计:"</span>);</span><br><span class="line">        sumLabel.setBounds(<span class="number">20</span>,<span class="number">300</span>,<span class="number">50</span>,<span class="number">30</span>);</span><br><span class="line">        sumLabel.setFont(getCashFont(<span class="keyword">false</span>));</span><br><span class="line">        panel.add(sumLabel);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 创建总价显示标签</span></span><br><span class="line">        JLabel sumViewLabel = <span class="keyword">new</span> JLabel(String.valueOf(sum_price));</span><br><span class="line">        sumViewLabel.setBounds(<span class="number">100</span>,<span class="number">300</span>,<span class="number">250</span>,<span class="number">60</span>);</span><br><span class="line">        sumViewLabel.setFont(getCashFont(<span class="keyword">true</span>));</span><br><span class="line">        panel.add(sumViewLabel);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//确定按钮绑定事件（不加数值验证）</span></span><br><span class="line">        addButton.addActionListener(<span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">				<span class="keyword">if</span> (goodsText.getText().equals(<span class="string">""</span>)||priceText.getText().equals(<span class="string">""</span>)||numberText.getText().equals(<span class="string">""</span>)) &#123;</span><br><span class="line">					JOptionPane.showMessageDialog(<span class="keyword">null</span>,<span class="string">"内容不全"</span>);</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="comment">//计算收费信息	</span></span><br><span class="line">					<span class="keyword">int</span> num = Integer.parseInt(numberText.getText());</span><br><span class="line">					<span class="keyword">double</span> price = Double.parseDouble(priceText.getText());</span><br><span class="line">					jta.append(<span class="string">"商品："</span>+goodsText.getText()+<span class="string">" 单价："</span>+price+<span class="string">" 数量："</span>+num+<span class="string">" 合计："</span>+num*price+<span class="string">"\n"</span>);</span><br><span class="line">					sum_price+=num*price;</span><br><span class="line">					sumViewLabel.setText(String.valueOf(sum_price));</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//清零按钮绑定事件</span></span><br><span class="line">        resetButton.addActionListener(<span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">				goodsText.setText(<span class="string">""</span>);</span><br><span class="line">				priceText.setText(<span class="string">""</span>);</span><br><span class="line">				numberText.setText(<span class="string">""</span>);</span><br><span class="line">				jta.setText(<span class="string">""</span>);</span><br><span class="line">				sum_price=<span class="number">0</span>d;</span><br><span class="line">				sumViewLabel.setText(String.valueOf(sum_price));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> panel;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">private</span> Font <span class="title">getCashFont</span><span class="params">(<span class="keyword">boolean</span> is_big)</span></span>&#123;</span><br><span class="line">		Font f;</span><br><span class="line">		<span class="keyword">if</span> (is_big) &#123;			</span><br><span class="line">			f = <span class="keyword">new</span> Font(<span class="string">"黑体"</span>, Font.BOLD, <span class="number">50</span>); </span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;			</span><br><span class="line">			f = <span class="keyword">new</span> Font(<span class="string">"黑体"</span>, Font.PLAIN, <span class="number">20</span>); </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> f;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>显而易见，这样的程序轻而易举的就能指出很多缺点：</p>
+<blockquote>
+<p>展示界面的swing代码和用于计算的业务逻辑代码杂糅在一起，难以分别<br>需要修改原有业务逻辑时需要整个重新编译源程序<br>无法轻便高效的拓展原系统功能<br>…</p>
+</blockquote>
+<p>以上代码虽然实现了收银系统的功能，但是面向过程的编程风格使得代码的可读性、可维护性、可扩展性都不强，面对小小的需求改变都难以适应。例如，商场开业为了酬宾推出部分商品折扣活动，有五折、八折、九折三种折扣分别适用于部分商品，在生成商品收费清单时，不仅要用所选的优惠方式进行计算，还要将折扣信息输出在收银界面上。<br>这是我们就应该考虑将业务逻辑封装起来，适应需求的变化。</p>
+<h2 id="业务逻辑封装"><a href="#业务逻辑封装" class="headerlink" title="业务逻辑封装"></a>业务逻辑封装</h2><ul>
+<li>业务逻辑封装类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 折扣类封装</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 张国荣</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Discount</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> String[] reduce = &#123;<span class="string">"正常收费"</span>,<span class="string">"五折"</span>,<span class="string">"八折"</span>,<span class="string">"九折"</span>&#125;;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 根据商品原价和折扣类型计算商品收费价格</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> money</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> type</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calPrice</span><span class="params">(<span class="keyword">double</span> money,String type)</span></span>&#123;</span><br><span class="line">		<span class="keyword">double</span> discount;</span><br><span class="line">		<span class="keyword">switch</span> (type) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"五折"</span>:</span><br><span class="line">			discount=<span class="number">0.5</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"八折"</span>:</span><br><span class="line">			discount=<span class="number">0.8</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"九折"</span>:</span><br><span class="line">			discount=<span class="number">0.9</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			discount=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> money*discount;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>界面类</li>
+</ul>
+<div class="note primary"><p>以下代码省略相同部分。</p></div>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">……</span><br><span class="line">        JComboBox&lt;String&gt; discountBox = <span class="keyword">new</span> JComboBox&lt;&gt;();</span><br><span class="line">        discountBox.setBounds(<span class="number">280</span>, <span class="number">20</span>, <span class="number">80</span>, <span class="number">30</span>);</span><br><span class="line">		<span class="comment">//调用业务类中的静态常量来生成优惠选项</span></span><br><span class="line">        <span class="keyword">for</span> (String e : Discount.reduce) &#123;		</span><br><span class="line">        	discountBox.addItem(e);</span><br><span class="line">		&#125;</span><br><span class="line">        panel.add(discountBox);</span><br><span class="line">……</span><br><span class="line"><span class="comment">//确定按钮绑定事件（不加数值验证）</span></span><br><span class="line">        addButton.addActionListener(<span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">				<span class="keyword">if</span> (goodsText.getText().equals(<span class="string">""</span>)||priceText.getText().equals(<span class="string">""</span>)||numberText.getText().equals(<span class="string">""</span>)) &#123;</span><br><span class="line">					JOptionPane.showMessageDialog(<span class="keyword">null</span>,<span class="string">"内容不全"</span>);</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;					</span><br><span class="line">					<span class="keyword">int</span> num = Integer.parseInt(numberText.getText());</span><br><span class="line">					<span class="keyword">double</span> price = Double.parseDouble(priceText.getText());</span><br><span class="line">					<span class="comment">//通过传入优惠参数调用业务类中的静态方法计算商品费用</span></span><br><span class="line">					<span class="keyword">double</span> dis_price=Discount.calPrice(price*num, discountBox.getSelectedItem().toString());</span><br><span class="line">					jta.append(<span class="string">"商品："</span>+goodsText.getText()+<span class="string">" 单价："</span>+price+<span class="string">" 数量："</span>+num+<span class="string">" "</span>+discountBox.getSelectedItem()+<span class="string">" 合计："</span>+dis_price+<span class="string">"\n"</span>);</span><br><span class="line">					sum_price+=dis_price;</span><br><span class="line">					sumViewLabel.setText(String.format(<span class="string">"%.2f"</span>, sum_price));</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+
+<p>这个版本的代码相比第一次有了很大的改善，代码的重构使得展示界面的“前端”代码和真正用于处理数据的业务逻辑代码分开，降低了耦合度。在这个版本中，当我们要对系统的界面进行优化或者业务逻辑的需求出现变化时，我们可以很轻易在不同的类中做修改，并且完全不影响到另一个方面。<br>但是这样的代码就是好的设计吗，显示不是，我们依然可以从中挑出不足：</p>
+<blockquote>
+<p>业务逻辑的代码全部放在一个类中，从这个角度耦合度并没有降下来<br>每一次进行业务逻辑的计算实际上只用到了类中的一个计算方法，但是其他计算方法也无可避免的参与了系统的编译和实例化<br>如果要加入新的业务功能，要么单独写类增加界面类的判断逻辑，提高界面和业务的耦合，要么融入到已有的业务类中，使得业务逻辑类的内部愈加复杂<br>……</p>
+</blockquote>
+<p>基于上述的种种问题，我们想到在上一个章节中介绍了简单工厂模式，显然就可以运用到这个案例中来，业务逻辑实际上可以抽象出计算实际收费功能的父类和具体不同算法实现收费的子类，这样不同的计算方式就可以分开来，降低业务逻辑的耦合度。<br>再看来需求，商场为了回馈快开业期间消费者的支持特地推出了更加有力的优惠活动，满减活动，但是不与原有的折扣活动共享，消费者自主选择划算的优惠方式。</p>
+<h2 id="简单工厂模式实现"><a href="#简单工厂模式实现" class="headerlink" title="简单工厂模式实现"></a>简单工厂模式实现</h2><p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/design21.jpg" alt="design21"></p>
+<ul>
+<li>收费工厂类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CashFactory</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> String[] reduce = &#123;<span class="string">"正常收费"</span>,<span class="string">"五折"</span>,<span class="string">"八折"</span>,<span class="string">"满三百减一百"</span>&#125;;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> CashSuper <span class="title">reduce</span><span class="params">(String type)</span></span>&#123;</span><br><span class="line">		CashSuper cs = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">switch</span> (type) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"正常收费"</span>:</span><br><span class="line">			cs = <span class="keyword">new</span> CashNormal();</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"五折"</span>:</span><br><span class="line">			cs = <span class="keyword">new</span> CashDiscount(<span class="number">0.5</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"八折"</span>:</span><br><span class="line">			cs = <span class="keyword">new</span> CashDiscount(<span class="number">0.8</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"满三百减一百"</span>:</span><br><span class="line">			cs = <span class="keyword">new</span> CashReturn(<span class="number">300</span>, <span class="number">100</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> cs;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>优惠父类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CashSuper</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calPrice</span><span class="params">(<span class="keyword">double</span> price)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> price;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>正常收费子类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CashNormal</span> <span class="keyword">extends</span> <span class="title">CashSuper</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calPrice</span><span class="params">(<span class="keyword">double</span> price)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> price;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>折扣子类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CashDiscount</span> <span class="keyword">extends</span> <span class="title">CashSuper</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">double</span> discount = <span class="number">1</span>d;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CashDiscount</span><span class="params">(<span class="keyword">double</span> discount)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.discount = discount;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calPrice</span><span class="params">(<span class="keyword">double</span> price)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> price*discount;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>满减子类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CashReturn</span> <span class="keyword">extends</span> <span class="title">CashSuper</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">double</span> condition_money = <span class="number">0</span>d;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">double</span> return_money = <span class="number">0</span>d;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CashReturn</span><span class="params">(<span class="keyword">double</span> condition_money, <span class="keyword">double</span> return_money)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.condition_money = condition_money;</span><br><span class="line">		<span class="keyword">this</span>.return_money = return_money;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calPrice</span><span class="params">(<span class="keyword">double</span> price)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> price-((<span class="keyword">int</span>)price/(<span class="keyword">int</span>)condition_money)*return_money;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>界面类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">……</span><br><span class="line">        <span class="comment">// 创建折扣下拉框</span></span><br><span class="line">        JComboBox&lt;String&gt; discountBox = <span class="keyword">new</span> JComboBox&lt;&gt;();</span><br><span class="line">        discountBox.setBounds(<span class="number">280</span>, <span class="number">20</span>, <span class="number">80</span>, <span class="number">30</span>);</span><br><span class="line">        <span class="comment">//引入活动名称</span></span><br><span class="line">        <span class="keyword">for</span> (String e : CashFactory.reduce) &#123;			</span><br><span class="line">        	discountBox.addItem(e);</span><br><span class="line">		&#125;</span><br><span class="line">        panel.add(discountBox);</span><br><span class="line">……</span><br><span class="line">		<span class="comment">//确定按钮绑定事件（不加数值验证）</span></span><br><span class="line">        addButton.addActionListener(<span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">				<span class="keyword">if</span> (goodsText.getText().equals(<span class="string">""</span>)||priceText.getText().equals(<span class="string">""</span>)||numberText.getText().equals(<span class="string">""</span>)) &#123;</span><br><span class="line">					JOptionPane.showMessageDialog(<span class="keyword">null</span>,<span class="string">"内容不全"</span>);</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;			</span><br><span class="line">					<span class="keyword">int</span> num = Integer.parseInt(numberText.getText());</span><br><span class="line">					<span class="keyword">double</span> good_price = Double.parseDouble(priceText.getText());</span><br><span class="line">					<span class="keyword">double</span> goods_price = good_price * num;</span><br><span class="line">					<span class="comment">//根据选中的优惠方式从优惠工厂中生成优惠子类</span></span><br><span class="line">					CashSuper cs = CashFactory.reduce(discountBox.getSelectedItem().toString());</span><br><span class="line">					<span class="comment">//调用优惠父类的抽象计算方法</span></span><br><span class="line">					goods_price = cs.calPrice(goods_price);				</span><br><span class="line">					<span class="comment">//显示收费及活动信息</span></span><br><span class="line">					sum_price+=goods_price;</span><br><span class="line">					jta.append(<span class="string">"商品："</span>+goodsText.getText()+<span class="string">" 单价："</span>+good_price+<span class="string">" 数量："</span>+num+<span class="string">" "</span>+discountBox.getSelectedItem()+<span class="string">" 合计："</span>+goods_price+<span class="string">"\n"</span>);</span><br><span class="line">					sumViewLabel.setText(String.format(<span class="string">"%.2f"</span>, sum_price));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+
+<p>到了这个版本，在业务逻辑方面的耦合度已经降得很低了，现在面对已有子类的新需求，我们只需要在工厂类中添加不同的参数名，返回相应的实例即可；而面对新的计算方法需求，添加计算方法类之后继承父类，并修改业务工厂中的调用即可。<br>到目前为止，虽然简单工厂模式也解决了收费算法的问题，但是这个模式只是解决了对象的创建问题，而且由于工厂本身包括了所有的收费方式，每次维护和扩展都要改动这个工厂，以致代码需要重新编译部署，所以这不是最好的办法。这里我们就要引出今天的策略模式了。</p>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><blockquote>
+<p><strong>策略模式（strategy）</strong>定义了算法家族，分别封装起来，让其之间可以互相替换，使算法的变化不会影响到使用算法的用户</p>
+</blockquote>
+<p>对于这个收银系统来说，不论是打折还是满减，甚至返利等算法，都是策略，用户真正想要得到的是优惠后所要付出的费用，而至于算法的实现过程并不关心。因此，我们真正所应该封装的，是不同的策略，而非类，这就是简单工厂模式所不能解决的问题，工厂只是解决了对象的创建，而用户所需要的只是类中的计算方法，而策略模式正好可以把对象也封装起来。在系统中，优惠父类即策略类，各种实现子类即具体策略类。</p>
+<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/design22.jpg" alt="design22"></p>
+<ul>
+<li>策略上下文</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CashContext</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> String[] reduce = &#123;<span class="string">"正常收费"</span>,<span class="string">"五折"</span>,<span class="string">"八折"</span>,<span class="string">"满三百减一百"</span>&#125;;</span><br><span class="line">	<span class="comment">//将优惠父类封装到策略上下文中</span></span><br><span class="line">	<span class="keyword">private</span> CashSuper cs;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">CashContext</span><span class="params">(String type)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">switch</span> (type) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"正常收费"</span>:</span><br><span class="line">			<span class="comment">//每一次实例化都在上下文中实例优惠子类对象</span></span><br><span class="line">			<span class="keyword">this</span>.cs = <span class="keyword">new</span> CashNormal();</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"五折"</span>:</span><br><span class="line">			<span class="keyword">this</span>.cs = <span class="keyword">new</span> CashDiscount(<span class="number">0.5</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"八折"</span>:</span><br><span class="line">			<span class="keyword">this</span>.cs = <span class="keyword">new</span> CashDiscount(<span class="number">0.8</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">"满三百减一百"</span>:</span><br><span class="line">			<span class="keyword">this</span>.cs = <span class="keyword">new</span> CashReturn(<span class="number">300</span>, <span class="number">100</span>);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//通过上下文调用子类的计算方法</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calMoney</span><span class="params">(<span class="keyword">double</span> money)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> cs.calPrice(money);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>界面类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">……</span><br><span class="line">        <span class="comment">// 创建折扣下拉框</span></span><br><span class="line">        discountBox = <span class="keyword">new</span> JComboBox&lt;&gt;();</span><br><span class="line">        discountBox.setBounds(<span class="number">280</span>, <span class="number">20</span>, <span class="number">80</span>, <span class="number">30</span>);</span><br><span class="line">        <span class="comment">//引入活动名称</span></span><br><span class="line">        <span class="keyword">for</span> (String e : CashContext.reduce) &#123;			</span><br><span class="line">        	discountBox.addItem(e);</span><br><span class="line">		&#125;</span><br><span class="line">        panel.add(discountBox);</span><br><span class="line">……</span><br><span class="line">        <span class="comment">//确定按钮绑定事件（不加数值验证）</span></span><br><span class="line">        addButton.addActionListener(<span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">				<span class="keyword">if</span> (goodsText.getText().equals(<span class="string">""</span>)||priceText.getText().equals(<span class="string">""</span>)||numberText.getText().equals(<span class="string">""</span>)) &#123;</span><br><span class="line">					JOptionPane.showMessageDialog(<span class="keyword">null</span>,<span class="string">"内容不全"</span>);</span><br><span class="line">				&#125;<span class="keyword">else</span>&#123;			</span><br><span class="line">					<span class="keyword">int</span> num = Integer.parseInt(numberText.getText());</span><br><span class="line">					<span class="keyword">double</span> good_price = Double.parseDouble(priceText.getText());</span><br><span class="line">					<span class="keyword">double</span> goods_price = good_price * num;</span><br><span class="line">					<span class="comment">//将选中的优惠类型传入策略上下文</span></span><br><span class="line">					CashContext cc = <span class="keyword">new</span> CashContext(discountBox.getSelectedItem().toString());</span><br><span class="line">					<span class="comment">//调用策略上下文中的计算方法</span></span><br><span class="line">					goods_price = cc.calMoney(goods_price);				</span><br><span class="line">					<span class="comment">//显示收费及活动信息</span></span><br><span class="line">					sum_price+=goods_price;</span><br><span class="line">					jta.append(<span class="string">"商品："</span>+goodsText.getText()+<span class="string">" 单价："</span>+good_price+<span class="string">" 数量："</span>+num+<span class="string">" "</span>+discountBox.getSelectedItem()+<span class="string">" 合计："</span>+goods_price+<span class="string">"\n"</span>);</span><br><span class="line">					sumViewLabel.setText(String.format(<span class="string">"%.2f"</span>, sum_price));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+
+<p>实际上，这个版本的代码是策略模式和简单工厂模式的结合，将工厂类和策略模式的上下文结合了起来，使得代码更加轻便。对比策略模式和简单工厂模式的界面类代码，我们可以发现，简单工厂模式中我们的客户端需要使用工厂类和优惠父类两个类才可以完成策略的使用，而策略模式中只需要在客户端实例化策略上下文一个类就可以完成策略的使用，耦合度变得更低，连优惠父类也封装起来了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>策略模式定义了一系列算法的方法，这些算法所做的工作相同，只是实现不同。策略模式以相同的方法调用不同的算法，减少了算法类和使用算法类之间的耦合</li>
+<li>策略模式简化了单元测试，每个算法都有自己的类，可通过自己的接口单独测试</li>
+<li>实践中策略模式可以用来封装几乎任何类型的规则，只要在分析过程中听到需要在不同时间应用不同的业务规则，就可以考略使用策略模式处理这种变化的可能性</li>
+</ol>
+<hr />
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E9%A3%8E%E6%A0%BC/" rel="tag"># 面向过程风格</a>
+          
+            <a href="/tags/%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" rel="tag"># 简单工厂模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/16/php8/" rel="next" title="PHP数据库编程学习笔记2">
+                <i class="fa fa-chevron-left"></i> PHP数据库编程学习笔记2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/18/php9/" rel="prev" title="PHP数据库编程学习笔记3">
+                PHP数据库编程学习笔记3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#面向过程风格"><span class="nav-number">1.</span> <span class="nav-text">面向过程风格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#业务逻辑封装"><span class="nav-number">2.</span> <span class="nav-text">业务逻辑封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单工厂模式实现"><span class="nav-number">3.</span> <span class="nav-text">简单工厂模式实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#策略模式"><span class="nav-number">4.</span> <span class="nav-text">策略模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

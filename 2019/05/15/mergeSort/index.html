@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,数据结构," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="归并排序是一种典型的采用分治策略进行排序的算法，其中合并的过程用到了外部排序的方式，算法的时间复杂度可以通过master公式进行计算，空间复杂度为O(N)，本文我们来讨论一下归并排序的算法思路以及该算法适用的题型。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="归并排序及其应用">
+<meta property="og:url" content="http://yoursite.com/2019/05/15/mergeSort/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="归并排序是一种典型的采用分治策略进行排序的算法，其中合并的过程用到了外部排序的方式，算法的时间复杂度可以通过master公式进行计算，空间复杂度为O(N)，本文我们来讨论一下归并排序的算法思路以及该算法适用的题型。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/mergeSort1.jpg">
+<meta property="article:published_time" content="2019-05-15T04:56:04.000Z">
+<meta property="article:modified_time" content="2019-05-15T09:26:20.785Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/mergeSort1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/15/mergeSort/"/>
+
+
+
+
+
+  <title>归并排序及其应用 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/mergeSort/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">归并排序及其应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-15T12:56:04+08:00">
+                2019-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">算法和数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>归并排序是一种典型的采用分治策略进行排序的算法，其中合并的过程用到了外部排序的方式，算法的时间复杂度可以通过master公式进行计算，空间复杂度为O(N)，本文我们来讨论一下归并排序的算法思路以及该算法适用的题型。</p>
+<a id="more"></a>
+
+<h2 id="算法思路"><a href="#算法思路" class="headerlink" title="算法思路"></a>算法思路</h2><p>归并排序的排序过程可以大体划分为两个阶段：划分阶段和合并阶段。并且根据每次对原序列划分的个数分为二路归并和多路归并两种，两者的区别仅仅在于划分的路数不同，本文以基本的二路归并为例进行研究。</p>
+<blockquote>
+<p>划分阶段：将一个数组进行不断二分，直到将整个序列划分到单独一个元素为一部分为止<br>合并阶段：将相邻的划分好的部分进行合并，每次合并申请一个长度为要合并的两部分长度之和的数组作为辅助空间进行外部排序，排序好之后再将有序序列拷贝回这两个相邻的部分，即代表一次合并结束；不断合并直到合并到原序列</p>
+</blockquote>
+<p>我们通过一个案例来分析这个过程，假设原序列为【2，0，7，3，8，5，4】，那么归并排序的过程大致如下：</p>
+<ul>
+<li>划分过程：<ol>
+<li>第一次划分：【2，0，7，3】；【8，5，4】</li>
+<li>第二次划分：【2，0】；【7，3】；【8，5】；【4】</li>
+<li>第三次划分：【2】；【0】；【7】；【3】；【8】；【5】；【4】</li>
+</ol>
+</li>
+</ul>
+<p>注意，这其中可能存在奇数偶数的问题，即划分过程不一定是很平均的，如果元素总个数为奇数个，那么必然会有一个元素提前一次划分完毕，成为单个部分。</p>
+<ul>
+<li>合并过程：<ol>
+<li>第一次合并：【0，2】；【3，7】；【5，8】</li>
+<li>第二次合并：【0，2，3，7】；【4，5，8】</li>
+<li>第三次合并：【0，2，3，4，5，7，8】</li>
+</ol>
+</li>
+</ul>
+<p>我们发现，合并和拆分正好是一个逆序的关系，且各个部分的划分与合并严格对应，在划分过程中被拆开的两个部分一定会在合并的阶段进行合并，这样的表现方式或许不够直观，通过下面这幅划分合并图我们可以看得更加清楚（图中不带箭头的实线表示划分过程，带箭头的实线表示合并过程）：</p>
+<p><img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/mergeSort1.jpg" alt="mergeSort1"></p>
+<p>如图所示，每一层的代表一次划分或合并，从第二层开始依次是三次划分和三次合并。这里我们就可以直观的看出各个部分的划分与合并是严格对应的，第二次划分就单独成为一部分的元素4，在第一次的合并中就没有参与，而是直到倒数第二次合并才与其划分出来的85这个部分进行合并，由此我们可以得出两条推论，即在归并排序中：</p>
+<ol>
+<li>第i次划分得到的两个部分在倒数第i次合并时才会进行合并</li>
+<li>第i次划分时不需要再被划分的部分在倒数第i次合并中不会参与合并</li>
+</ol>
+<h2 id="代码解析"><a href="#代码解析" class="headerlink" title="代码解析"></a>代码解析</h2><p>到目前为止，我们对归并排序的流程已经有了大致的把握，接下来就是函数实现的细节问题，例如边界值的判断，执行流程的控制等。从这个划分的过程来看，必然是一个递归函数的调用，在学习递归函数时我们说写一个递归函数，首先要考虑函数的终止条件，避免无休止的递归导致函数栈溢出，很显然这里的终止条件是划分的部分只有一个元素；第二步考虑递归的依赖条件，即我们想要完成对整个序列的排序，依赖于左半部分和右半部分的有序，同理左右两个部分的排序也依赖于其各自的左右两个部分的有序，以此类推……最终单个元素必然是有序的。<br>分析了这两方面的条件，我们来构造这个递归函数，为了便于函数参数的传递，我们将递归函数的参数设为本次划分出来的部分的首位下标，这样既便于函数的调用，也能够对base case作出判断；确定了函数的参数，接下来我们考虑是否需要返回值，显然我们的目的是对数组进行排序，而排序的过程可以在方法内完成，因此不需要返回值；函数内部流程我们可以抽象的分为下面几个步骤：</p>
+<ol>
+<li>判断当前要排序的这个部分是否已经达到了终止条件，如果是则无需再进行排序，直接返回；否则在对其进行排序</li>
+<li>将当前部分划分成左右两个部分，递归调用排序方法，使得左右两个子部分各自有序</li>
+<li>将排序完成的左右两个部分通过外排的方式进行合并，使当前这个部分有序</li>
+</ol>
+<p>根据上述分析，我们的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 归并排序算法</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(arr==<span class="keyword">null</span>||arr.length&lt;<span class="number">2</span>)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	sortProcess(arr, <span class="number">0</span>, arr.length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 划分函数，二分</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> left</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> right</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sortProcess</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(left==right)</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">int</span> middle = (left+right)/<span class="number">2</span>;</span><br><span class="line">	sortProcess(arr, left, middle);</span><br><span class="line">	sortProcess(arr, middle+<span class="number">1</span>, right);</span><br><span class="line">	merge(arr, left, middle, right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中第一个函数是归并排序递归方法的第一个入口，同时对数组的可排序性进行了验证，我们也可以直接调用该方法的最后一行代码进入递归过程；而第二个递归函数的内部过程也和我们的分析过程如出一辙。这里对左右子序列的合并过程我们将其抽象出来，封装成一个函数，下面我们来讨论一下这个函数应当如何实现，前面我们说过归并的过程实际上是通过辅助数组来完成的，因为左右两个子部分通过递归调用排序方法已经达到有序，那么只需要两个指针从左右两个子部分的头开始，逐渐将两个子部分遍历一遍，每比较一次拷贝出一个小数，指针向后移动一下，直到某个部分的数全部拷贝完，再将另一部分剩余的数拷贝出来（最终再将辅助数组中的有序结果拷贝回原部分即可）。</p>
+<p>假设现有有序的左右两个子部分【2,3,5】和【0,7,8】，则先申请一个长度为6的辅助数组【<em>,</em>,<em>,</em>,<em>,</em>】，合并的过程如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">阶段</th>
+<th align="center">左子部分</th>
+<th align="center">右子部分</th>
+<th align="center">辅助数组</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">比较拷贝</td>
+<td align="center">【2,3,5】</td>
+<td align="center">【~,7,8】</td>
+<td align="center">【0,<em>,</em>,<em>,</em>,_】</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">【~,3,5】</td>
+<td align="center">【~,7,8】</td>
+<td align="center">【0,2,<em>,</em>,<em>,</em>】</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">【<del>,</del>,5】</td>
+<td align="center">【~,7,8】</td>
+<td align="center">【0,2,3,<em>,</em>,_】</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">【<del>,</del>,~】</td>
+<td align="center">【~,7,8】</td>
+<td align="center">【0,2,3,5,<em>,</em>】</td>
+</tr>
+<tr>
+<td align="center">补全拷贝</td>
+<td align="center">【<del>,</del>,~】</td>
+<td align="center">【<del>,</del>,8】</td>
+<td align="center">【0,2,3,5,7,_】</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">【<del>,</del>,~】</td>
+<td align="center">【<del>,</del>,~】</td>
+<td align="center">【0,2,3,5,7,8】</td>
+</tr>
+<tr>
+<td align="center">拷回原序列</td>
+<td align="center">【0,2,3】</td>
+<td align="center">【5,7,8】</td>
+<td align="center">【0,2,3,5,7,8】</td>
+</tr>
+</tbody></table>
+<p>通过这个表格我们发现，在往辅助数组中拷贝元素时，必然存在某一个部分的元素提前拷贝完成的情况，但是不清楚数据情况的前提下我们是无法确定哪个部分会剩下元素的，因此我们需要在比较拷贝阶段结束后，再对两个部分进行判断和补全拷贝工作，这样才能保证每个元素都不会丢失，最终用辅助数组中的序列覆盖掉原数组中的序列即可。该方法的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 归并函数，复杂度为O(N)</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> left</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> middle</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> right</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> middle , <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span>[] help = <span class="keyword">new</span> <span class="keyword">int</span>[right-left+<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">int</span> p = left, q = middle+<span class="number">1</span> , i = <span class="number">0</span>;</span><br><span class="line">	<span class="comment">//比较拷贝</span></span><br><span class="line">	<span class="keyword">while</span>(p&lt;=middle&amp;&amp;q&lt;=right)</span><br><span class="line">		help[i++] = arr[p] &lt; arr[q] ? arr[p++] : arr[q++];</span><br><span class="line">	<span class="comment">//补全拷贝</span></span><br><span class="line">	<span class="comment">//右子部分有剩余元素未拷贝结束</span></span><br><span class="line">	<span class="keyword">while</span>(q&lt;=right)</span><br><span class="line">		help[i++] = arr[q++];</span><br><span class="line">	<span class="comment">//左子部分有剩余元素未拷贝结束</span></span><br><span class="line">	<span class="keyword">while</span>(p&lt;=middle)</span><br><span class="line">		help[i++] = arr[p++];</span><br><span class="line">	<span class="comment">//拷回原序列</span></span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; help.length ; i++)</span><br><span class="line">		arr[left++] = help[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后要注意写完算法之后使用对数器对该算法进行测试，避免边界值界定的失误导致代码出现漏洞。下面我们来分析一下算法的复杂度，空间复杂度很好判断，辅助数组只在每一次合并时申请，合并结束后直接释放，因此每一次合并不论分成多少个部分，其加起来的总和<strong>不会超过</strong>原数组的长度，这个通过观察上文中划分和合并图即可确定，合并的每一层各个部分都只不过是对原数组长度的划分，而辅助空间的申请也是依据子部分的长度，因此空间复杂度为O(N)。</p>
+<blockquote>
+<ol>
+<li>注意，这里之所以说不会超过而不是直接说等于原数组的长度，是因为存在如上文中单个元素4的这种情况，这样就会使得某一次的合并时申请的空间没有原数组的长度那么长；</li>
+<li>并且，也并非只有划分出单个元素会出现这种情况，工程应用中，子部分长度小于一定值时会直接对其使用插入排序（插入排序对样本量较少的序列时间成本更低），也会导致不再划分的情况</li>
+</ol>
+</blockquote>
+<p>而对时间复杂度的判断我们就需要借助master公式进行求解，因为归并排序对于子过程的划分是相等的，这里忽略奇数个元素的情况，因为均分只估计规模不考虑常数。而不论是二路归并还是多路归并，其子部分划分的个数和总共要执行的子过程次数是一样的（一次划分过程中），因此a=b推出log(b,a)=1，同时通过观察合并函数，也可以发现剩余过程的时间复杂度是O(N)，因此d=1.由master公式我们可知，归并排序算法的时间复杂度为O(N*log(N))。</p>
+<h2 id="算法应用"><a href="#算法应用" class="headerlink" title="算法应用"></a>算法应用</h2><p>学习归并排序不只是要了解该算法的实现和细节，更重要的是要掌握该算法的思想，能够将其灵活的运用到各种题目中。这里我们不妨反思一下为什么归并排序相比冒泡，选择，插入这三个O(N<sup>2</sup>)级别的算法时间复杂度更优，我们说排序无非是比较和交换两部分组成，当我们在比较数组中每个元素时，如果能将已经比较过的顺序关系重复利用，而不是重复比较，那么必然能节省更多的时间。反观冒泡，选择和插入这三个算法，每次遍历（比较）完整个序列只能确定一个数据的位置，下一次比较又要重头开始，等于之前比较的结果都浪费了，时间复杂度必然是差的。</p>
+<p>反观归并排序，每一次子部分的排序结果都能在下一次合并的过程中用上，组内比较的次数是不会被浪费的，这是该算法时间复杂度较快的根本原因。</p>
+<h3 id="小和问题"><a href="#小和问题" class="headerlink" title="小和问题"></a>小和问题</h3><ul>
+<li>题目：在一个数组中，每一个数左边比当前数小的数累加起来，叫做这个数组的小和。求一个数组的小和。</li>
+<li>举例：[1,3,4,2,5]<ul>
+<li>1左边比1小的数， 没有；</li>
+<li>3左边比3小的数， 1；</li>
+<li>4左边比4小的数， 1、 3；</li>
+<li>2左边比2小的数， 1；</li>
+<li>5左边比5小的数， 1、 3、 4、 2；</li>
+<li>所以小和为1+1+3+1+1+3+4+2=16</li>
+</ul>
+</li>
+<li>对数器：遍历整个数组，每个数的左边再遍历一遍，累加比当前数小的数，时间复杂度O(N<sup>2</sup>)</li>
+<li>思路：小和的实质是要确定当前数的右边有多少个数比他大，借助归并排序可以加速这个过程。归并排序能够使得子部分的元素在<strong>组内有序</strong>，因此在两个子部分合并的过程中，<strong>一旦比较出左部分的某个元素（设为a）的值小于右部分的某个元素（设为b），通过与子部分右边界的下表变换即可确定右部分至少有几个元素的值比a大</strong>。且合并过程中，指针是从左往右依次遍历的，因此不会漏掉任何一个可累加的小和；每一个子部分合并完成时，该部分可以被榨取的小和全部榨取完成，在之后的合并过程中不会重复榨取，因此也不会多加任何一个小和。</li>
+</ul>
+<p>下面我们根据题目的要求和解题思路来对归并算法做修改，首先大框架不变，依旧是划分和合并两个部分，不同的是这次我们要求小和，因此在合并的过程中不仅要将子部分排序，还要将榨取的小和返回回来进行累加。故递归函数和合并函数的返回值需要改为整型，相应的递归函数base case的返回值要改为0，因为单个元素的子部分不产生小和；而递归的依赖关系则是，整个序列的小和是通过左右两个子部分各自内部榨取的小和之和加上当前左右两个子部分之间可以榨取的小和得到的，因此递归调用过程是三个部分的累加和作为返回值，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">smallSum</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (arr == <span class="keyword">null</span> || arr.length &lt; <span class="number">2</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> divide(arr, <span class="number">0</span>, arr.length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (left == right)</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">int</span> middle = left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">return</span> divide(arr, left, middle) + divide(arr, middle + <span class="number">1</span>, right) + merge(arr, left, right, middle);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面考虑对合并函数的修改，其实相比归并排序中合并函数的功能，小和问题只需要在比较拷贝阶段榨取小和并最终返回即可，不涉及到其他代码逻辑的更改，因为小和是在比较的前提下产生的，而合并函数中只有比较拷贝阶段涉及左右两个子部分元素的比较。因此，我们需要在合并函数中增加一个累加小和的变量，并在比较阶段，对于左部分指针指向的值小于右部分指针指向的值时榨取小和，算法是由右部分指针下标和右子部分末端下标相减加一得出有多少个元素的值大于左部分指针指向的元素，相乘累加即可。代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> middle)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span>[] help = <span class="keyword">new</span> <span class="keyword">int</span>[right - left + <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> p = left;</span><br><span class="line">	<span class="keyword">int</span> q = middle + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (p &lt;= middle &amp;&amp; q &lt;= right) &#123;</span><br><span class="line">		<span class="comment">//榨取每个小组中的所有小和</span></span><br><span class="line">		sum += arr[p] &lt; arr[q] ? (right - q + <span class="number">1</span>) * arr[p] : <span class="number">0</span>;</span><br><span class="line">		<span class="comment">//先榨取后拷贝（指针后移）</span></span><br><span class="line">		help[i++] = arr[p] &lt; arr[q] ? arr[p++] : arr[q++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (p &lt;= middle)</span><br><span class="line">		help[i++] = arr[p++];</span><br><span class="line">	<span class="keyword">while</span> (q &lt;= right)</span><br><span class="line">		help[i++] = arr[q++];</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; help.length; i++) &#123;</span><br><span class="line">		arr[left + i] = help[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们看到，这道题的代码与归并排序的代码非常相似，且时间复杂度任然保持在O(N*log(N))，时间复杂度优于直接嵌套遍历查找，原因在于利用归并排序的思路求小和实质上是分批查找，而不是单个查找，每一次子部分合并，即可累加出一批小和，大大加速了查找效率。</p>
+<h3 id="逆序对问题"><a href="#逆序对问题" class="headerlink" title="逆序对问题"></a>逆序对问题</h3><ul>
+<li>题目：在一个数组中，左边的数如果比右边的数大，则这两个数构成一个逆序对，请打印所有逆序对。</li>
+<li>思路：延续小和问题的思路，在两个相对有序的子部分中，很容易知道某个数左右有几个大于或小于该数的元素，因此可以在合并的过程中比较左右两个指针指向的数的大小关系，符合逆序对时，左部分指针往后的数都是比当前数大的，故都能与右部分指针指向的数组成逆序对，故直接遍历输出即可。</li>
+<li>代码修改：相比小和问题，本题对归并排序的代码改动更少，因为不涉及合并结果的累计，我们只需在合并时将符合条件的值输出即可，故只需在合并函数的比较拷贝阶段添加如下代码即可（注意以下代码要放在拷贝和指针后移之前执行）：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(arr[p]&gt;arr[q]) &#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = p; j &lt;= middle; j++) &#123;</span><br><span class="line">		System.out.println(<span class="string">"逆序对["</span>+arr[j]+<span class="string">","</span>+arr[q]+<span class="string">"]"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr />
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/12/stable/" rel="next" title="排序算法的稳定性分析">
+                <i class="fa fa-chevron-left"></i> 排序算法的稳定性分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/16/quickSort/" rel="prev" title="快速排序及其优化">
+                快速排序及其优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思路"><span class="nav-number">1.</span> <span class="nav-text">算法思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码解析"><span class="nav-number">2.</span> <span class="nav-text">代码解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法应用"><span class="nav-number">3.</span> <span class="nav-text">算法应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小和问题"><span class="nav-number">3.1.</span> <span class="nav-text">小和问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逆序对问题"><span class="nav-number">3.2.</span> <span class="nav-text">逆序对问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

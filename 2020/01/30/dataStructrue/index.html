@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,数据结构," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="计算机领域许多概念都是生活中实际问题的抽象表达，因为这一学科在诞生时本身就具有很强的工程倾向，其目的就是高效的解决现实中的许多问题，在数据结构这一部分尤为明显。例如我们在生活中常常面临的物品堆积问题和排队问题就分别可以抽象成栈和队列这两种数据结构，由于实际情况中这些问题非常普遍也使得这两种数据结构成为工程实践过程中最常用的两种数据结构，这也是我们在学习算法和数据结构时最先接触这两种数据结构的原因。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构概述">
+<meta property="og:url" content="http://yoursite.com/2020/01/30/dataStructrue/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="计算机领域许多概念都是生活中实际问题的抽象表达，因为这一学科在诞生时本身就具有很强的工程倾向，其目的就是高效的解决现实中的许多问题，在数据结构这一部分尤为明显。例如我们在生活中常常面临的物品堆积问题和排队问题就分别可以抽象成栈和队列这两种数据结构，由于实际情况中这些问题非常普遍也使得这两种数据结构成为工程实践过程中最常用的两种数据结构，这也是我们在学习算法和数据结构时最先接触这两种数据结构的原因。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-30T03:53:28.000Z">
+<meta property="article:modified_time" content="2020-02-06T07:04:51.410Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/30/dataStructrue/"/>
+
+
+
+
+
+  <title>数据结构概述 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/dataStructrue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构概述</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-30T11:53:28+08:00">
+                2020-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">算法和数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>计算机领域许多概念都是生活中实际问题的抽象表达，因为这一学科在诞生时本身就具有很强的工程倾向，其目的就是高效的解决现实中的许多问题，在数据结构这一部分尤为明显。例如我们在生活中常常面临的物品堆积问题和排队问题就分别可以抽象成栈和队列这两种数据结构，由于实际情况中这些问题非常普遍也使得这两种数据结构成为工程实践过程中最常用的两种数据结构，这也是我们在学习算法和数据结构时最先接触这两种数据结构的原因。那么究竟什么是数据结构呢，今天我们就来一探究竟。</p>
+<a id="more"></a>
+
+<h2 id="所谓“结构”"><a href="#所谓“结构”" class="headerlink" title="所谓“结构”"></a>所谓“结构”</h2><p>我们在学习数据结构之前首先要对结构的划分有一个清晰的认识，否则后面对一些名词的分类和含义在理解上可能会出现一些偏差，例如线性表和链表是同一个结构吗？如果是包含关系，两者谁的范围又更广呢？要搞清楚这些问题，我们先得明确两个名词——“物理结构”和“逻辑结构”。</p>
+<h3 id="物理结构"><a href="#物理结构" class="headerlink" title="物理结构"></a>物理结构</h3><p>我们知道，计算机存储数据是通过一个个顺序排列的存储单元来实现的，每个存储单元只能通过高低电平来表示0、1两个值，那么不论我们要存储多么复杂的结构，实际上也是通过一个个存储单元的序列来表示的，我们把数据在存储单元中的存储方式叫做“物理结构”。有同学可能会不理解，如果存储序列是像数组一样一个接一个的并列着，那么不是只能像数组一样按顺序一个个存储吗，还能有别的存储方法吗。其实除了这样的<strong>顺序存储</strong>方式，还有一种存储方式叫做<strong>链式存储</strong>，指的是前一个元素中包含下一个元素的起始地址，就像火车的车厢一样前一节的尾部挂着后一节的头部，也可以理解为排队过程中每个人只要记得自己前面的人是谁就不怕下一次无法还原这个排序（当然第二个例子不太恰当，因为链式存储中一般都是前一个元素记住后一个元素是谁）。</p>
+<p>从上面的介绍我们可以推断出两种物理结构各自的存储特点了，在前面讲算法的时间复杂度时我们曾提过，获取数组元素的时间复杂度为O(1)，因为数组在内存空间上就是顺序存储的物理结构，CPU可以通过简单地数值计算进行内存寻址，因此顺序存储的优点在于快速读取，不论是获取序列中的第几个元素，其时间复杂度都是相同的。但是顺序存储的数据是不便于扩展的，因为你无法确定待扩展的下一个内存地址是否被占用，如果占用的话，将扩展的元素放到下一个空闲的位置又无法保证每个元素的连续性，这样只能开辟一块更大的空闲内存地址范围，将原来的序列复制到新申请的位置，继而存放新的元素，如果序列的扩展操作频繁，这种方式必然是低效的，根源就是<strong>无法解决内存空间的碎片化</strong>（注意此处的无法解决指无法在较小的成本下解决该问题）。</p>
+<p>而链式存储的优缺点和顺序存储正好相反，链式存储不要求元素之间的位置连续，那么就便于我们对序列进行扩展和删减，避免了内存空间碎片化所造成的问题。但是由于整个数据的序列关系保存在每个元素中，所以我们获取某个元素时必须要遍历整个序列，时间为O(N)，这样就不适用于需要频繁读取的操作，时间成本较高。另外由于链式存储中前一个元素要携带下一个元素的地址信息，因此相比顺序存储还需申请额外的内存空间。</p>
+<h3 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h3><p>了解了物理结构，我们就知道数据怎么在计算机中存储了，你可能会疑惑那为什么还要有逻辑结构呢。因为人毕竟不是计算机，两者的思考方式和擅长的方面完全不同，计算机可以很快的计算出两个十位数相乘的结果，却难以识别一只猫，人则刚好相反，所以逻辑结构通俗的理解就是站在人的角度去组织数据，使用数据的分类方式。逻辑结构由简到繁可以大致划分为四类——集合、线性表、树和图，虽然每种结构有一些概念层面的定义，但是还是很容易让人联想到现实生活中的事物，这里我们先按下不表，后面会对每种结构进行展开。</p>
+<p>这里我们需要着重说明的是<strong>物理结构和逻辑结构之间没有严格的对应关系</strong>，每种逻辑结构既可以用顺序存储来实现，也可以用链式存储实现，<strong>比较复杂的逻辑结构还需要两种存储方式结合起来实现</strong>。在<strong>逻辑结构层面我们更加关心的是这个结构需要实现哪些功能</strong>，而在<strong>物理层面我们则是考虑如何通过封装来实现所需功能</strong>，这样解释可能有些同学还是觉得比较抽象和陌生，不知道该如何来操作，那是因为在我们学习编程语言的过程中，不论你是C语言，C++，C#，Java还是Python等等，语言的设计者已经对许多逻辑结构和功能进行了封装，我们最开始接触的数组结构其实就是顺序存储的线性结构的简单实现，而链式存储则在不同语言中有不同的实现，例如C语言等中的指针，Java中类的定义和引用。毕竟语言的发展使得我们越来越少与操作系统和硬件打交道，许多逻辑结构已经被语言自带的库封装的很好用了，我们只需要调用接口记忆可以实现其功能，但是学习这些结构的内部功能和实现也是很有必要的，如果一个东西对我们而言只是一个黑盒，那我们就无法将其用到极致。</p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><p>这里我们以最简单的集合结构来举例，集合的定义很简单，就是元素之前没有任何关系，既没有顺序先后，也没有连接所属关系，仅仅是位于一个范围中，有些结构的设计中集合中的元素是不可以重复的，这种限制使得集合更偏向于数学中的概念，我们这里也按照这种设定去实现。集合的操作一般可以分为以下几个，同时为每个功能命名：</p>
+<ol>
+<li>创建集合（构造方法）</li>
+<li>计算集合大小（size）</li>
+<li>判断集合是否为空（isEmpty）</li>
+<li>向集合中添加元素（push）</li>
+<li>从集合中随机取出一个元素（pop）</li>
+</ol>
+<div class="note warning"><p>由于我们使用Java进行代码的实现，语言特性中的自动垃圾回收机制使得我们不用考虑对申请的内存空间进行手动释放，如果是使用C语言实现则需要考虑封装析构方法</p></div>
+### 顺序存储实现
+
+<p>首先，我们采用顺序存储的方式来实现集合结构，顺序存储的局限在于集合的容量会有上限，因此我们需要考虑在集合中加入元素时处理扩展集合容量的问题；另一个问题是从集合中获取元素和加入元素时由于集合是无序的，需要保证随机性，又由于顺序存储时元素之间是相互挨着的，所以我们可以通过随机数人为地打乱插入和取出的次序，以此来模拟集合的无序性。但是这样一来又会随之伴生两个问题，一是随着插入的元素越来越多，整个内存空间上可以被用来放置新元素的位置越来越少，在还没有对集合进行扩容之前，我们随机选择的插入位置已经被占用的概率越来越高；二是相对的在集合中没有多少元素的情况下，我们随机从集合中取出一个元素时，随机选择的位置没有元素的概率也会越来越高。其中第一个问题类似于我们在解决哈希冲突时所遇到的问题，解决这个问题最简单的方法就是从当前位置依次往下寻找下一个空位放进去，这样解决相比重新随机位置要高效很多，但是随机性就会差一些，因为寻找空闲位置总是沿着相同的方向和步长，这里我们就要加入一些随机条件来稀释其规律性，增加随机性。我们将整个集合结构封装成一个SeqCollection类，下面我们来看一下代码：</p>
+<div class="note warning"><p>出于简化代码逻辑，避免过多与核心功能无关的代码，我们将元素类型设定为整型数字</p></div>
+* 首先是类的五个内部成员变量：
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当前集合的容量上限</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> ceiling = <span class="number">5</span>;</span><br><span class="line"><span class="comment">//用于增加解决地址冲突时寻址的随机性设置方向标识</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</span><br><span class="line"><span class="comment">//用于存储集合中的元素</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> value[];</span><br><span class="line"><span class="comment">//用于保存数组各个位置是否存放了元素</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> occupy[];</span><br><span class="line"><span class="comment">//当前集合中元素的数目</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> size;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其次是类的构造函数和初始化方法，我们提供可用于设定初始集合容量上限的构造方法，从而在使用者对集合大小有一定估计的情况下节省空间和扩容成本：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SeqCollection</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    init();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SeqCollection</span><span class="params">(<span class="keyword">int</span> ceiling)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.ceiling = ceiling;</span><br><span class="line">    init();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 初始化方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    value = <span class="keyword">new</span> <span class="keyword">int</span>[ceiling];</span><br><span class="line">    occupy = <span class="keyword">new</span> <span class="keyword">boolean</span>[ceiling];</span><br><span class="line">    size = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>接下来是四个内部的私有方法，虽然不直接作为接口对外访问，但却是集合结构的核心逻辑代码，这四个函数辅助实现了集合的功能接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>:集合扩容方法，每次扩容至当前容量的两倍</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">expansion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> new_value[] = <span class="keyword">new</span> <span class="keyword">int</span>[size * <span class="number">2</span>];</span><br><span class="line">    <span class="keyword">boolean</span> new_occupy[] = <span class="keyword">new</span> <span class="keyword">boolean</span>[size * <span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">        new_value[i] = value[i];</span><br><span class="line">        new_occupy[i] = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    value = new_value;</span><br><span class="line">    occupy = new_occupy;</span><br><span class="line">    ceiling = size * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>:随机获取一个可插入元素的索引</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">pushIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> index = (<span class="keyword">int</span>) (Math.random() * ceiling);</span><br><span class="line">    <span class="keyword">if</span> (occupy[index]) &#123;</span><br><span class="line">        <span class="comment">//设置flag变量用于出现地址冲突时寻址的方向随机性</span></span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            <span class="keyword">while</span> (occupy[index]) &#123;</span><br><span class="line">                index++;</span><br><span class="line">                <span class="keyword">if</span> (index == ceiling)</span><br><span class="line">                    index = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (occupy[index]) &#123;</span><br><span class="line">                index--;</span><br><span class="line">                <span class="keyword">if</span> (index == -<span class="number">1</span>)</span><br><span class="line">                    index = ceiling - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        flag = !flag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> index;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>:随机获取一个已插入元素的索引</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">popIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> index = (<span class="keyword">int</span>) (Math.random() * ceiling);</span><br><span class="line">    <span class="keyword">if</span> (!occupy[index]) &#123;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!occupy[index]) &#123;</span><br><span class="line">                index++;</span><br><span class="line">                <span class="keyword">if</span> (index == ceiling)</span><br><span class="line">                    index = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (!occupy[index]) &#123;</span><br><span class="line">                index--;</span><br><span class="line">                <span class="keyword">if</span> (index == -<span class="number">1</span>)</span><br><span class="line">                    index = ceiling - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        flag = !flag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> index;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>:判断某个元素是否已经存在于集合中，该方法用于排除元素重复的情况</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> elem</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">exist</span><span class="params">(<span class="keyword">int</span> elem)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> exist = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ceiling; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (value[i] == elem &amp;&amp; occupy[i]) &#123;</span><br><span class="line">            exist = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> exist;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>最后是对外提供的接口方法：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>:获取集合内元素个数</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>:判断集合是否为空</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> size == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>:向集合中添加元素，添加成功返回true，该元素已存在返回false</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> elem</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> elem)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//先判断要插入的元素是否已经存在</span></span><br><span class="line">    <span class="keyword">if</span> (!exist(elem)) &#123;</span><br><span class="line">        <span class="comment">//如果集合中的元素已达上限先进行扩容</span></span><br><span class="line">        <span class="keyword">if</span> (size == ceiling)</span><br><span class="line">            expansion();</span><br><span class="line">        <span class="keyword">int</span> index = pushIndex();</span><br><span class="line">        value[index] = elem;</span><br><span class="line">        occupy[index] = <span class="keyword">true</span>;</span><br><span class="line">        size++;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>:从集合中随机拿出一个元素</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//集合为空时报错</span></span><br><span class="line">        <span class="keyword">if</span> (isEmpty())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"collection empty , pop failed"</span>);</span><br><span class="line">        <span class="keyword">int</span> index = popIndex();</span><br><span class="line">        occupy[index] = <span class="keyword">false</span>;</span><br><span class="line">        size--;</span><br><span class="line">        <span class="keyword">return</span> value[index];</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        System.exit(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="链式存储实现"><a href="#链式存储实现" class="headerlink" title="链式存储实现"></a>链式存储实现</h3><p>接下来我们采用链式存储的方式实现集合结构，相比于顺序存储链式存储其实更适合来实现集合结构，因为顺序存储先天就带有的位置优势在集合结构中不太用的上，同时集合结构的重要操作就是放入元素和取出元素，也就是说在物理层面上的修改数据操作较多，这点也更适合链式存储来实现。因此我们唯一要解决的问题是保证集合中放入元素和取出元素的随机性，同时由于元素之间不相邻，也不用处理索引冲突的问题。下面我们来看ChaCollection类的代码：</p>
+<ul>
+<li>首先是集合类的成员变量和节点类Node，成员变量只包含一个头节点head，这样的好处在于头结点的值可以用来保存着整个集合元素的数量，因此整个集合结构就是一个带头节点的单链表</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//头结点</span></span><br><span class="line"><span class="keyword">private</span> Node head;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:内部类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="comment">//存储下一个元素节点的位置</span></span><br><span class="line">    <span class="keyword">public</span> Node next;</span><br><span class="line">    <span class="comment">//存储当前元素的值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> value;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(Node next, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.next = next;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其次是类的构造函数，链式存储的构造函数实现起来十分简单，只需要初始化头结点即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ChaCollection</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        head = <span class="keyword">new</span> Node(<span class="keyword">null</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来是一个内部的私有方法，判断是否元素以及存在集合中，这也是链式存储实现起来方便之处</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> elem</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>:判断某个元素是否已经存在于集合中</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">exist</span><span class="params">(<span class="keyword">int</span> elem)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> exist = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (!isEmpty()) &#123;</span><br><span class="line">            Node p;</span><br><span class="line">            p = head.next;</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (p.value == elem) &#123;</span><br><span class="line">                    exist = <span class="keyword">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                p = p.next;</span><br><span class="line">            &#125; <span class="keyword">while</span> (p != <span class="keyword">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> exist;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后是对外提供的接口方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:获取集合内元素个数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> head.value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:判断集合是否为空</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> head.next == <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> elem</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:向集合中添加元素，添加成功返回true，该元素已存在返回false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> elem)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (exist(elem)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//随机选择位置放入元素</span></span><br><span class="line">        <span class="keyword">int</span> pushIndex = (<span class="keyword">int</span>) (Math.random() * head.value);</span><br><span class="line">        Node p = head, q;</span><br><span class="line">        <span class="keyword">while</span> (pushIndex-- &gt; <span class="number">0</span>)</span><br><span class="line">            p = p.next;</span><br><span class="line">        q = <span class="keyword">new</span> Node(<span class="keyword">null</span>, elem);</span><br><span class="line">        q.next = p.next;</span><br><span class="line">        p.next = q;</span><br><span class="line">        head.value++;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Description</span>:从集合中随机拿出一个元素</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (isEmpty())</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"collection empty , pop failed"</span>);</span><br><span class="line">        <span class="keyword">int</span> popIndex = (<span class="keyword">int</span>) (Math.random() * head.value);</span><br><span class="line">        Node p = head, q;</span><br><span class="line">        <span class="keyword">while</span> (popIndex-- &gt; <span class="number">0</span>)</span><br><span class="line">            p = p.next;</span><br><span class="line">        q = p.next;</span><br><span class="line">        p.next = p.next.next;</span><br><span class="line">        head.value--;</span><br><span class="line">        <span class="keyword">return</span> q.value;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        System.exit(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>这里我们也给出两种实现结构的测试代码与测试结果，验证代码的正确性和获取数据的随机性。测试代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"顺序存储结果集："</span>);</span><br><span class="line">    SeqCollection seqCollection = <span class="keyword">new</span> SeqCollection();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            seqCollection.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.print(seqCollection.pop() + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"链式存储结果集："</span>);</span><br><span class="line">    ChaCollection chaCollection = <span class="keyword">new</span> ChaCollection();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            chaCollection.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            System.out.print(chaCollection.pop() + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>验证结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">顺序存储结果集：</span><br><span class="line">2 0 5 3 6 1 7 4 8 9 </span><br><span class="line">9 7 2 1 4 5 3 6 0 8 </span><br><span class="line">3 1 8 6 9 4 2 7 0 5 </span><br><span class="line">1 5 2 6 8 9 7 4 0 3 </span><br><span class="line">9 7 1 0 6 2 8 5 4 3 </span><br><span class="line">1 7 0 6 5 3 2 4 8 9 </span><br><span class="line">3 7 0 2 6 8 1 5 9 4 </span><br><span class="line">3 0 6 8 4 9 1 7 5 2 </span><br><span class="line">6 7 5 8 2 1 0 4 9 3 </span><br><span class="line">1 0 5 7 9 8 4 3 2 6 </span><br><span class="line">链式存储结果集：</span><br><span class="line">0 9 7 4 5 1 6 3 2 8 </span><br><span class="line">5 0 7 6 8 4 2 3 9 1 </span><br><span class="line">8 4 6 3 5 2 7 1 9 0 </span><br><span class="line">1 6 0 2 9 4 5 3 8 7 </span><br><span class="line">9 8 4 0 7 1 3 6 2 5 </span><br><span class="line">9 8 2 4 5 3 0 1 7 6 </span><br><span class="line">5 1 6 7 8 4 0 9 3 2 </span><br><span class="line">2 1 4 5 7 9 0 8 6 3 </span><br><span class="line">1 0 4 7 8 5 3 6 9 2 </span><br><span class="line">0 2 3 6 1 4 8 9 7 5</span><br></pre></td></tr></table></figure>
+
+<hr />
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/28/bucketSort/" rel="next" title="非基于比较的排序——桶排序">
+                <i class="fa fa-chevron-left"></i> 非基于比较的排序——桶排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/06/drunkMan/" rel="prev" title="《醉步男》读后感">
+                《醉步男》读后感 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#所谓“结构”"><span class="nav-number">1.</span> <span class="nav-text">所谓“结构”</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#物理结构"><span class="nav-number">1.1.</span> <span class="nav-text">物理结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑结构"><span class="nav-number">1.2.</span> <span class="nav-text">逻辑结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合"><span class="nav-number">2.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链式存储实现"><span class="nav-number">2.1.</span> <span class="nav-text">链式存储实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试"><span class="nav-number">2.2.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
