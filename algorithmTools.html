@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-progress@1.0.2/themes/blue/pace-theme-flash.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-progress@1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shitsurei.online","root":"/","scheme":"Muse","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"perspectiveLeftIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"perspectiveLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="算法和数据结构学习过程中的小工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对数器和比较器的应用">
+<meta property="og:url" content="https://shitsurei.online/algorithmTools.html">
+<meta property="og:site_name" content="shitsurei">
+<meta property="og:description" content="算法和数据结构学习过程中的小工具">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-05-07T07:43:19.000Z">
+<meta property="article:modified_time" content="2025-01-02T05:55:00.204Z">
+<meta property="article:author" content="GuoRong Zhang">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://shitsurei.online/algorithmTools.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>对数器和比较器的应用 | shitsurei</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shitsurei</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">失礼しました</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-排行">
+
+    <a href="/top/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>排行</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shitsurei.online/algorithmTools.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="个人博客小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shitsurei">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          对数器和比较器的应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-07 15:43:19" itemprop="dateCreated datePublished" datetime="2019-05-07T15:43:19+08:00">2019-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-01-02 13:55:00" itemprop="dateModified" datetime="2025-01-02T13:55:00+08:00">2025-01-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">算法和数据结构学习过程中的小工具</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在学习数据结构和算法的过程中，我们常常会遇到这样的问题：看到或想出某个时间复杂度或空间复杂度较低的算法，想要验证这个算法是否正确，但一时无法在OJ系统中找到相同的题目，只是有限的几个样本数据很难确定算法是否真的能AC，这时我们就可以借助对数器这一强有力的工具来帮助我们解决。</p>
+<a id="more"></a>
+
+<div class="note info"><p>以下学习笔记内容由java语言编写。</p></div>
+
+<h2 id="六步实现对数器"><a href="#六步实现对数器" class="headerlink" title="六步实现对数器"></a>六步实现对数器</h2><p>什么是对数器，简单来说就是验证你的算法是否“完全正确”的工具，听起来很高大上，实现起来却很简单，只需要简简单单六个步骤</p>
+<h3 id="1-有一个你想要测试的方法a"><a href="#1-有一个你想要测试的方法a" class="headerlink" title="1.有一个你想要测试的方法a"></a>1.有一个你想要测试的方法a</h3><p>这个方法可能来源于你在面对一道算法题时冥思苦想得出的一个思路，虽然看起来没什么问题，但是面对大样本的输入时不敢保证每一个结果都正确；又或者来源于你看到某篇帖子或论坛上某个大神的迷之脑回路的一个解法，想要验证这个解法是否正确。总之，这个方法你理解也好不理解也罢，目前为止还没有什么有效结果来支持这一算法的正确性。</p>
+<h3 id="2-实现一个绝对正确的方法b"><a href="#2-实现一个绝对正确的方法b" class="headerlink" title="2.实现一个绝对正确的方法b"></a>2.实现一个绝对正确的方法b</h3><p>面对任何一道算法题，它的解一定不是唯一的，例如一个简单的排序，我们也学过冒泡，插入，选择，快排，希尔，桶排，堆排等等十几种排序方法。但是，解和解之间是有差别的，最终的差别往往体现在算法的时间复杂度和空间复杂度上，面对同一道题目，我们既可以采用最直接最简单也最暴力的方法去计算，也可以写出优雅高效的算法，这也是衡量一个程序员代码水平的重要指标。</p>
+<p>对于大多数算法题目来说，如果你给出的解法在时间复杂度上超过O(N<sup>2</sup>)时，这个算法往往是没有意义的，因为这样的时间复杂度在工程领域根本不具备可操作性；但是，这样的方法往往是我们解决一个问题的第一思路，这个思路最符合人的思维逻辑（往往具备线性，全覆盖性等特点），对于这一算法的正确性也最有把握。因此，用这样的绝对正确但时间复杂度和空间复杂度又差的方法产生的结果作为参照依据是对数器的核心思路。</p>
+<h3 id="3-实现一个随机样本产生器"><a href="#3-实现一个随机样本产生器" class="headerlink" title="3.实现一个随机样本产生器"></a>3.实现一个随机样本产生器</h3><p>有了算法，这时应该考虑测试数据从哪来，在我们一开始得到方法a时，必然也会用有限的几个样本数据对算法的准确性做初步的测试，三五个正确的输入输出之后似乎算法没有什么问题，但要做进一步大样本的测试又不是人力所能及的，这时我们就要通过语言所提供给我们的一些工具来构造大样本的富有随机性的输入输出了。构造随机样本产生器，我们主要要考虑以下三个问题：</p>
+<ol>
+<li><p><strong>输入数据的主要类型是什么？</strong></p>
+<p> 可能你会认为，算法题目有那么多，几乎每一道题要求的输入数据都不相同，难道要每遇到一道题，就去手动构造一个对数器？其实不然，有一定数据结构与算法基础的同学都知道，基本的数据类型只有四种：集合结构，线性结构，树形结构，网状结构（也成图）。这四种属于逻辑结构，即人为区分出来的结构，对应到计算机内存中，每种逻辑结构又可以通过顺序存储和链式存储两种物理结构来表示（两种物理结构各有利弊，一般根据对数据常用的操作来决定选择哪种），因此通常你会遇到的主要数据类型不会超过十种，如果你能对每一种类型的构造方法都进行一定可拓展性的补充，就足以应对大部分的算法题目。</p>
+</li>
+<li><p><strong>输入数据的数据状况如何？</strong></p>
+<p> 由于算法题目的要求往往具备一定的实际意义，因此其输入数据的数据状况也有相应的要求，以我们最常见的整型为例，如果题目的输入数据为年龄，则不应该出现负数或太大的数字，如果输入数据为星期数，则只能是1到7这七个整型数字之一，这就要求我们在构造随机样本生成器时，对随机产生的数据做一定处理，保证其输入的元素均在题目要求的合理范围内，避免进行无意义的计算。</p>
+</li>
+<li><p><strong>边界值的考虑</strong></p>
+<p> 有一定开发经验的朋友一定深有体会，写代码过程中80%的时间都是在对边界值做处理，保证代码的健壮性（任何合法或不合法的输入输出值都不会使得程序崩溃），在做算法题目时也是如此，题目所给出的样本值往往是有限个合法或某一种不合法的输入情况，而在其他不合法的输入情况下，题目也没有明确说明不会有该情况发生，这时就需要我们全方位的考虑输入值在各种情况下如何得到合理的输出，尤其是对边界值的处理。这里的边界值包括0值的输入、空值的输入或空字符串的输入等，以及相关变量初始化和终止条件的控制。</p>
+</li>
+</ol>
+<div class="note info"><p>后两点最好在随机样本产生器的构造函数中就留好接口，减少后期对构造函数反复修改的成本。</p></div>
+
+<h3 id="4-把方法a和方法b比对很多次来验证方法a是否正确"><a href="#4-把方法a和方法b比对很多次来验证方法a是否正确" class="headerlink" title="4.把方法a和方法b比对很多次来验证方法a是否正确"></a>4.把方法a和方法b比对很多次来验证方法a是否正确</h3><p>有了随机样本生成器之后，我们便可以对样本进行大规模测试，将两个方法每一次计算得到的结果进行对比，判断这两次计算得到的结果是否完全相等，这里依然需要注意几个问题：</p>
+<ol>
+<li><p><strong>样本数量如何控制？</strong></p>
+<p> 虽然在这一步我们意图进行大规模的样本测试，但是也很难对工程级的数据量进行测试，原因显而易见，想要比对两次计算所得结果，首先就要两个算法分别跑一遍之后才能进行比较，故整个流程是串行的，其时间复杂度为两个算法的时间复杂度之和。从数量级来看整个比较过程的时间复杂度和算法b的时间复杂度相同，如果算法b对工程级的数据量可以接受，那么算法a的时间复杂度的优势意义没有了，因此我们依然是对有限的数据量进行测试。</p>
+<p> 那么既不能太多——时间耗不起，又不能太少——样本覆盖率太小，因此通过经验分析，我们认为在测试数量达到数十万次以上是一个比较合理的范围；这也需要根据数据类型和数据情况做相应的调整，例如输入样本为整型数组，数组的长度和取值范围也是考虑因素，如果数组本身已经很大，一次计算所要花费的时间就很大，那么数十万次的测试时间也是难以接受的。这里笔者推荐大家在计算机当前所能承受的计算程度上，逐级增加数据量，从而逼近当前计算能力所能逼近的数据量上限。</p>
+</li>
+<li><p><strong>如何对输出结果进行比较？</strong></p>
+<p> 在得到两个计算结果之后，我们需要对两者进行比较，这一步我们需要创建比较函数。事实上，这一步通常比大家想的要难的多，虽然也有些题目的结果为单一的基本类型，直接用等号判断即可，但大量的题目是无法直接比较得出答案的。难以比较的结果主要分为以下几种：</p>
+<ul>
+<li><p>输出结果带有一定随机性。例如，输出结果是一个无序集合，算法a和算法b输出的结果是乱序的，需要一定程度的遍历，检索和记录；</p>
+</li>
+<li><p>输出结果为一个对象。无法直接比较两者的引用来验证，需要比较器（重写compareTo方法）来协助验证过程；</p>
+</li>
+<li><p>输出结果的类型需要一定转换。在讨论输入类型时我们提到四种基本逻辑结构，越是靠后的结构越复杂，有时通过将复杂的物理结构进行压缩（类似“降维打击”）可以有效提高数据的运算速度。例如，二叉树的比较是一个比较复杂的问题，但是当把二叉树序列化之后得到的字符串可以唯一标识一个树，这样字符串之间的比较就简单得多。</p>
+<p>总之，对于计算结果的对比验证，其难度有时不亚于一道算法题目，需要在验证函数完成后多测试，确保验证函数的正确性，否则之后产生的问题会很难定位。</p>
+</li>
+</ul>
+</li>
+</ol>
+<div class="note warning"><p>在对输入数据进行运算时，为了避免算法对原始输入数据的影响和算法之间的相互影响，通常开辟不同的内存空间存储相同值的输入数据，供方法a和方法b进行运算。</p></div>
+
+<h3 id="5-如果有一个样本使得比对出错，打印样本分析是哪个方法出错"><a href="#5-如果有一个样本使得比对出错，打印样本分析是哪个方法出错" class="headerlink" title="5.如果有一个样本使得比对出错，打印样本分析是哪个方法出错"></a>5.如果有一个样本使得比对出错，打印样本分析是哪个方法出错</h3><p>样本验证出错是常有的情况，我们自己写出来的代码很难一次就AC，能够及时发现bug，修正代码的逻辑才是需要更加重视的能力。这里要注意的是，当发现错误时，我们需要保留出错时的相关信息，帮助我们锁定出问题的位置，才能迅速的修正问题。一般而言，在对数器的主函数中，就应当写明出现问题时打印当前比较中原始输入的数据，方法a执行的结果，方法b执行的结果等，分析这些信息来判断出错的函数（不是每次出错都是方法a的问题，有时方法b也会产生部分错误，但这些错误很快就会暴露出来）。分析错误的流程如下：</p>
+<ol>
+<li>先将通过人工推导的方式将原始输入数据推导一遍，得到输出数据，通过三方数据相互比对确定哪一个或几个数据出现问题</li>
+<li>在找到数据出问题的方法，将原始输入数据代入其中，人工推导一遍代码的运算逻辑，找出出错的位置</li>
+<li>修改出错的代码逻辑</li>
+</ol>
+<h3 id="6-当样本数量很多时比对测试依然正确，可以确定方法a已经正确"><a href="#6-当样本数量很多时比对测试依然正确，可以确定方法a已经正确" class="headerlink" title="6.当样本数量很多时比对测试依然正确，可以确定方法a已经正确"></a>6.当样本数量很多时比对测试依然正确，可以确定方法a已经正确</h3><p>当最初设定的样本数量全部通过之后，可以打印相应的信息进行标识，到此为止，我们已经可以基本确定，方法a是准确的了。之所以说基本确定，因为这样的验证方法仅仅是基于归纳统计得出的结果，而非通过严格的数学证明。但往往严格的数学证明需要花费大量的时间和精力，尤其是在贪心策略的相关题目上，提出一个贪心策略很容易，验证一个贪心策略也不是很难，而证明一个贪心策略需要深厚的数学功底，如果当前的目标是提升自己的算法能力，那么使用对数器来验证算法就够用了。</p>
+<h2 id="对数器的代码实现"><a href="#对数器的代码实现" class="headerlink" title="对数器的代码实现"></a>对数器的代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AlgorithmDevice</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 生成随机数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> maxSize	数组最大长度</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> maxValue	数组元素最大值</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> hasMinus	元素是否包含负数</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> withEmpty	数组是否可以为空</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] geneRandomArray(<span class="keyword">int</span> maxSize,<span class="keyword">int</span> maxValue,<span class="keyword">boolean</span> hasMinus,<span class="keyword">boolean</span> withEmpty) &#123;</span><br><span class="line">		<span class="keyword">int</span>[] arr;</span><br><span class="line">		<span class="keyword">if</span>(withEmpty)</span><br><span class="line">			arr = <span class="keyword">new</span> <span class="keyword">int</span>[(<span class="keyword">int</span>)(Math.random()*(maxSize+<span class="number">1</span>))];</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			arr = <span class="keyword">new</span> <span class="keyword">int</span>[(<span class="keyword">int</span>) (Math.random() * (maxSize - <span class="number">1</span> + <span class="number">1</span>)) + <span class="number">1</span>];</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; arr.length ; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (hasMinus)</span><br><span class="line">				arr[i] = (<span class="keyword">int</span>)(Math.random()*(maxValue+<span class="number">1</span>))-(<span class="keyword">int</span>)(Math.random()*(maxValue+<span class="number">1</span>));</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				arr[i] = (<span class="keyword">int</span>)(Math.random()*(maxValue+<span class="number">1</span>));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> arr;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 验证两个数组是否完全相等</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> arr1</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> arr2</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">validate</span><span class="params">(<span class="keyword">int</span>[] arr1, <span class="keyword">int</span>[] arr2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>((arr1==<span class="keyword">null</span>&amp;&amp;arr2!=<span class="keyword">null</span>)||(arr2==<span class="keyword">null</span>&amp;&amp;arr1!=<span class="keyword">null</span>))</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">if</span>(arr1==<span class="keyword">null</span>&amp;&amp;arr2==<span class="keyword">null</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">if</span>(arr1.length!=arr2.length)</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">boolean</span> equal = <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; arr1.length ; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(arr1[i]!=arr2[i]) &#123;</span><br><span class="line">				equal = <span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> equal;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 	验证两个链表是否完全相等</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> n1</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> n2</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">validateLinkList</span><span class="params">(Node n1,Node n2)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(n1==<span class="keyword">null</span>&amp;&amp;n2==<span class="keyword">null</span>)</span><br><span class="line">			<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">boolean</span> equal = <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">while</span>(n1!=<span class="keyword">null</span>&amp;&amp;n2!=<span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(n1.value!=n2.value) &#123;</span><br><span class="line">				equal = <span class="keyword">false</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			n1 = n1.next;</span><br><span class="line">			n2 = n2.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>((n1==<span class="keyword">null</span>&amp;&amp;n2!=<span class="keyword">null</span>)||(n1!=<span class="keyword">null</span>&amp;&amp;n2==<span class="keyword">null</span>))</span><br><span class="line">			equal = <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">return</span> equal;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//主函数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//设置初始值：验证次数，随机样本长度，最大值</span></span><br><span class="line">		<span class="keyword">int</span> textTime = <span class="number">50000</span>;</span><br><span class="line">		<span class="keyword">int</span> maxSize = <span class="number">20</span>;</span><br><span class="line">		<span class="keyword">int</span> maxValue = <span class="number">50</span>;</span><br><span class="line">		<span class="comment">//循环开关</span></span><br><span class="line">		<span class="keyword">boolean</span> ac = <span class="keyword">true</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; textTime ; i++) &#123;</span><br><span class="line">			<span class="comment">//遵循方法隔离原则，方法a和b分别操作不同的内存区域</span></span><br><span class="line">			<span class="keyword">int</span>[] ran = geneRandomArray(maxSize, maxValue,<span class="keyword">false</span>,<span class="keyword">false</span>);</span><br><span class="line">			<span class="comment">//clone方法为数组的深拷贝</span></span><br><span class="line">			<span class="keyword">int</span>[] arr1 = ran.clone();</span><br><span class="line">			<span class="keyword">int</span>[] arr2 = ran.clone();</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//输出结果为基本数据类型的验证</span></span><br><span class="line">			<span class="comment">/*int num1 = a(arr1);</span></span><br><span class="line"><span class="comment">			int num2 = b(arr2);</span></span><br><span class="line"><span class="comment">			if(num1!=num2) &#123;</span></span><br><span class="line"><span class="comment">				System.out.println(num1);</span></span><br><span class="line"><span class="comment">				System.out.println(num2);</span></span><br><span class="line"><span class="comment">				ac = false;</span></span><br><span class="line"><span class="comment">				break;</span></span><br><span class="line"><span class="comment">			&#125;*/</span></span><br><span class="line">			<span class="comment">//输出结果为数组的验证</span></span><br><span class="line">			<span class="comment">/*if(!validate(arr1, arr2)) &#123;</span></span><br><span class="line"><span class="comment">				ac = false;</span></span><br><span class="line"><span class="comment">				FoundSort.show(ran, false);</span></span><br><span class="line"><span class="comment">				FoundSort.show(arr1, false);</span></span><br><span class="line"><span class="comment">				FoundSort.show(arr2, false);</span></span><br><span class="line"><span class="comment">				break;</span></span><br><span class="line"><span class="comment">			&#125;*/</span></span><br><span class="line">			<span class="comment">//……</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(ac)</span><br><span class="line">			System.out.println(<span class="string">"Nice!"</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			System.out.println(<span class="string">"Fucking wrong!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="比较器（Comparator）"><a href="#比较器（Comparator）" class="headerlink" title="比较器（Comparator）"></a>比较器（Comparator）</h2><h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>比较器是java从JDK1.2版本开始就有的泛型接口，用来确定同类对象之间的顺序关系，从JDK8之后，该接口被声明为函数式接口，可以通过lambda表达式进行调用。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ol>
+<li>上文中我们提到用比较器来比较两个对象的是否“相等”，我们都知道在java中对象作为一个引用类型，是不能够直接用等号<code>==</code>来进行比较的，这样只会比较两个对象是否指向同一块内存区域，显然不具有实际的比较意义。有些类中为了便于比较，封装了自己的比较方法，例如String类的equals方法，故对于自定义类型的比较，需要根据需求自定义该类实例的比较方法。</li>
+<li>在排序相关的算法过程中往往涉及到比较的环节，只有元素之间能够进行比较，才能确定顺序（且该顺序应该是确定唯一的，而非人为规定的循环顺序——“石头剪刀布”），因此为了简化代码，分离逻辑，将比较相关的代码放入比较器中。</li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> foundation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Comparator;</span><br><span class="line"><span class="keyword">import</span> java.util.PriorityQueue;</span><br><span class="line"><span class="keyword">import</span> java.util.TreeSet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CompareDevice</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Student s1 = <span class="keyword">new</span> Student(<span class="number">1</span>, <span class="string">"tom"</span>, <span class="number">22</span>);</span><br><span class="line">		Student s2 = <span class="keyword">new</span> Student(<span class="number">2</span>, <span class="string">"lina"</span>, <span class="number">12</span>);</span><br><span class="line">		Student s3 = <span class="keyword">new</span> Student(<span class="number">3</span>, <span class="string">"john"</span>, <span class="number">25</span>);</span><br><span class="line">		Student[] stus = <span class="keyword">new</span> Student[] &#123; s3, s1, s2 &#125;;</span><br><span class="line">		printStu(stus);</span><br><span class="line">		<span class="comment">/**</span></span><br><span class="line"><span class="comment">		 * 比较器的返回值： </span></span><br><span class="line"><span class="comment">		 * 负数 ----&gt; 第一个参数应该放在前面 </span></span><br><span class="line"><span class="comment">		 * 0  ----&gt; 两个参数相等 </span></span><br><span class="line"><span class="comment">		 * 正数 ----&gt; 第二个参数应该放在前面</span></span><br><span class="line"><span class="comment">		 */</span></span><br><span class="line">		<span class="comment">//根据ID进行比较</span></span><br><span class="line">		Comparator&lt;Student&gt; idComparator = (o1, o2) -&gt; o2.id - o1.id;</span><br><span class="line">		<span class="comment">//根据年龄进行比较</span></span><br><span class="line">		Comparator&lt;Student&gt; ageComparator = (o1, o2) -&gt; o2.age - o1.age;</span><br><span class="line">		<span class="comment">//数组排序时传入比较器，按比较器规则进行排序</span></span><br><span class="line">		Arrays.sort(stus, idComparator);</span><br><span class="line">		printStu(stus);</span><br><span class="line">		Arrays.sort(stus, ageComparator);</span><br><span class="line">		printStu(stus);</span><br><span class="line">		<span class="comment">//生成堆的过程可以按照比较器进行排序</span></span><br><span class="line">		PriorityQueue&lt;Student&gt; heap = <span class="keyword">new</span> PriorityQueue&lt;&gt;(idComparator);</span><br><span class="line">		heap.add(s1);</span><br><span class="line">		heap.add(s3);</span><br><span class="line">		heap.add(s2);</span><br><span class="line">		<span class="keyword">while</span> (!heap.isEmpty()) &#123;</span><br><span class="line">			Student e = heap.poll();</span><br><span class="line">			System.out.println(e.id + <span class="string">"\t"</span> + e.name + <span class="string">"\t"</span> + e.age);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printStu</span><span class="params">(Student[] stus)</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"======================="</span>);</span><br><span class="line">		<span class="keyword">for</span> (Student e : stus) &#123;</span><br><span class="line">			System.out.println(e.id + <span class="string">"\t"</span> + e.name + <span class="string">"\t"</span> + e.age);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">"======================="</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> id;</span><br><span class="line">	String name;</span><br><span class="line">	<span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">(<span class="keyword">int</span> id, String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr />
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/wechatpay.jpg" alt="GuoRong Zhang 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/alipay.jpg" alt="GuoRong Zhang 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/cyff1.html" rel="prev" title="CYFF（一）：念念不忘">
+      <i class="fa fa-chevron-left"></i> CYFF（一）：念念不忘
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/recursion.html" rel="next" title="递归&Master公式">
+      递归&Master公式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MDI4NC8xNjgxMQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#六步实现对数器"><span class="nav-number">1.</span> <span class="nav-text">六步实现对数器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-有一个你想要测试的方法a"><span class="nav-number">1.1.</span> <span class="nav-text">1.有一个你想要测试的方法a</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-实现一个绝对正确的方法b"><span class="nav-number">1.2.</span> <span class="nav-text">2.实现一个绝对正确的方法b</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-实现一个随机样本产生器"><span class="nav-number">1.3.</span> <span class="nav-text">3.实现一个随机样本产生器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-把方法a和方法b比对很多次来验证方法a是否正确"><span class="nav-number">1.4.</span> <span class="nav-text">4.把方法a和方法b比对很多次来验证方法a是否正确</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-如果有一个样本使得比对出错，打印样本分析是哪个方法出错"><span class="nav-number">1.5.</span> <span class="nav-text">5.如果有一个样本使得比对出错，打印样本分析是哪个方法出错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-当样本数量很多时比对测试依然正确，可以确定方法a已经正确"><span class="nav-number">1.6.</span> <span class="nav-text">6.当样本数量很多时比对测试依然正确，可以确定方法a已经正确</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对数器的代码实现"><span class="nav-number">2.</span> <span class="nav-text">对数器的代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较器（Comparator）"><span class="nav-number">3.</span> <span class="nav-text">比较器（Comparator）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#含义"><span class="nav-number">3.1.</span> <span class="nav-text">含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景"><span class="nav-number">3.2.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现"><span class="nav-number">3.3.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="GuoRong Zhang"
+        src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+  <div class="site-description" itemprop="description">个人博客小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shitsurei" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shitsurei" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/lfgewj21345@163.com" title="E-Mail → lfgewj21345@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.zhihu.com/people/zhang-guo-rong-44-53" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;zhang-guo-rong-44-53" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.alloyteam.com/nav/" title="http:&#x2F;&#x2F;www.alloyteam.com&#x2F;nav&#x2F;" rel="noopener" target="_blank">Web前端导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.chuangzaoshi.com/code" title="http:&#x2F;&#x2F;www.chuangzaoshi.com&#x2F;code" rel="noopener" target="_blank">创造狮导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.36zhen.com/t?id=3448" title="http:&#x2F;&#x2F;www.36zhen.com&#x2F;t?id&#x3D;3448" rel="noopener" target="_blank">前端书籍资料</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://e.xitu.io/" title="http:&#x2F;&#x2F;e.xitu.io&#x2F;" rel="noopener" target="_blank">掘金酱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">V2EX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">印记中文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
+</div>
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫加我</div>
+    </div>
+  </div>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/next-theme/pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/love.js"></script>
+  <!--崩溃欺骗-->
+<script type="text/javascript" src="/js/cheat.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+</html>
