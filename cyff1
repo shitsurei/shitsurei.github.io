@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-progress@1.0.2/themes/blue/pace-theme-flash.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-progress@1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shitsurei.online","root":"/","scheme":"Muse","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"perspectiveLeftIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"perspectiveLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="被程序耽误的设计师系列~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CYFF（一）：念念不忘">
+<meta property="og:url" content="https://shitsurei.online/cyff1">
+<meta property="og:site_name" content="shitsurei">
+<meta property="og:description" content="被程序耽误的设计师系列~">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff11.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff12.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff13.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff14.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff15.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff16.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff17.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff18.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff19.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff110.jpg">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff111.jpg">
+<meta property="article:published_time" content="2019-03-10T06:56:18.000Z">
+<meta property="article:modified_time" content="2019-03-10T08:22:19.428Z">
+<meta property="article:author" content="GuoRong Zhang">
+<meta property="article:tag" content="海报">
+<meta property="article:tag" content="电影">
+<meta property="article:tag" content="影展">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff11.jpg">
+
+<link rel="canonical" href="https://shitsurei.online/cyff1">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CYFF（一）：念念不忘 | shitsurei</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shitsurei</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">失礼しました</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-排行">
+
+    <a href="/top/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>排行</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shitsurei.online/cyff1">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="个人博客小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shitsurei">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CYFF（一）：念念不忘
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-03-10 14:56:18 / 修改时间：16:22:19" itemprop="dateCreated datePublished" datetime="2019-03-10T14:56:18+08:00">2019-03-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B9%B3%E9%9D%A2%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">平面设计</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">被程序耽误的设计师系列~</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>大二下学期社团大佬找到我们，说长春青年影展（CYFF）想和吉大合作将南校区作为影展的放映场地之一，我们来组织这次的放映，这也是继FIRST之后又一电影节与社团的合作活动。不同的是CYFF是长春本土的影展，于我们而言感到更加亲切，后来几次和策展人的接触中也留下了很好的印象。因此在次年的影展筹备活动中，策展人找到我希望我能负责第四届CYFF的设计工作，我也很开心的接受了。<br>说实话，第一次在这样的活动中承担设计工作心里是有点虚的，毕竟自己也只是个业余水平，不知道能否拿下这项任务，于是为了能拿出好的作品费了不少心思。设计风格也尝试了很多种，有了FIRST的经验想法也慢慢成熟，风格上还是以简约的风格为主，配以富有意义的图案，在发给策展人审核的时候也得到了认可，虽然最后在印制时没有采用所有的方案，我也还是很开心。</p>
+<span id="more"></span>
+
+<blockquote>
+<p>长春青年电影节致力于于民间影像的推广与放映，力图创造一个依托高校放映的民间学术交流平台，为国内新锐导演提供一个展映作品的空间，也为观众开拓一个交流国内外独立电影和独立纪录片的环境。影展致力于扩展放映与交流相呼应的放映氛围，放映后设有讨论和问答环节，在这里观众们不仅可以一同探讨不同类型的影片，还有机会与导演现场交流或连线。鼓励大众成为影片的评论者，长春青年电影节是一个激发青年思维活力想象自由的场所。</p>
+</blockquote>
+<h2 id="第四届长春青年电影节——邀请函折页（外侧）"><a href="#第四届长春青年电影节——邀请函折页（外侧）" class="headerlink" title="第四届长春青年电影节——邀请函折页（外侧）"></a>第四届长春青年电影节——邀请函折页（外侧）</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff11.jpg" alt="第四届长春青年电影节——邀请函折页（外侧）"></p>
+<h2 id="第四届长春青年电影节——邀请函折页（里侧）"><a href="#第四届长春青年电影节——邀请函折页（里侧）" class="headerlink" title="第四届长春青年电影节——邀请函折页（里侧）"></a>第四届长春青年电影节——邀请函折页（里侧）</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff12.jpg" alt="第四届长春青年电影节——邀请函折页（里侧）"></p>
+<h2 id="第四届长春青年电影节——吊牌"><a href="#第四届长春青年电影节——吊牌" class="headerlink" title="第四届长春青年电影节——吊牌"></a>第四届长春青年电影节——吊牌</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff13.jpg" alt="第四届长春青年电影节——吊牌"></p>
+<h2 id="第四届长春青年电影节——感谢状"><a href="#第四届长春青年电影节——感谢状" class="headerlink" title="第四届长春青年电影节——感谢状"></a>第四届长春青年电影节——感谢状</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff14.jpg" alt="第四届长春青年电影节——感谢状"></p>
+<h2 id="第四届长春青年电影节——海报1"><a href="#第四届长春青年电影节——海报1" class="headerlink" title="第四届长春青年电影节——海报1"></a>第四届长春青年电影节——海报1</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff15.jpg" alt="第四届长春青年电影节——海报1"></p>
+<h2 id="第四届长春青年电影节——海报2"><a href="#第四届长春青年电影节——海报2" class="headerlink" title="第四届长春青年电影节——海报2"></a>第四届长春青年电影节——海报2</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff16.jpg" alt="第四届长春青年电影节——海报2"></p>
+<h2 id="第四届长春青年电影节——海报3"><a href="#第四届长春青年电影节——海报3" class="headerlink" title="第四届长春青年电影节——海报3"></a>第四届长春青年电影节——海报3</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff17.jpg" alt="第四届长春青年电影节——海报3"></p>
+<h2 id="第四届长春青年电影节——展架2（暗）"><a href="#第四届长春青年电影节——展架2（暗）" class="headerlink" title="第四届长春青年电影节——展架2（暗）"></a>第四届长春青年电影节——展架2（暗）</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff18.jpg" alt="第四届长春青年电影节——展架2（暗）"></p>
+<h2 id="第四届长春青年电影节——展架2（亮）"><a href="#第四届长春青年电影节——展架2（亮）" class="headerlink" title="第四届长春青年电影节——展架2（亮）"></a>第四届长春青年电影节——展架2（亮）</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff19.jpg" alt="第四届长春青年电影节——展架2（亮）"></p>
+<h2 id="第四届长春青年电影节——展架1（大图）"><a href="#第四届长春青年电影节——展架1（大图）" class="headerlink" title="第四届长春青年电影节——展架1（大图）"></a>第四届长春青年电影节——展架1（大图）</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff110.jpg" alt="第四届长春青年电影节——展架1（大图）"></p>
+<h2 id="第四届长春青年电影节——展架1（小图）"><a href="#第四届长春青年电影节——展架1（小图）" class="headerlink" title="第四届长春青年电影节——展架1（小图）"></a>第四届长春青年电影节——展架1（小图）</h2><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/cyff111.jpg" alt="第四届长春青年电影节——展架1（小图）"></p>
+<hr />
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/wechatpay.jpg" alt="GuoRong Zhang 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/alipay.jpg" alt="GuoRong Zhang 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B5%B7%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 海报</a>
+              <a href="/tags/%E7%94%B5%E5%BD%B1/" rel="tag"><i class="fa fa-tag"></i> 电影</a>
+              <a href="/tags/%E5%BD%B1%E5%B1%95/" rel="tag"><i class="fa fa-tag"></i> 影展</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/php10" rel="prev" title="PHP预定义超全局变量学习笔记">
+      <i class="fa fa-chevron-left"></i> PHP预定义超全局变量学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/algorithmTools" rel="next" title="对数器和比较器的应用">
+      对数器和比较器的应用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MDI4NC8xNjgxMQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E9%82%80%E8%AF%B7%E5%87%BD%E6%8A%98%E9%A1%B5%EF%BC%88%E5%A4%96%E4%BE%A7%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">第四届长春青年电影节——邀请函折页（外侧）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E9%82%80%E8%AF%B7%E5%87%BD%E6%8A%98%E9%A1%B5%EF%BC%88%E9%87%8C%E4%BE%A7%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">第四届长春青年电影节——邀请函折页（里侧）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E5%90%8A%E7%89%8C"><span class="nav-number">3.</span> <span class="nav-text">第四届长春青年电影节——吊牌</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E6%84%9F%E8%B0%A2%E7%8A%B6"><span class="nav-number">4.</span> <span class="nav-text">第四届长春青年电影节——感谢状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E6%B5%B7%E6%8A%A51"><span class="nav-number">5.</span> <span class="nav-text">第四届长春青年电影节——海报1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E6%B5%B7%E6%8A%A52"><span class="nav-number">6.</span> <span class="nav-text">第四届长春青年电影节——海报2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E6%B5%B7%E6%8A%A53"><span class="nav-number">7.</span> <span class="nav-text">第四届长春青年电影节——海报3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E5%B1%95%E6%9E%B62%EF%BC%88%E6%9A%97%EF%BC%89"><span class="nav-number">8.</span> <span class="nav-text">第四届长春青年电影节——展架2（暗）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E5%B1%95%E6%9E%B62%EF%BC%88%E4%BA%AE%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">第四届长春青年电影节——展架2（亮）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E5%B1%95%E6%9E%B61%EF%BC%88%E5%A4%A7%E5%9B%BE%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">第四届长春青年电影节——展架1（大图）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%B1%8A%E9%95%BF%E6%98%A5%E9%9D%92%E5%B9%B4%E7%94%B5%E5%BD%B1%E8%8A%82%E2%80%94%E2%80%94%E5%B1%95%E6%9E%B61%EF%BC%88%E5%B0%8F%E5%9B%BE%EF%BC%89"><span class="nav-number">11.</span> <span class="nav-text">第四届长春青年电影节——展架1（小图）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="GuoRong Zhang"
+        src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+  <div class="site-description" itemprop="description">个人博客小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shitsurei" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shitsurei" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/lfgewj21345@163.com" title="E-Mail → lfgewj21345@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.zhihu.com/people/zhang-guo-rong-44-53" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;zhang-guo-rong-44-53" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.alloyteam.com/nav/" title="http:&#x2F;&#x2F;www.alloyteam.com&#x2F;nav&#x2F;" rel="noopener" target="_blank">Web前端导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.chuangzaoshi.com/code" title="http:&#x2F;&#x2F;www.chuangzaoshi.com&#x2F;code" rel="noopener" target="_blank">创造狮导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.36zhen.com/t?id=3448" title="http:&#x2F;&#x2F;www.36zhen.com&#x2F;t?id&#x3D;3448" rel="noopener" target="_blank">前端书籍资料</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://e.xitu.io/" title="http:&#x2F;&#x2F;e.xitu.io&#x2F;" rel="noopener" target="_blank">掘金酱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">V2EX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">印记中文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
+</div>
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫加我</div>
+    </div>
+  </div>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/next-theme/pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/love.js"></script>
+  <!--崩溃欺骗-->
+<script type="text/javascript" src="/js/cheat.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+</html>

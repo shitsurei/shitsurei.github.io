@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-progress@1.0.2/themes/blue/pace-theme-flash.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-progress@1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shitsurei.online","root":"/","scheme":"Muse","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"perspectiveLeftIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"perspectiveLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="markdown可以理解为一种解释型的编程语言（类似于Python），在转换的时候根据不同的标签转换为HTML语句，从而实践不同的排版效果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markdown学习笔记">
+<meta property="og:url" content="https://shitsurei.online/markdown-learning">
+<meta property="og:site_name" content="shitsurei">
+<meta property="og:description" content="markdown可以理解为一种解释型的编程语言（类似于Python），在转换的时候根据不同的标签转换为HTML语句，从而实践不同的排版效果。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/test_pic.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/mw690/81b78497jw1emfgwjrh2pj21hc0u01g3.jpg">
+<meta property="article:published_time" content="2018-10-14T15:34:00.000Z">
+<meta property="article:modified_time" content="2020-05-18T11:17:35.151Z">
+<meta property="article:author" content="GuoRong Zhang">
+<meta property="article:tag" content="markdown">
+<meta property="article:tag" content="MarkdownPad2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/test_pic.jpg">
+
+<link rel="canonical" href="https://shitsurei.online/markdown-learning">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>markdown学习笔记 | shitsurei</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shitsurei</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">失礼しました</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-排行">
+
+    <a href="/top/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>排行</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shitsurei.online/markdown-learning">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="个人博客小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shitsurei">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          markdown学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-10-14 23:34:00" itemprop="dateCreated datePublished" datetime="2018-10-14T23:34:00+08:00">2018-10-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-18 19:17:35" itemprop="dateModified" datetime="2020-05-18T19:17:35+08:00">2020-05-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%B6%E4%BB%96/" itemprop="url" rel="index"><span itemprop="name">其他</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>markdown可以理解为一种解释型的编程语言（类似于Python），在转换的时候根据不同的标签转换为HTML语句，从而实践不同的排版效果。</p>
+<span id="more"></span>
+
+<h2 id="1-区块元素"><a href="#1-区块元素" class="headerlink" title="1.区块元素"></a>1.区块元素</h2><p>###段落</p>
+<p>markdown的段落由一个或多个连续的文本行组成，每个文本行前后要有一个以上的空行,且可以对段落中的文字进行<strong>加粗</strong>、<em>斜体</em>、<u>加下划线</u>或<del>删除字样</del>的处理。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">markdown的段落由一个或多个连续的文本行组成</span><br><span class="line">每个文本行前后要有一个以上的空行</span><br><span class="line">且可以对段落中的文字进行**加粗**、*斜体*、<span class="tag">&lt;<span class="name">u</span>&gt;</span>加下划线<span class="tag">&lt;/<span class="name">u</span>&gt;</span>或~~删除字样~~的处理。</span><br><span class="line">注意：加粗可以选中文字后使用快捷键Ctrl+B，斜体可以选中文字后使用快捷键Ctrl+I。</span><br></pre></td></tr></table></figure>
+
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 这是一级标题</span><br><span class="line">## 这是二级标题</span><br><span class="line">### 这是三级标题</span><br><span class="line">以此类推，最多支持六级标题，注意#后要有空格且行首不能有空格，否则无法渲染。</span><br></pre></td></tr></table></figure>
+<h3 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h3><blockquote>
+<p>这里是区块引用的内容</p>
+<blockquote>
+<p>区块引用也可以采取嵌套形式</p>
+</blockquote>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">这里是区块引用的内容</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;区块引用也可以采取嵌套形式</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><ul>
+<li>无序列表项</li>
+<li>无序列表项</li>
+<li>无序列表项</li>
+</ul>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>无序列表项</span><br><span class="line"><span class="bullet">* </span>无序列表项</span><br><span class="line"><span class="bullet">* </span>无序列表项</span><br><span class="line">此处*可以替换为+或-，注意符号与内容之间要有空格</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>有序列表项</li>
+<li>有序列表项</li>
+<li>有序列表项</li>
+</ol>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 有序列表项</span><br><span class="line"><span class="bullet">2.</span> 有序列表项</span><br><span class="line"><span class="bullet">3.</span> 有序列表项</span><br><span class="line">此处第二项以及以后的开头数字和.可以用-替代，同样注意符号与内容之间的空格</span><br></pre></td></tr></table></figure>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><table>
+<thead>
+<tr>
+<th>表头1</th>
+<th align="right">表头2</th>
+<th align="center">表头3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>条目1内容1aaaaaa</td>
+<td align="right">条目1内容2</td>
+<td align="center">条目1内容3</td>
+</tr>
+<tr>
+<td>条目2内容1</td>
+<td align="right">条目2内容2bbbbbb</td>
+<td align="center">条目2内容3</td>
+</tr>
+<tr>
+<td>条目3内容1</td>
+<td align="right">条目3内容2</td>
+<td align="center">条目3内容3cccccc</td>
+</tr>
+</tbody></table>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">默认每列元素左对齐，通过：设置对齐方式</span><br><span class="line">|<span class="string"> 表头1 </span>|<span class="string"> 表头2 </span>|<span class="string"> 表头3 </span>|</span><br><span class="line">|<span class="string"> --- </span>|<span class="string"> ---: </span>|<span class="string"> :---: </span>|</span><br><span class="line">|<span class="string"> 条目1内容1aaaaaa </span>|<span class="string"> 条目1内容2 </span>|<span class="string"> 条目1内容3 </span>|</span><br><span class="line">|<span class="string"> 条目2内容1 </span>|<span class="string"> 条目2内容2bbbbbb </span>|<span class="string"> 条目2内容3 </span>|</span><br><span class="line">|<span class="string"> 条目3内容1 </span>|<span class="string"> 条目3内容2 </span>|<span class="string"> 条目3内容3cccccc </span>|</span><br></pre></td></tr></table></figure>
+
+<h3 id="角标文字"><a href="#角标文字" class="headerlink" title="角标文字"></a>角标文字</h3><p>这是一段有上方角标<sup>你好</sup>和下方角标<sub>世界</sub>的文字段落。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是一段有上方角标<span class="tag">&lt;<span class="name">sup</span>&gt;</span>你好<span class="tag">&lt;/<span class="name">sup</span>&gt;</span>和下方角标<span class="tag">&lt;<span class="name">sub</span>&gt;</span>世界<span class="tag">&lt;/<span class="name">sub</span>&gt;</span>的文字段落，鼠标停留在文字上显示全程。</span><br></pre></td></tr></table></figure>
+
+<h3 id="文本居中"><a href="#文本居中" class="headerlink" title="文本居中"></a>文本居中</h3><blockquote class="blockquote-center">
+            <i class="fa fa-quote-left"></i>
+            <p>人生乃是一面镜子，<br>从镜子里认识自己，<br>我要称之为头等大事，<br>也只是我们追求的目的！</p>
+
+            <i class="fa fa-quote-right"></i>
+          </blockquote>
+
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">cq</span> %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">人生乃是一面镜子，</span></span><br><span class="line"><span class="language-xml">从镜子里认识自己，</span></span><br><span class="line"><span class="language-xml">我要称之为头等大事，</span></span><br><span class="line"><span class="language-xml">也只是我们追求的目的！</span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endcq</span> %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="note标签"><a href="#note标签" class="headerlink" title="note标签"></a>note标签</h3><div class="note default"><p>default</p></div>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=&quot;<span class="symbol">note</span> <span class="symbol">default</span>&quot;&gt;&lt;<span class="symbol">p</span>&gt;<span class="symbol">default</span>&lt;/<span class="symbol">p</span>&gt;&lt;/<span class="symbol">div</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<div class="note primary"><p>primary</p></div>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=&quot;<span class="symbol">note</span> <span class="symbol">primary</span>&quot;&gt;&lt;<span class="symbol">p</span>&gt;<span class="symbol">primary</span>&lt;/<span class="symbol">p</span>&gt;&lt;/<span class="symbol">div</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<div class="note success"><p>success</p></div>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=&quot;<span class="symbol">note</span> <span class="symbol">success</span>&quot;&gt;&lt;<span class="symbol">p</span>&gt;<span class="symbol">success</span>&lt;/<span class="symbol">p</span>&gt;&lt;/<span class="symbol">div</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<div class="note info"><p>info</p></div>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=&quot;<span class="symbol">note</span> <span class="symbol">info</span>&quot;&gt;&lt;<span class="symbol">p</span>&gt;<span class="symbol">info</span>&lt;/<span class="symbol">p</span>&gt;&lt;/<span class="symbol">div</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p>warning</p></div>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=&quot;<span class="symbol">note</span> <span class="symbol">warning</span>&quot;&gt;&lt;<span class="symbol">p</span>&gt;<span class="symbol">warning</span>&lt;/<span class="symbol">p</span>&gt;&lt;/<span class="symbol">div</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<div class="note danger"><p>danger</p></div>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=&quot;<span class="symbol">note</span> <span class="symbol">danger</span>&quot;&gt;&lt;<span class="symbol">p</span>&gt;<span class="symbol">danger</span>&lt;/<span class="symbol">p</span>&gt;&lt;/<span class="symbol">div</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="tabs-标签"><a href="#tabs-标签" class="headerlink" title="tabs 标签"></a>tabs 标签</h3><div class="tabs" id="选项卡"><ul class="nav-tabs"><li class="tab"><a href="#选项卡-1">选项卡 1</a></li><li class="tab active"><a href="#选项卡-2">选项卡 2</a></li><li class="tab"><a href="#选项卡-3">选项卡 3</a></li></ul><div class="tab-content"><div class="tab-pane" id="选项卡-1"><p><strong>这是选项卡 1</strong> 哇，你找到我了！φ(≧ω≦*)♪～</p></div><div class="tab-pane active" id="选项卡-2"><p><strong>这是选项卡 2</strong> 默认显示</p></div><div class="tab-pane" id="选项卡-3"><p><strong>这是选项卡 3</strong> 哇，你找到我了！φ(≧ω≦*)♪～</p></div></div></div>
+
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name">tabs</span> 选项卡, 2 %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"><span class="comment">&lt;!-- tab --&gt;</span></span></span><br><span class="line"><span class="language-xml">**这是选项卡 1** 哇，你找到我了！φ(≧ω≦*)♪～</span></span><br><span class="line"><span class="language-xml"><span class="comment">&lt;!-- endtab --&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="comment">&lt;!-- tab --&gt;</span></span></span><br><span class="line"><span class="language-xml">**这是选项卡 2** 默认显示</span></span><br><span class="line"><span class="language-xml"><span class="comment">&lt;!-- endtab --&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="comment">&lt;!-- tab --&gt;</span></span></span><br><span class="line"><span class="language-xml">**这是选项卡 3** 哇，你找到我了！φ(≧ω≦*)♪～</span></span><br><span class="line"><span class="language-xml"><span class="comment">&lt;!-- endtab --&gt;</span></span></span><br><span class="line"><span class="language-xml"></span><span class="template-tag">&#123;% <span class="name">endtabs</span> %&#125;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="专有名词缩写"><a href="#专有名词缩写" class="headerlink" title="专有名词缩写"></a>专有名词缩写</h3><p>这是一段有专有名词<acronym title="National Basketball Association">NBA</acronym>和<abbr title="西安电子科技大学">西电</abbr>的文字段落。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是一段有专有名词<span class="tag">&lt;<span class="name">acronym</span> <span class="attr">title</span>=<span class="string">&quot;National Basketball Association&quot;</span>&gt;</span>NBA<span class="tag">&lt;/<span class="name">acronym</span>&gt;</span>和<span class="tag">&lt;<span class="name">abbr</span> <span class="attr">title</span>=<span class="string">&quot;西安电子科技大学&quot;</span>&gt;</span>西电<span class="tag">&lt;/<span class="name">abbr</span>&gt;</span>的文字段落。</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h3><p>这是一段包含行内代码<code>&lt;a href=&quot;shitsurei.github.io&quot;&gt;个人博客&lt;/a&gt;</code>的文字</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这是一段包含行内代码`<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;shitsurei.github.io&quot;</span>&gt;</span>个人博客<span class="tag">&lt;/<span class="name">a</span>&gt;</span>`的文字</span><br><span class="line">注意：设置行内引用可以选中文字后使用快捷键Ctrl+K。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    num+=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Todo列表（待办事宜-）"><a href="#Todo列表（待办事宜-）" class="headerlink" title="Todo列表（待办事宜 ）"></a>Todo列表（待办事宜 ）</h3><ul>
+<li><input disabled="" type="checkbox"> 待办事件1</li>
+<li><input checked="" disabled="" type="checkbox"> 待办事件2</li>
+<li><input checked="" disabled="" type="checkbox"> 待办事件3</li>
+</ul>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>[ ] 待办事件1</span><br><span class="line"><span class="bullet">- </span>[x] 待办事件2</span><br><span class="line"><span class="bullet">- </span>[x] 待办事件3</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-资源链接"><a href="#2-资源链接" class="headerlink" title="2. 资源链接"></a>2. 资源链接</h2><h3 id="文字链接"><a href="#文字链接" class="headerlink" title="文字链接"></a>文字链接</h3><p>这段文字中包含<a target="_blank" rel="noopener" href="https://shitsurei.github.io/">个人博客</a>的链接。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这段文字中包含<span class="selector-attr">[个人博客]</span>(<span class="attribute">https</span>:<span class="comment">//shitsurei.github.io/)的链接。</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="图片链接"><a href="#图片链接" class="headerlink" title="图片链接"></a>图片链接</h3><p><img data-src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/test_pic.jpg" alt="夏至未至"></p>
+<p><img data-src="http://ww3.sinaimg.cn/mw690/81b78497jw1emfgwjrh2pj21hc0u01g3.jpg" alt="Caption"></p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">采取相对路径，需要先上传文件至相应的文件夹中</span><br><span class="line">!<span class="selector-attr">[夏至未至]</span>(/uploads/test_pic.jpg)</span><br><span class="line">采取绝对路径，对路径格式有要求，不一定成功</span><br><span class="line">!<span class="selector-attr">[Caption]</span>(<span class="attribute">http</span>:<span class="comment">//ww3.sinaimg.cn/mw690/81b78497jw1emfgwjrh2pj21hc0u01g3.jpg)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="表情"><a href="#表情" class="headerlink" title="表情"></a>表情</h3><p>:bowtie::smile::laughing::blush::smiley::relaxed::smirk::heart_eyes::kissing_heart::kissing_closed_eyes::flushed::relieved::satisfied::grin::wink:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">:bowtie</span><span class="symbol">:</span><span class="symbol">:smile</span><span class="symbol">:</span><span class="symbol">:laughing</span><span class="symbol">:</span><span class="symbol">:blush</span><span class="symbol">:</span><span class="symbol">:smiley</span><span class="symbol">:</span><span class="symbol">:relaxed</span><span class="symbol">:</span><span class="symbol">:smirk</span><span class="symbol">:</span><span class="symbol">:heart_eyes</span><span class="symbol">:</span><span class="symbol">:kissing_heart</span><span class="symbol">:</span><span class="symbol">:kissing_closed_eyes</span><span class="symbol">:</span><span class="symbol">:flushed</span><span class="symbol">:</span><span class="symbol">:relieved</span><span class="symbol">:</span><span class="symbol">:satisfied</span><span class="symbol">:</span><span class="symbol">:grin</span><span class="symbol">:</span><span class="symbol">:wink</span>:</span><br><span class="line">更多表情信息参考：</span><br><span class="line"><span class="symbol">https:</span>/<span class="regexp">/www.webpagefx.com/tools</span><span class="regexp">/emoji-cheat-sheet/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-各种语言代码高亮"><a href="#3-各种语言代码高亮" class="headerlink" title="3. 各种语言代码高亮"></a>3. 各种语言代码高亮</h2><h3 id="普通代码块"><a href="#普通代码块" class="headerlink" title="普通代码块"></a>普通代码块</h3><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">alert</span>(<span class="string">&#x27;Hello World!&#x27;</span>);</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>print &#39;helloworld&#39;
+</code></pre>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">代码块课通过`包裹或<span class="literal">tab</span>键缩进标识</span><br></pre></td></tr></table></figure>
+
+<h3 id="javascript"><a href="#javascript" class="headerlink" title="javascript"></a>javascript</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">alert</span>( <span class="string">&#x27;Hello, world!&#x27;</span> );</span><br></pre></td></tr></table></figure>
+
+<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span> <span class="string">&#x27;helloworld&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ruby"><a href="#ruby" class="headerlink" title="ruby"></a>ruby</h3><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">foo</span></span><br><span class="line">  puts <span class="string">&#x27;foo&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="c"><a href="#c" class="headerlink" title="c++"></a>c++</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(<span class="type">int</span> arg1, <span class="type">int</span> arg2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  string str;</span><br><span class="line">  <span class="built_in">foo</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Hello World&quot;</span> &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="python-1"><a href="#python-1" class="headerlink" title="python"></a>python</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@requires_authorization</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SomeClass</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># A comment</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;hello world&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-其他细节"><a href="#4-其他细节" class="headerlink" title="4. 其他细节"></a>4. 其他细节</h2><h3 id="文章简介"><a href="#文章简介" class="headerlink" title="文章简介"></a>文章简介</h3><p>每篇博客的简介（用于首页显示）和正文部分通过<code>&lt;!--more--&gt;</code>语句分隔。</p>
+<h3 id="引擎渲染"><a href="#引擎渲染" class="headerlink" title="引擎渲染"></a>引擎渲染</h3><p>不同的markdown引擎的解释效果是不同的，原因是采用的技术不同，有的是PHP有的是JS，本文主要针对jekyll+next的实现效果（即文章所演示出来的效果）</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/wechatpay.jpg" alt="GuoRong Zhang 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/alipay.jpg" alt="GuoRong Zhang 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/markdown/" rel="tag"><i class="fa fa-tag"></i> markdown</a>
+              <a href="/tags/MarkdownPad2/" rel="tag"><i class="fa fa-tag"></i> MarkdownPad2</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/scienceEnglish1" rel="prev" title="单句写作：词类">
+      <i class="fa fa-chevron-left"></i> 单句写作：词类
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/c1" rel="next" title="C语言基本概念">
+      C语言基本概念 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MDI4NC8xNjgxMQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%8C%BA%E5%9D%97%E5%85%83%E7%B4%A0"><span class="nav-number">1.</span> <span class="nav-text">1.区块元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">标题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%99%E6%98%AF%E4%B8%80%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number"></span> <span class="nav-text">这是一级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E6%98%AF%E4%BA%8C%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">这是二级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%99%E6%98%AF%E4%B8%89%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">这是三级标题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E5%BC%95%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">区块引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC"><span class="nav-number">1.4.</span> <span class="nav-text">表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%92%E6%A0%87%E6%96%87%E5%AD%97"><span class="nav-number">1.5.</span> <span class="nav-text">角标文字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%B1%85%E4%B8%AD"><span class="nav-number">1.6.</span> <span class="nav-text">文本居中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#note%E6%A0%87%E7%AD%BE"><span class="nav-number">1.7.</span> <span class="nav-text">note标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tabs-%E6%A0%87%E7%AD%BE"><span class="nav-number">1.8.</span> <span class="nav-text">tabs 标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%93%E6%9C%89%E5%90%8D%E8%AF%8D%E7%BC%A9%E5%86%99"><span class="nav-number">1.9.</span> <span class="nav-text">专有名词缩写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%8C%BA%E5%9D%97"><span class="nav-number">1.10.</span> <span class="nav-text">代码区块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Todo%E5%88%97%E8%A1%A8%EF%BC%88%E5%BE%85%E5%8A%9E%E4%BA%8B%E5%AE%9C-%EF%BC%89"><span class="nav-number">1.11.</span> <span class="nav-text">Todo列表（待办事宜 ）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E8%B5%84%E6%BA%90%E9%93%BE%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">2. 资源链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E5%AD%97%E9%93%BE%E6%8E%A5"><span class="nav-number">2.1.</span> <span class="nav-text">文字链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">图片链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E6%83%85"><span class="nav-number">2.3.</span> <span class="nav-text">表情</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%90%84%E7%A7%8D%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE"><span class="nav-number">3.</span> <span class="nav-text">3. 各种语言代码高亮</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">3.1.</span> <span class="nav-text">普通代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#javascript"><span class="nav-number">3.2.</span> <span class="nav-text">javascript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python"><span class="nav-number">3.3.</span> <span class="nav-text">python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ruby"><span class="nav-number">3.4.</span> <span class="nav-text">ruby</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c"><span class="nav-number">3.5.</span> <span class="nav-text">c++</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-1"><span class="nav-number">3.6.</span> <span class="nav-text">python</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%85%B6%E4%BB%96%E7%BB%86%E8%8A%82"><span class="nav-number">4.</span> <span class="nav-text">4. 其他细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%AE%80%E4%BB%8B"><span class="nav-number">4.1.</span> <span class="nav-text">文章简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E6%93%8E%E6%B8%B2%E6%9F%93"><span class="nav-number">4.2.</span> <span class="nav-text">引擎渲染</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="GuoRong Zhang"
+        src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+  <div class="site-description" itemprop="description">个人博客小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shitsurei" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shitsurei" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/lfgewj21345@163.com" title="E-Mail → lfgewj21345@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.zhihu.com/people/zhang-guo-rong-44-53" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;zhang-guo-rong-44-53" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.alloyteam.com/nav/" title="http:&#x2F;&#x2F;www.alloyteam.com&#x2F;nav&#x2F;" rel="noopener" target="_blank">Web前端导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.chuangzaoshi.com/code" title="http:&#x2F;&#x2F;www.chuangzaoshi.com&#x2F;code" rel="noopener" target="_blank">创造狮导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.36zhen.com/t?id=3448" title="http:&#x2F;&#x2F;www.36zhen.com&#x2F;t?id&#x3D;3448" rel="noopener" target="_blank">前端书籍资料</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://e.xitu.io/" title="http:&#x2F;&#x2F;e.xitu.io&#x2F;" rel="noopener" target="_blank">掘金酱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">V2EX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">印记中文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
+</div>
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫加我</div>
+    </div>
+  </div>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/next-theme/pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/love.js"></script>
+  <!--崩溃欺骗-->
+<script type="text/javascript" src="/js/cheat.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/images/favicon/site.webmanifest">
+  <meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-progress@1.0.2/themes/blue/pace-theme-flash.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-progress@1.0.2/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"shitsurei.online","root":"/","scheme":"Muse","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"perspectiveLeftIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"perspectiveLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前面我们提到过，数据库编程中的SQL指令分为四种，最后一种dtl数据事务语句还没有讲到。熟悉数据库的朋友应该知道，数据库是一个并行系统，在系统运行的过程中，不可能同一时刻只有一个用户在访问某个数据，当不同用户对同一个数据进行访问时，系统必须保证数据的同步，这就涉及到事务。事务用于保证数据的一致性，由一组相关的dml语句组成，该组语句要么全部成功要么全部失败。事务具有acid四大特性：原子性、一致性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP数据库编程学习笔记3">
+<meta property="og:url" content="https://shitsurei.online/php9">
+<meta property="og:site_name" content="shitsurei">
+<meta property="og:description" content="前面我们提到过，数据库编程中的SQL指令分为四种，最后一种dtl数据事务语句还没有讲到。熟悉数据库的朋友应该知道，数据库是一个并行系统，在系统运行的过程中，不可能同一时刻只有一个用户在访问某个数据，当不同用户对同一个数据进行访问时，系统必须保证数据的同步，这就涉及到事务。事务用于保证数据的一致性，由一组相关的dml语句组成，该组语句要么全部成功要么全部失败。事务具有acid四大特性：原子性、一致性">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-11-18T14:47:51.000Z">
+<meta property="article:modified_time" content="2018-11-18T15:24:29.384Z">
+<meta property="article:author" content="GuoRong Zhang">
+<meta property="article:tag" content="数据库连接">
+<meta property="article:tag" content="mysqli扩展库">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://shitsurei.online/php9">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PHP数据库编程学习笔记3 | shitsurei</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">shitsurei</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">失礼しました</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-排行">
+
+    <a href="/top/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>排行</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://shitsurei.online/php9">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+      <meta itemprop="name" content="GuoRong Zhang">
+      <meta itemprop="description" content="个人博客小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="shitsurei">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP数据库编程学习笔记3
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2018-11-18 22:47:51 / 修改时间：23:24:29" itemprop="dateCreated datePublished" datetime="2018-11-18T22:47:51+08:00">2018-11-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index"><span itemprop="name">PHP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>前面我们提到过，数据库编程中的SQL指令分为四种，最后一种dtl数据事务语句还没有讲到。熟悉数据库的朋友应该知道，数据库是一个并行系统，在系统运行的过程中，不可能同一时刻只有一个用户在访问某个数据，当不同用户对同一个数据进行访问时，系统必须保证数据的同步，这就涉及到事务。<br>事务用于保证数据的一致性，由一组相关的dml语句组成，该组语句要么全部成功要么全部失败。事务具有acid四大特性：原子性、一致性、隔离性、持久性。在mysqli扩展库中提供了相应的函数支持，用来处理事务。同时，该扩展库还支持预编译技术，用于对多条SQL语句进行批处理。</p>
+<span id="more"></span>
+
+<h2 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$mysqli</span>=<span class="keyword">new</span> <span class="title class_">MySQLi</span>(<span class="string">&quot;localhost&quot;</span>,<span class="string">&quot;root&quot;</span>,<span class="string">&quot;mysql&quot;</span>,<span class="string">&quot;test&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$mysqli</span>-&gt;connect_error) &#123;</span><br><span class="line">	<span class="keyword">die</span>(<span class="string">&quot;connect failed&quot;</span>.<span class="variable">$mysqli</span>-&gt;connect_error);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭默认的直接提交</span></span><br><span class="line"><span class="comment"># 相当于mysql控制台执行以下步骤： start transaction; savepoint a;</span></span><br><span class="line"><span class="variable">$mysqli</span>-&gt;<span class="title function_ invoke__">autocommit</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$sql1</span>=<span class="string">&quot;update account set balance=balance-2 where id=1&quot;</span>;</span><br><span class="line"><span class="variable">$sql2</span>=<span class="string">&quot;update account set balance=balance+2 where id=2&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$res1</span>=<span class="variable">$mysqli</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql1</span>);</span><br><span class="line"><span class="variable">$res2</span>=<span class="variable">$mysqli</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql2</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$res1</span>&amp;&amp;<span class="variable">$res2</span>) &#123;</span><br><span class="line">	<span class="comment"># 事务成功统一提交</span></span><br><span class="line">	<span class="comment"># 相当于mysql控制台执行以下步骤： commit;</span></span><br><span class="line">	<span class="variable">$mysqli</span>-&gt;<span class="title function_ invoke__">commit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment"># 失败全部回滚</span></span><br><span class="line">	<span class="comment"># 相当于mysql控制台执行以下步骤： rollback to a;</span></span><br><span class="line">	<span class="variable">$mysqli</span>-&gt;<span class="title function_ invoke__">rollback</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$mysqli</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="stmt预编译"><a href="#stmt预编译" class="headerlink" title="stmt预编译"></a>stmt预编译</h2><p>PHP向mysql数据库发送批量相同模板指令时，可以第一次发送先编译好，之后只需要发送数据即可,批处理有两个优点：</p>
+<ul>
+<li>效率高，节省数据库编译时间开销</li>
+<li>安全性高，可以防止sql注入攻击</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 模拟要添加的用户类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$id</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$name</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$age</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="variable">$password</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$name</span>,<span class="variable">$age</span>,<span class="variable">$password</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;name=<span class="variable">$name</span>;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;age=<span class="variable">$age</span>;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;password=<span class="variable">$password</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="dml语句预编译处理方式"><a href="#dml语句预编译处理方式" class="headerlink" title="dml语句预编译处理方式"></a>dml语句预编译处理方式</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$mysqli</span>=<span class="keyword">new</span> <span class="title class_">MySQLi</span>(<span class="string">&quot;localhost&quot;</span>,<span class="string">&quot;root&quot;</span>,<span class="string">&quot;mysql&quot;</span>,<span class="string">&quot;test&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于批量绑定的参数</span></span><br><span class="line"><span class="variable">$u1</span>=<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;n1&quot;</span>,<span class="number">22</span>,<span class="string">&quot;p1&quot;</span>);</span><br><span class="line"><span class="variable">$u2</span>=<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;n2&quot;</span>,<span class="number">23</span>,<span class="string">&quot;p2&quot;</span>);</span><br><span class="line"><span class="variable">$u3</span>=<span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;n3&quot;</span>,<span class="number">24</span>,<span class="string">&quot;p3&quot;</span>);</span><br><span class="line"><span class="variable">$user_set</span>=<span class="keyword">array</span>(<span class="variable">$u1</span>,<span class="variable">$u2</span>,<span class="variable">$u3</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$sql_dml</span>=<span class="string">&quot;insert into user(name,age,password) values(?,?,?);&quot;</span>;</span><br><span class="line"><span class="comment"># 创建预编译对象</span></span><br><span class="line"><span class="variable">$mysqli_stmt</span>=<span class="variable">$mysqli</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="variable">$sql_dml</span>);</span><br><span class="line"><span class="comment"># 绑定数据并执行</span></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$user_set</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$value</span>) &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 绑定参数（使用可变参数，类似于printf的写法）</span></span><br><span class="line">	<span class="comment">## 类型（s 字符串 i 整数 d 浮点数）和参数需要严格对应</span></span><br><span class="line">	<span class="variable">$mysqli_stmt</span>-&gt;<span class="title function_ invoke__">bind_param</span>(<span class="string">&quot;sis&quot;</span>,<span class="variable">$value</span>-&gt;name,<span class="variable">$value</span>-&gt;age,<span class="variable">$value</span>-&gt;password);</span><br><span class="line"></span><br><span class="line">	<span class="comment"># 执行</span></span><br><span class="line">	<span class="variable">$res</span>=<span class="variable">$mysqli_stmt</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line">	<span class="keyword">if</span> (!<span class="variable">$res</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;failed&quot;</span>.<span class="variable">$mysqli_stmt</span>-&gt;error;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="dql语句预编译处理方式"><a href="#dql语句预编译处理方式" class="headerlink" title="dql语句预编译处理方式"></a>dql语句预编译处理方式</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$mysqli</span>=<span class="keyword">new</span> <span class="title class_">MySQLi</span>(<span class="string">&quot;localhost&quot;</span>,<span class="string">&quot;root&quot;</span>,<span class="string">&quot;mysql&quot;</span>,<span class="string">&quot;test&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于接受批量结果集的数组</span></span><br><span class="line"><span class="variable">$res_set</span>=<span class="keyword">array</span>();</span><br><span class="line"><span class="comment"># 用于批量绑定的参数</span></span><br><span class="line"><span class="variable">$param_set</span>=<span class="keyword">array</span>(<span class="number">20</span>,<span class="number">23</span>,<span class="number">25</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$sql_dql</span>=<span class="string">&quot;select * from user where age&gt;?;&quot;</span>;</span><br><span class="line"><span class="comment"># 创建预编译对象</span></span><br><span class="line"><span class="variable">$mysqli_stmt</span>=<span class="variable">$mysqli</span>-&gt;<span class="title function_ invoke__">prepare</span>(<span class="variable">$sql_dql</span>);</span><br><span class="line"><span class="comment"># 绑定数据并执行</span></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$param_set</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$value</span>) &#123;</span><br><span class="line">	<span class="comment"># 绑定参数</span></span><br><span class="line">	<span class="variable">$mysqli_stmt</span>-&gt;<span class="title function_ invoke__">bind_param</span>(<span class="string">&quot;i&quot;</span>,<span class="variable">$value</span>);</span><br><span class="line">	<span class="comment"># 绑定结果集（引用传参）</span></span><br><span class="line">	<span class="variable">$mysqli_stmt</span>-&gt;<span class="title function_ invoke__">bind_result</span>(<span class="variable">$id</span>,<span class="variable">$name</span>,<span class="variable">$age</span>,<span class="variable">$password</span>);</span><br><span class="line">	<span class="comment"># 执行指令</span></span><br><span class="line">	<span class="variable">$mysqli_stmt</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line">	<span class="comment"># 用于暂时存放一次结果集的数组</span></span><br><span class="line">	<span class="variable">$res</span>=<span class="keyword">array</span>();</span><br><span class="line">	<span class="comment"># 取出绑定的结果集</span></span><br><span class="line">	<span class="keyword">while</span> (<span class="variable">$mysqli_stmt</span>-&gt;<span class="title function_ invoke__">fetch</span>()) &#123;</span><br><span class="line">		<span class="variable">$u</span>=<span class="keyword">new</span> <span class="title class_">User</span>(<span class="variable">$name</span>,<span class="variable">$age</span>,<span class="variable">$password</span>);</span><br><span class="line">		<span class="variable">$u</span>-&gt;id=<span class="variable">$id</span>;</span><br><span class="line">		<span class="title function_ invoke__">array_push</span>(<span class="variable">$res</span>, <span class="variable">$u</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="title function_ invoke__">array_push</span>(<span class="variable">$res_set</span>, <span class="variable">$res</span>);</span><br><span class="line">	<span class="comment"># 释放资源（返回的结果集）</span></span><br><span class="line">	<span class="variable">$mysqli_stmt</span>-&gt;<span class="title function_ invoke__">free_result</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 关闭预编译语句</span></span><br><span class="line"><span class="variable">$mysqli_stmt</span>-&gt;<span class="title function_ invoke__">close</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量结果集输出</span></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$res_set</span> <span class="keyword">as</span> <span class="variable">$key</span> =&gt; <span class="variable">$value</span>) &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;new result&quot;</span>;</span><br><span class="line">	<span class="keyword">foreach</span> (<span class="variable">$value</span> <span class="keyword">as</span> <span class="variable">$key1</span> =&gt; <span class="variable">$value1</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;--&quot;</span>.<span class="variable">$value1</span>-&gt;id.<span class="variable">$value1</span>-&gt;name.<span class="variable">$value1</span>-&gt;age.<span class="variable">$value1</span>-&gt;password;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="mysqli扩展库中对表格信息的访问"><a href="#mysqli扩展库中对表格信息的访问" class="headerlink" title="mysqli扩展库中对表格信息的访问"></a>mysqli扩展库中对表格信息的访问</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span>=<span class="string">&quot;select * from user;&quot;</span>;</span><br><span class="line"><span class="variable">$res</span>=<span class="variable">$mysqli</span>-&gt;<span class="title function_ invoke__">query</span>(<span class="variable">$sql</span>);</span><br><span class="line"><span class="comment">## 获取返回结果集的总行数和总列数</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;--&quot;</span>.<span class="variable">$res</span>-&gt;num_rows.<span class="variable">$res</span>-&gt;field_count;;</span><br><span class="line"><span class="comment">## 返回表头信息</span></span><br><span class="line"><span class="keyword">while</span> (<span class="variable">$field</span>=<span class="variable">$res</span>-&gt;<span class="title function_ invoke__">fetch_field</span>()) &#123;</span><br><span class="line">	<span class="comment"># 字段属性名</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;--&quot;</span>.<span class="variable">$field</span>-&gt;name;<span class="comment">//--id--name--age--password</span></span><br><span class="line">	<span class="comment"># 字段最大长度</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">&quot;--&quot;</span>.<span class="variable">$field</span>-&gt;max_length;<span class="comment">//--2--9--2--32</span></span><br><span class="line">	<span class="comment"># 其他查手册</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr />
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/wechatpay.jpg" alt="GuoRong Zhang 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/alipay.jpg" alt="GuoRong Zhang 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5/" rel="tag"><i class="fa fa-tag"></i> 数据库连接</a>
+              <a href="/tags/mysqli%E6%89%A9%E5%B1%95%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i> mysqli扩展库</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/design2" rel="prev" title="策略模式">
+      <i class="fa fa-chevron-left"></i> 策略模式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/design3" rel="next" title="面向对象编程五大原则">
+      面向对象编程五大原则 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MDI4NC8xNjgxMQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">事务处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stmt%E9%A2%84%E7%BC%96%E8%AF%91"><span class="nav-number">2.</span> <span class="nav-text">stmt预编译</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dml%E8%AF%AD%E5%8F%A5%E9%A2%84%E7%BC%96%E8%AF%91%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">dml语句预编译处理方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dql%E8%AF%AD%E5%8F%A5%E9%A2%84%E7%BC%96%E8%AF%91%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">dql语句预编译处理方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysqli%E6%89%A9%E5%B1%95%E5%BA%93%E4%B8%AD%E5%AF%B9%E8%A1%A8%E6%A0%BC%E4%BF%A1%E6%81%AF%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">3.</span> <span class="nav-text">mysqli扩展库中对表格信息的访问</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="/">
+      <img class="site-author-image" itemprop="image" alt="GuoRong Zhang"
+        src="https://shitsurei-pictures.oss-cn-beijing.aliyuncs.com/pics/avatar.jpg">
+    </a>
+  <p class="site-author-name" itemprop="name">GuoRong Zhang</p>
+  <div class="site-description" itemprop="description">个人博客小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/shitsurei" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;shitsurei" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/lfgewj21345@163.com" title="E-Mail → lfgewj21345@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://www.zhihu.com/people/zhang-guo-rong-44-53" title="知乎 → http:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;zhang-guo-rong-44-53" rel="noopener" target="_blank"><i class="fa fa-book fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.alloyteam.com/nav/" title="http:&#x2F;&#x2F;www.alloyteam.com&#x2F;nav&#x2F;" rel="noopener" target="_blank">Web前端导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.chuangzaoshi.com/code" title="http:&#x2F;&#x2F;www.chuangzaoshi.com&#x2F;code" rel="noopener" target="_blank">创造狮导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.36zhen.com/t?id=3448" title="http:&#x2F;&#x2F;www.36zhen.com&#x2F;t?id&#x3D;3448" rel="noopener" target="_blank">前端书籍资料</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://e.xitu.io/" title="http:&#x2F;&#x2F;e.xitu.io&#x2F;" rel="noopener" target="_blank">掘金酱</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">V2EX</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.v2ex.com/" title="https:&#x2F;&#x2F;www.v2ex.com&#x2F;" rel="noopener" target="_blank">印记中文</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GuoRong Zhang</span>
+</div>
+
+<div class="weixin-box">
+  <div class="weixin-menu">
+    <div class="weixin-hover">
+      <div class="weixin-description">微信扫一扫加我</div>
+    </div>
+  </div>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.1.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/next-theme/pjax@0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.2.5/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+    </div>
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/love.js"></script>
+  <!--崩溃欺骗-->
+<script type="text/javascript" src="/js/cheat.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"log":false});</script></body>
+</html>
